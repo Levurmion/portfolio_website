@@ -1,9 +1,12 @@
 
+import styles from './AboutMeButton.module.scss';
+
 function AboutMeButton({id}) {
 
   return (
     <div id={id}>
       <svg
+      className={styles.button}
       height='100%'
       viewBox='0 0 219 58'
       fill='none'

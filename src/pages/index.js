@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import CodeEditorSVG from '../../components/CodeEditor/CodeEditor'
 import AboutMeButton from '../../components/AboutMeButton/AboutMeButton'
 import MyProjectsButton from '../../components/MyProjectsButton/MyProjectsButton'
+import styles from '../styles/home.module.scss'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,26 +18,26 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className='hero'>
+      <div className={styles.hero}>
 
-        <CodeEditorSVG id='hero-code-editor'/>
+        <CodeEditorSVG id={styles.heroCodeEditor} text='print("Hello World!")' animate={true}/>
 
-        <div className='hero-text-wrapper'>
+        <div className={styles.heroTextWrapper}>
 
-          <div className='hero-text'>
+          <div className={styles.heroText}>
 
-            <div className='header-text'>
+            <div className={styles.headerText}>
               <div>Hello World!</div>
               <div>I'm Elbert.</div>
             </div>
 
-            <div className='subheader-text'>
+            <div className={styles.subheaderText}>
                 I’m a bioinformatics student with a soft spot for frontend development.
             </div>
             
-            <div className='button-row'>
-              <AboutMeButton id='about-me-button'/>
-              <MyProjectsButton id='my-projects-button'/>
+            <div className={styles.buttonRow}>
+              <AboutMeButton id={styles.aboutMeButton}/>
+              <MyProjectsButton id={styles.myProjectsButton}/>
             </div>
           </div>
 

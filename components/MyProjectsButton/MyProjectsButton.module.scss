@@ -1,0 +1,10 @@
+.button {
+  cursor: pointer;
+  transition: 0.25s
+}
+
+.button:hover {
+  filter: saturate(200%) hue-rotate(-5deg);
+  cursor: pointer;
+  transition: 0.25s;
+}

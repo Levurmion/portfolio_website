@@ -1,7 +1,11 @@
+
+import styles from './MyProjectsButton.module.scss'
+
 function MyProjectsButton({ id }) {
   return (
     <div id={id}>
       <svg
+        className={styles.button}
         height='100%'
         viewBox='0 0 219 58'
         fill='none'

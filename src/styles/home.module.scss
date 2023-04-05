@@ -1,0 +1,141 @@
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$teal-green: #167d7f;
+$teal: #29a0b1;
+
+.hero {
+  display: flex;
+  flex-direction: row;
+  height: 50vh;
+  margin-top: 25vh;
+  padding-inline: 5vw;
+  justify-content: center;
+  align-items: center;
+
+  #heroCodeEditor {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 450px;
+    max-height: 550px;
+  }
+
+  .heroTextWrapper {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: auto;
+    height: 100%;
+    max-height: 450px;
+    min-height: 400px;
+    min-width: 490px;
+
+    .heroText {
+      display: flex;
+      flex-direction: column;
+      padding-left: 7.5%;
+      width: 90%;
+      height: 100%;
+      max-width: 800px;
+
+      .headerText {
+        color: $teal-green;
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+        font-size: clamp(70px,4.5vw,92px);
+        margin-bottom: 2%;
+      }
+
+      .subheaderText {
+        display: flex;
+        font-size: clamp(30px,2vw,40px);
+      }
+
+      .buttonRow {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 5%;
+        height: 14%;
+        gap: 5%;
+        flex-wrap: wrap;
+        
+        #aboutMeButton {
+          margin-top: 2.5%;
+          height: 100%;
+        }
+
+        #myProjectsButton {
+          margin-top: 2.5%;
+          height: 100%
+        }
+      }
+    }
+
+  }
+}
+
+
+@media (max-width: 1200px), (orientation: portrait) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-inline: 5vw;
+    margin-top: 5vh;
+    align-items: center;
+    justify-content: start;
+
+    #heroCodeEditor {
+      align-self: center;
+      width: 100%;
+      height: 100%;
+      min-height: 0px;
+      flex-shrink: 1;
+    }
+  
+    .heroTextWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-width: 0px;
+  
+      .heroText {
+        display: flex;
+        flex-direction: column;
+        padding-left: 0px;
+        margin-top: 2vh;
+        width: 90%;
+        height: 85%;
+  
+        .headerText {
+          color: $teal-green;
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          font-weight: 500;
+          font-size: clamp(20px,14vw,90px);
+          margin-bottom: 2%;
+        }
+  
+        .subheaderText {
+          display: flex;
+          font-size: clamp(10px,6vw,40px);
+        }
+
+        .buttonRow {
+          gap: 1%;
+          max-height: 8vh;
+        }
+      }
+      
+    }
+  }
+}
