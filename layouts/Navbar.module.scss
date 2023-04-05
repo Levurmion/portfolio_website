@@ -1,0 +1,62 @@
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$teal-green: #167d7f;
+$dark-teal-green: #0f5456;
+$teal: #29a0b1;
+
+.navbar {
+  display: flex;
+  position: fixed;
+  top: 0;
+  font-size: clamp(24px,2.2vh,40px);
+  font-weight: 500;
+  padding: 4vh;
+  padding-inline: 2.8vw;
+  gap: 2.8vw;
+
+  .linkBox {
+    display: flex;
+    flex-direction: column;
+
+    .links {
+      text-decoration: none;
+      color: black;
+      transition: 0.2s;
+    }
+
+    .underliner {
+      background-color: $teal-green;
+      height: 3px;
+      width: 0vw;
+      margin-top: -0.2vh;
+      transition: 0.2s;
+    }
+
+  }
+
+  .linkBox:hover {
+    .links {
+      color: $dark-teal-green;
+      transition: 0.2s;
+    }
+
+    .underliner {
+      width: 110%;
+      transition: 0.3s ease-in-out;
+    }
+  }
+
+}
+
+@media (max-width: 1350px), (orientation: portrait) {
+  .navbar {
+    position: relative;
+    justify-content: space-around;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    padding-inline: 5vw;
+    font-size: 3vw;
+    gap: 4vw
+  }
+}
