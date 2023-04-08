@@ -35,12 +35,11 @@ export default function Home() {
               <div className={homeStyle.heroText}>
                 <div className={homeStyle.headerText}>
                   <div>Hello World!</div>
-                  <div>I&apos;m Elbert.</div>
+                  <div>{"I'm Elbert."}</div>
                 </div>
 
                 <div className={homeStyle.subheaderText}>
-                  I’m a bioinformatics student with a soft spot for frontend
-                  development.
+                  {"I’m a bioinformatics student with a soft spot for frontend development."}
                   <RedHeartIcon
                     fontSize='clamp(30px,2vw,40px)'
                     display='inline-block'
