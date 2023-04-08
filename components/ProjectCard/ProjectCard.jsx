@@ -1,14 +1,39 @@
+import { useEffect, useRef, useState } from "react";
 import styles from "./ProjectCard.module.scss";
+import Image from "next/image";
+import { motion, useMotionValue } from "framer-motion";
 
 function ProjectCard() {
+
+   const cardRef = useRef(null)
+   const [cardWidth, setCardWidth] = useState(null)
+
+   function handleCardWidth() {
+      setCardWidth(cardRef.current.getBoundingClientRect().width)
+   }
+
+   useEffect(() => {
+
+      handleCardWidth()
+      window.addEventListener('resize', handleCardWidth)
+      
+      return () => {
+         window.removeEventListener('resize', handleCardWidth)
+      }
+
+   },[cardWidth])
+
    return (
       <div className={styles.cardWrapper}>
+         <div className={styles.imageWrapper} style={{width: String(cardWidth * 0.95) + 'px'}}>
+            <Image alt='image' className={styles.image} fill src='/images/sample_pic.jpg'></Image>
+         </div>
          <svg
             height='100%'
             viewBox='0 0 528 651'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'>
-            <g filter='url(#filter0_d_79_9)'>
+            <g filter='url(#filter0_d_79_9)' ref={cardRef}>
                <rect
                   x='24'
                   y='11'

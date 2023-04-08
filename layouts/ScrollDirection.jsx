@@ -52,11 +52,11 @@ function ScrollDirection({ children, pageNames, pageColors }) {
    const pageThresholdIntervals = 1 / (pageNames.length - 1);
    const scrollXMultiplier = 2.5;
 
-   let pageNumbers = -1
-   const scrollProgressThresholds = pageNames.map(name => {
-    pageNumbers += 1
-    return pageNumbers*pageThresholdIntervals
-   })
+   let pageNumbers = -1;
+   const scrollProgressThresholds = pageNames.map((name) => {
+      pageNumbers += 1;
+      return pageNumbers * pageThresholdIntervals;
+   });
 
    // variable to reference scroll setTimeout callback to
    let isScrolling = null;
@@ -166,11 +166,11 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                   <motion.div
                      className={styles.scrollTicks + " tick"}
                      onClick={handleSkipToPage}
-                     pageNumber={pageCounter}
+                     pagenumber={pageCounter}
                      animate={{
-                      borderRadius: "50%",
-                      transform: "rotate(0deg) scale(1)",
-                      }}
+                        borderRadius: "50%",
+                        transform: "rotate(0deg) scale(1)",
+                     }}
                      whileHover={{ cursor: "pointer" }}></motion.div>
                </motion.div>
             );
@@ -203,7 +203,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    // handle skipping to a page when clicking on one of the scroll ticks
    function handleSkipToPage(event) {
-      currentPage = parseInt(event.target.getAttribute("pageNumber"));
+      currentPage = parseInt(event.target.getAttribute("pagenumber"));
       console.log(currentPage);
       snapScrollToPage();
    }
@@ -265,20 +265,25 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.addEventListener("resize", determineOrientation);
 
       if (scrollTickRef.current !== null) {
-         
          window.addEventListener("mousedown", handleDrag);
          window.addEventListener("mouseup", handleMouseUp);
          window.addEventListener("scroll", handleScrollX);
 
-         const firstTick = pageNames[0]
-         animateScrollTickRef(`#${firstTick} > .tick`, {
-          borderRadius: "5%",
-          transform: "rotate(135deg) scale(1.5)",
-          },{
-          type: "spring",
-          stiffness: 300,
-          damping: 20,
-          })
+         scrollXProgress.set(0)
+
+         const firstTick = pageNames[0];
+         animateScrollTickRef(
+            `#${firstTick} > .tick`,
+            {
+               borderRadius: "5%",
+               transform: "rotate(135deg) scale(1.5)",
+            },
+            {
+               type: "spring",
+               stiffness: 300,
+               damping: 20,
+            }
+         );
       }
       return () => {
          window.removeEventListener("resize", determineOrientation);
@@ -293,7 +298,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
          {orientation === "landscape" ? (
             <>
                <motion.div
-                  style={{backgroundColor}}
+                  style={{ backgroundColor }}
                   className={styles.sidescrollWrapper}
                   ref={sidescrollWrapperRef}>
                   {children}

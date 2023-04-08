@@ -55,6 +55,17 @@ function CodeEditorSVG({ id, text, animate }) {
       },
    };
 
+   function uniqueKeyGenerator() {
+      let counter = -1;
+      function generateKey(keyName) {
+         counter += 1
+         return keyName + String(counter)
+      }
+      return generateKey
+   }
+
+   const makeCharKeys = uniqueKeyGenerator()
+
    function setCodeEditorDimensions() {
       const SVGRect = SVGEditor.current.getBoundingClientRect();
       const SVGWidth = SVGRect.width;
@@ -96,6 +107,7 @@ function CodeEditorSVG({ id, text, animate }) {
                <div className={styles.textChar}> </div>
                {textCharArray.current.map((char) => (
                   <motion.div
+                     key={makeCharKeys(char)}
                      variants={textCharAnim}
                      className={styles.textChar}>
                      {char}

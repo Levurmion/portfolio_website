@@ -23,7 +23,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar>
-        <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#E6FDF6','#CAE5FF','#a4f4d9']}>
+        <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#F1FFFB','#CAE5FF','#a4f4d9']}>
           <div className={homeStyle.hero}>
             <CodeEditorSVG
               id={homeStyle.heroCodeEditor}

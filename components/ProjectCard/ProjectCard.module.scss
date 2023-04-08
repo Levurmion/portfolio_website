@@ -1,5 +1,34 @@
 
 .cardWrapper {
    display: flex;
+   position: relative;
    height: 100%;
+   align-items: center;
+
+   .imageWrapper {
+      display: flex;
+      position: absolute;
+      left: 7%;
+      top: 3.6%;
+      height: 45%;
+      border-radius: 3px;
+      overflow: hidden;
+
+      .image {
+         object-fit: cover;
+         filter: saturate(0.1)
+      }
+
+   }
+
+   .imageWrapper::after {
+      box-shadow: inset 3px 3px 10px 0 #000000;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 5;
+    }
 }
