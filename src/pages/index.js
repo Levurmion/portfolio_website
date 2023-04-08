@@ -5,9 +5,11 @@ import CodeEditorSVG from "../../components/CodeEditor/CodeEditor";
 import AboutMeButton from "../../components/AboutMeButton/AboutMeButton";
 import MyProjectsButton from "../../components/MyProjectsButton/MyProjectsButton";
 import RedHeartIcon from "../../icons/RedHeartIcon";
-import styles from "../styles/home.module.scss";
+import homeStyle from "../styles/home.module.scss";
+import projectsStyle from '../styles/projects.module.scss'
 import Navbar from "../../layouts/Navbar";
 import ScrollDirection from "../../layouts/ScrollDirection";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,22 +23,22 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar>
-        <ScrollDirection>
-          <div className={styles.hero}>
+        <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#E6FDF6','#CAE5FF','#a4f4d9']}>
+          <div className={homeStyle.hero}>
             <CodeEditorSVG
-              id={styles.heroCodeEditor}
+              id={homeStyle.heroCodeEditor}
               text='print("Hello World!")'
               animate={true}
             />
 
-            <div className={styles.heroTextWrapper}>
-              <div className={styles.heroText}>
-                <div className={styles.headerText}>
+            <div className={homeStyle.heroTextWrapper}>
+              <div className={homeStyle.heroText}>
+                <div className={homeStyle.headerText}>
                   <div>Hello World!</div>
                   <div>I'm Elbert.</div>
                 </div>
 
-                <div className={styles.subheaderText}>
+                <div className={homeStyle.subheaderText}>
                   I’m a bioinformatics student with a soft spot for frontend
                   development.
                   <RedHeartIcon
@@ -45,13 +47,21 @@ export default function Home() {
                   />
                 </div>
 
-                <div className={styles.buttonRow}>
-                  <MyProjectsButton id={styles.myProjectsButton} />
-                  <AboutMeButton id={styles.aboutMeButton} />
+                <div className={homeStyle.buttonRow}>
+                  <MyProjectsButton id={homeStyle.myProjectsButton} />
+                  <AboutMeButton id={homeStyle.aboutMeButton} />
                 </div>
               </div>
             </div>
           </div>
+          <div className={projectsStyle.projects}>
+            <div className={projectsStyle.projectCardsWrapper}>
+              <ProjectCard />
+              <ProjectCard />
+              <ProjectCard />
+            </div>
+          </div>
+          <div className={homeStyle.about}></div>
         </ScrollDirection>
       </Navbar>
     </>
