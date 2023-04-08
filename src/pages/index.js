@@ -35,7 +35,7 @@ export default function Home() {
               <div className={homeStyle.heroText}>
                 <div className={homeStyle.headerText}>
                   <div>Hello World!</div>
-                  <div>I'm Elbert.</div>
+                  <div>I&apos;m Elbert.</div>
                 </div>
 
                 <div className={homeStyle.subheaderText}>
