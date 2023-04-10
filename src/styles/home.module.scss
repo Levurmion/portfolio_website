@@ -66,12 +66,12 @@ $teal: #29a0b1;
         
         #aboutMeButton {
           margin-top: 1%;
-          height: 100%;
+          height: 90%;
         }
 
         #myProjectsButton {
           margin-top: 1%;
-          height: 100%;
+          height: 90%;
         }
       }
     }
@@ -79,7 +79,7 @@ $teal: #29a0b1;
   }
 }
 
-@media (max-width: 1435px) {
+@media (max-width: 1500px) {
   .heroText{
     justify-content: start !important;
   }

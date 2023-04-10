@@ -1,22 +1,36 @@
 
+$header-color: #04247C;
+
 .cardWrapper {
+   --shadow-color: 210deg 40% 56%;
+   --shadow-elevation-medium:
+     -0.3px 0.4px 0.6px hsl(var(--shadow-color) / 0.35),
+     -1.1px 1.4px 2px -0.8px hsl(var(--shadow-color) / 0.35),
+     -2.8px 3.4px 5px -1.7px hsl(var(--shadow-color) / 0.35),
+     -6.9px 8.2px 12.1px -2.5px hsl(var(--shadow-color) / 0.35);
+
    display: flex;
    position: relative;
-   height: 100%;
+   flex-direction: column;
+   height:600px;
+   width: 400px;
+   border-radius: 10px;
    align-items: center;
+   background-color: #FFFFFF;
+   font-size: 32px;
+   box-shadow: var(--shadow-elevation-medium);
 
    .imageWrapper {
       display: flex;
-      position: absolute;
-      left: 7%;
-      top: 3.6%;
+      position: relative;
       height: 45%;
-      border-radius: 3px;
+      width: 95%;
+      margin: 2.5%;
+      border-radius: 5px;
       overflow: hidden;
 
       .image {
          object-fit: cover;
-         filter: saturate(0.1)
       }
 
    }
@@ -31,4 +45,53 @@
       width: 100%;
       z-index: 5;
     }
+
+    .textbox {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2.5%;
+      width: 90%;
+      font-size: 100%;
+      font-weight: 400;
+      align-items: start;
+
+      .header {
+         font-weight: 500;
+         color: $header-color;
+      }
+
+      .description {
+         font-size: 70%;
+      }
+    }
+}
+
+// pre-render shadow
+.cardWrapper::after {
+
+   --shadow-color: 210deg 40% 56%;
+   --shadow-elevation-high:
+     -0.3px 0.4px 0.6px hsl(var(--shadow-color) / 0.33),
+     -2px 2.4px 3.5px -0.4px hsl(var(--shadow-color) / 0.33),
+     -3.7px 4.4px 6.5px -0.7px hsl(var(--shadow-color) / 0.33),
+     -6.1px 7.3px 10.7px -1.1px hsl(var(--shadow-color) / 0.33),
+     -9.8px 11.6px 17.1px -1.4px hsl(var(--shadow-color) / 0.33),
+     -15.2px 18.1px 26.6px -1.8px hsl(var(--shadow-color) / 0.33),
+     -23.2px 27.6px 40.6px -2.1px hsl(var(--shadow-color) / 0.33),
+     -34.1px 40.6px 59.6px -2.5px hsl(var(--shadow-color) / 0.33);
+
+   content: '';
+   position: absolute;
+   border-radius: inherit;
+   opacity: 0 !important;
+   box-shadow: var(--shadow-elevation-high);
+   height: 100%;
+   width: 100%;
+   opacity: 1;
+   transition: 0.5s;
+}
+
+.cardWrapper:hover::after {
+   opacity: 1 !important;
+   transition: 0.5s;
 }

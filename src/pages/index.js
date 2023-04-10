@@ -23,7 +23,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar>
-        <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#F1FFFB','#CAE5FF','#a4f4d9']}>
+        <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#DDFFE7','#CAE5FF','#a4f4d9']}>
           <div className={homeStyle.hero}>
             <CodeEditorSVG
               id={homeStyle.heroCodeEditor}
@@ -55,9 +55,21 @@ export default function Home() {
           </div>
           <div className={projectsStyle.projects}>
             <div className={projectsStyle.projectCardsWrapper}>
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
+              <ProjectCard 
+                header='COSMOUSE'
+                description='COSMOUSE is a fullstack project powered by React, Django, and a MySQL database. It is a bioinformatics portal integrating protein-protein interaction networks with embryonic expression data obtained from human and mouse models.'
+                imageSrc={'/images/cosmouse.png'}
+              />
+              <ProjectCard 
+                header='Alphasense'
+                description='Alphasense augments the predictive accuracy of the existing Missense3D portal for Alphafold models. It is a data/pipeline engineering project built in Python implementing nearest-neighbour search algorithms to deal with 3D protein atomic coordinates.'
+                imageSrc={'/images/sample_pic.jpg'}
+              />
+              <ProjectCard 
+                header='ICAC Scoresheet'
+                description='Not your typical CRUD app project. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper.'
+                imageSrc={'/images/sample_pic.jpg'}
+              />
             </div>
           </div>
           <div className={homeStyle.about}></div>

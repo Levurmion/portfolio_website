@@ -1,86 +1,82 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./ProjectCard.module.scss";
 import Image from "next/image";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-function ProjectCard() {
+const cardAnim = {
+   default: {
+      scale: 1,
+      transition: {
+         type: "spring",
+         stiffness: 100,
+         damping: 12,
+      },
+   },
+   hover: {
+      scale: 1.1,
+      cursor: "pointer",
+      transition: {
+         type: "spring",
+         stiffness: 200,
+         damping: 18,
+      },
+   },
+};
 
-   const cardRef = useRef(null)
-   const [cardWidth, setCardWidth] = useState(null)
+function ProjectCard({ header, description, imageSrc }) {
+   const cardRef = useRef(null);
 
-   function handleCardWidth() {
-      setCardWidth(cardRef.current.getBoundingClientRect().width)
+   const cursorCenterOffsetX = useMotionValue(0);
+   const cursorCenterOffsetY = useMotionValue(0);
+   const cursorOffsetXSpring = useSpring(cursorCenterOffsetX, {stiffness: 100, damping: 15})
+   const cursorOffsetYSpring = useSpring(cursorCenterOffsetY, {stiffness: 100, damping: 15})
+   const x = useTransform(cursorOffsetXSpring, [-0.5, 0.5], [10, -10]);
+   const y = useTransform(cursorOffsetYSpring, [-0.5, 0.5], [10, -10]);
+
+   function handleMousemoveOnCard(event) {
+      const cardRect = cardRef.current.getBoundingClientRect();
+      const cardCenterX = (cardRect.right + cardRect.left) / 2;
+      const cardCenterY = (cardRect.bottom + cardRect.top) / 2;
+
+      const centerOffsetX = (event.clientX - cardCenterX) / cardRect.width;
+      const centerOffsetY = (event.clientY - cardCenterY) / cardRect.height;
+
+      cursorCenterOffsetX.set(centerOffsetX);
+      cursorCenterOffsetY.set(centerOffsetY);
    }
 
-   useEffect(() => {
+   function handleHoverStart(event) {
+      cardRef.current.addEventListener("mousemove", handleMousemoveOnCard);
+   }
 
-      handleCardWidth()
-      window.addEventListener('resize', handleCardWidth)
-      
-      return () => {
-         window.removeEventListener('resize', handleCardWidth)
-      }
-
-   },[cardWidth])
+   function handleHoverEnd(event) {
+      cursorCenterOffsetX.set(0)
+      cursorCenterOffsetY.set(0)
+      cardRef.current.removeEventListener("mousemove", handleMousemoveOnCard);
+   }
 
    return (
-      <div className={styles.cardWrapper}>
-         <div className={styles.imageWrapper} style={{width: String(cardWidth * 0.95) + 'px'}}>
-            <Image alt='image' className={styles.image} fill src='/images/sample_pic.jpg'></Image>
+      <motion.div
+         className={styles.cardWrapper}
+         initial={false}
+         animate={cardAnim.default}
+         whileHover={cardAnim.hover}
+         onHoverStart={handleHoverStart}
+         onHoverEnd={handleHoverEnd}
+         style={{x, y}}
+         ref={cardRef}>
+         <div className={styles.imageWrapper}>
+            <Image
+               alt='image'
+               className={styles.image}
+               fill
+               src={imageSrc}></Image>
          </div>
-         <svg
-            height='100%'
-            viewBox='0 0 528 651'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'>
-            <g filter='url(#filter0_d_79_9)' ref={cardRef}>
-               <rect
-                  x='24'
-                  y='11'
-                  width='488'
-                  height='611'
-                  rx='12'
-                  fill='white'
-               />
-            </g>
-            <defs>
-               <filter
-                  id='filter0_d_79_9'
-                  x='0'
-                  y='0'
-                  width='528'
-                  height='651'
-                  filterUnits='userSpaceOnUse'
-                  color-interpolation-filters='sRGB'>
-                  <feFlood flood-opacity='0' result='BackgroundImageFix' />
-                  <feColorMatrix
-                     in='SourceAlpha'
-                     type='matrix'
-                     values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                     result='hardAlpha'
-                  />
-                  <feOffset dx='-4' dy='9' />
-                  <feGaussianBlur stdDeviation='10' />
-                  <feComposite in2='hardAlpha' operator='out' />
-                  <feColorMatrix
-                     type='matrix'
-                     values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'
-                  />
-                  <feBlend
-                     mode='normal'
-                     in2='BackgroundImageFix'
-                     result='effect1_dropShadow_79_9'
-                  />
-                  <feBlend
-                     mode='normal'
-                     in='SourceGraphic'
-                     in2='effect1_dropShadow_79_9'
-                     result='shape'
-                  />
-               </filter>
-            </defs>
-         </svg>
-      </div>
+         <div className={styles.textbox}>
+            <header className={styles.header}>{header}</header>
+            <p className={styles.description}>{description}</p>
+         </div>
+      </motion.div>
    );
 }
 

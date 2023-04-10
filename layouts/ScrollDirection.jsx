@@ -291,7 +291,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
          window.removeEventListener("mouseup", handleMouseUp);
          window.removeEventListener("scroll", handleScrollX);
       };
-   });
+   },);
 
    return (
       <>
