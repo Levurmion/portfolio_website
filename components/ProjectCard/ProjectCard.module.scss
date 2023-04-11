@@ -106,13 +106,23 @@ $header-color: #04247C;
    }
 }
 
-// iPad and tablets
-@media (max-width: 1024px), (pointer: coarse) {
+// iPad and tablets portrait
+@media (max-width: 1024px) {
    .cardWrapper {
       display: flex;
       height: 750px;
       width: 500px;
       font-size: 40px;
+   }
+}
+
+// iPad and tablets landscape
+@media (pointer: coarse) and (orientation: landscape) {
+   .cardWrapper {
+      display: flex;
+      height: 500px !important;
+      width: 330px !important;
+      font-size: 28px !important;
    }
 }
 
