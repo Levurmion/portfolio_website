@@ -93,7 +93,7 @@ $teal: #29a0b1;
   // background-color: rgb(164, 244, 217);
 }
 
-@media only screen and (max-width: 1250px) {
+@media only screen and (max-width: 1300px) {
 
   .hero {
     min-height: 0px;
@@ -145,7 +145,7 @@ $teal: #29a0b1;
 
 }
 
-@media (max-width: 1025px), (orientation: portrait) {
+@media (max-width: 1025px), (orientation: portrait), ((hover: none) and (pointer: coarse)) {
   .hero {
     display: flex;
     flex-direction: column;

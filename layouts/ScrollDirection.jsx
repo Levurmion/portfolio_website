@@ -118,7 +118,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    // determine whether to use horizontal or vertical layout
    function determineOrientation() {
-      if (window.matchMedia("(max-width: 1025px),(orientation: portrait)").matches) {
+      if (window.matchMedia("(max-width: 1025px), (orientation: portrait), ((hover: none) and (pointer: coarse))").matches) {
          setOrientation("portrait");
       } else {
          setOrientation("landscape");
