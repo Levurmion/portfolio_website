@@ -305,7 +305,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                      className={styles.navButtons}
                      whileHover={{ x: "-0.2vw" }}
                      whileTap={{ x: "-0.4vw" }}
-                     onClick={handleScrollPrev}
+                     // onClick={handleScrollPrev}
                      onTap={handleScrollPrev}>
                      <NavigateBeforeIcon fontSize='inherit' color='inherit' />
                   </motion.div>
@@ -314,7 +314,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                      className={styles.navButtons}
                      whileHover={{ x: "0.2vw" }}
                      whileTap={{ x: "0.4vw" }}
-                     onClick={handleScrollNext}
+                     // onClick={handleScrollNext}
                      onTap={handleScrollNext}>
                      <NavigateNextIcon fontSize='inherit' color='inherit' />
                   </motion.div>
