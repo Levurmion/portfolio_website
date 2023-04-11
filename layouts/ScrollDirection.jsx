@@ -13,7 +13,7 @@ import {
 } from "framer-motion";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import { Landscape } from "@mui/icons-material";
+import { sideScroll } from "@mui/icons-material";
 
 const scrollTicksBoxAnim = {
    initial: {},
@@ -43,9 +43,9 @@ const scrollTicksLabelAnim = {
 
 function ScrollDirection({ children, pageNames, pageColors }) {
 
-   const [orientation, setOrientation] = useState('landscape');
+   const [orientation, setOrientation] = useState('sideScroll');
 
-   const sidescrollWrapperRef = useRef(null);
+   const sideScrollWrapperRef = useRef(null);
 
    let currentPage = 0;
    let lastClientX = 0;
@@ -79,12 +79,12 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
       if (latest >= nextPageThreshold && latest < 1) {
          currentPage += 1;
-         if (sidescrollWrapperRef.current !== null) {
+         if (sideScrollWrapperRef.current !== null) {
             animateScrollTicks(pageNames[currentPage - 1]);
          }
       } else if (latest < prevPageThreshold && latest < 1 && currentPage > 0) {
          currentPage -= 1;
-         if (sidescrollWrapperRef.current !== null) {
+         if (sideScrollWrapperRef.current !== null) {
             animateScrollTicks(pageNames[currentPage + 1]);
          }
       } else {
@@ -118,23 +118,20 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    // determine whether to use horizontal or vertical layout
    function determineOrientation() {
-      if (window.matchMedia("(max-width: 1025px), (orientation: portrait)").matches || window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
-         setOrientation("portrait");
+      if (window.matchMedia('(max-width: 1024px), (orientation: portrait), (pointer: coarse)').matches){
+         console.log('vertical')
+         setOrientation("verticalScroll");
       } else {
-         setOrientation("landscape");
-         // if (sidescrollWrapperRef.current != null) {
-         //    sidescrollWrapperRef.current.childNodes.forEach((child) => {
-         //       child.style.width = "90vw";
-         //       child.style.paddingInline = "5vw";
-         //    });
-         }
+         console.log('horizontal')
+         setOrientation("sideScroll");
+      }
    }
 
    // draw scroll ticks based on the number of provided and detected pages in the application
    function drawScrollTicks() {
       const numPages =
-         sidescrollWrapperRef.current !== null
-            ? sidescrollWrapperRef.current.childNodes.length
+         sideScrollWrapperRef.current !== null
+            ? sideScrollWrapperRef.current.childNodes.length
             : 0;
 
       let pageCounter = -1;
@@ -157,7 +154,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                   <motion.div
                      className={styles.scrollTicksLabel}
                      variants={scrollTicksLabelAnim}>
-                     {name}
+                     {/* {name} */}
                   </motion.div>
                   <motion.div
                      className={styles.scrollTicks + " tick"}
@@ -180,7 +177,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
          currentPage < pageNames.length - 1 ? currentPage + 1 : currentPage;
       window.scroll({
          left:
-            (currentPage * sidescrollWrapperRef.current.clientWidth) /
+            (currentPage * sideScrollWrapperRef.current.clientWidth) /
             pageNames.length,
          behavior: "smooth",
       });
@@ -191,7 +188,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       currentPage = currentPage > 0 ? currentPage - 1 : currentPage;
       window.scroll({
          left:
-            (currentPage * sidescrollWrapperRef.current.clientWidth) /
+            (currentPage * sideScrollWrapperRef.current.clientWidth) /
             pageNames.length,
          behavior: "smooth",
       });
@@ -208,7 +205,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
    function snapScrollToPage() {
       window.scroll({
          left:
-            (currentPage * sidescrollWrapperRef.current.clientWidth) /
+            (currentPage * sideScrollWrapperRef.current.clientWidth) /
             pageNames.length,
          behavior: "smooth",
       });
@@ -259,8 +256,10 @@ function ScrollDirection({ children, pageNames, pageColors }) {
    useEffect(() => {
       determineOrientation();
       window.addEventListener("resize", determineOrientation);
+      console.log('mounting')
 
-      if (orientation === 'landscape') {
+
+      if (orientation === 'sideScroll') {
          window.addEventListener("mousedown", handleDrag);
          window.addEventListener("mouseup", handleMouseUp);
          window.addEventListener("scroll", handleScrollX);
@@ -292,12 +291,12 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    return (
       <>
-         {orientation === "landscape" ? (
+         {orientation === "sideScroll" ? (
             <>
                <motion.div
                   style={{ backgroundColor }}
                   className={styles.sidescrollWrapper}
-                  ref={sidescrollWrapperRef}>
+                  ref={sideScrollWrapperRef}>
                   {children}
                </motion.div>
                <div className={styles.scrollTicksRow} ref={scrollTickRef}>
@@ -321,7 +320,9 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                </div>
             </>
          ) : (
-            children
+            <div className='verticalScrollbox' style={{display: 'flex', flexDirection: 'column', width: '90vw', paddingInline: '5vw', alignItems: 'center'}}>
+               {children}
+            </div>
          )}
       </>
    );

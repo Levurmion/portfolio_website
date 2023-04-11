@@ -5,58 +5,55 @@ $teal-green: #167d7f;
 $dark-teal-green: #116265;
 $teal: #29a0b1;
 
-.navbar {
-  display: flex;
-  position: fixed;
-  top: 0;
-  font-size: clamp(24px,2.2vh,40px);
-  font-weight: 500;
-  padding: 4vh;
-  padding-inline: 2.8vw;
-  gap: 2.8vw;
-
-  .linkBox {
+// mobile, iPad, and tablets
+@media (max-width: 1024px), (orientation: portrait), (pointer: coarse) {
+  .navbar {
     display: flex;
-    flex-direction: column;
-
-    .links {
-      text-decoration: none;
-      color: black;
-      transition: 0.2s;
-    }
-
-    .underliner {
-      background-color: $teal-green;
-      height: 2px;
-      width: 0vw;
-      margin-top: -0.2vh;
-      transition: 0.2s;
-    }
-
+    flex-direction: row;
+    justify-content: space-around;
+    padding-inline: 5vw;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    width: 90vw;
+    font-size: clamp(18px, 3vw, 40px);
   }
 
-  .linkBox:hover {
-    .links {
-      color: $dark-teal-green;
-      transition: 0.2s;
-    }
-
-    .underliner {
-      width: 110%;
-      transition: 0.3s ease-in-out;
-    }
+  .links {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s
   }
 
+  .links:hover {
+    color: $dark-teal-green;
+    transition: 0.2s;
+  }
 }
 
-@media (max-width: 1025px), (orientation: portrait), (hover: none), (pointer: coarse) {
+// laptops
+@media screen and (min-width: 1025px) and (pointer: fine) {
   .navbar {
-    position: relative;
-    justify-content: space-around;
-    padding-top: 3vh;
-    padding-bottom: 3vh;
-    padding-inline: 5vw;
-    font-size: 3vw;
-    gap: 4vw
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    justify-content: start;
+    gap: 2vw;
+    margin-left: 4vh;
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    font-size: 1.8vw;
+  }
+
+  .links {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s
+  }
+
+  .links:hover {
+    color: $dark-teal-green;
+    transition: 0.2s;
   }
 }

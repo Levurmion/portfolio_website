@@ -6,9 +6,9 @@ function Navbar({ children }) {
     <>
       <div className={styles.navbar}>
         <div className={styles.linkBox}>
-          <Link className={styles.links} href='/'>
+          <a className={styles.links} href='/'>
             Home
-          </Link>
+          </a>
           <div className={styles.underliner}></div>
         </div>
         <div className={styles.linkBox}>

@@ -1,6 +1,6 @@
 import styles from "./CodeEditor.module.scss";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useMotionValue, motion } from "framer-motion";
 
 function CodeEditorSVG({ id, text, animate }) {
    const textCharArray = useRef(text.split(""));
@@ -94,7 +94,7 @@ function CodeEditorSVG({ id, text, animate }) {
    });
 
    return (
-      <div className='SVGwrapper' id={id}>
+      <div className={styles.SVGWrapper} id={id}>
          <div ref={codeEditorWrapper} className={styles.codeEditorWrapper}>
             <motion.div
                className={styles.codeEditorTextbox}

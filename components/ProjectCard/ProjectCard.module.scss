@@ -95,3 +95,43 @@ $header-color: #04247C;
    opacity: 1 !important;
    transition: 0.5s;
 }
+
+// mobile phones
+@media (max-width: 420px) {
+   .cardWrapper {
+      display: flex;
+      height: 400px !important;
+      width: 280px !important;
+      font-size: 22px !important;
+   }
+}
+
+// iPad and tablets
+@media (max-width: 1024px), (pointer: coarse) {
+   .cardWrapper {
+      display: flex;
+      height: 750px;
+      width: 500px;
+      font-size: 40px;
+   }
+}
+
+// small laptops
+@media (min-width: 1025px) and (pointer: fine) {
+   .cardWrapper {
+      display: flex;
+      height: 400px;
+      width: 280px;
+      font-size: 22px;
+   }
+}
+
+// large laptops and screens
+@media (min-width: 1200px) and (pointer: fine) {
+   .cardWrapper {
+      display: flex;
+      height: 30vw;
+      width: 20vw;
+      font-size: 1.6vw;
+   }
+}

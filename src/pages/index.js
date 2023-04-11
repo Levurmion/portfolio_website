@@ -5,7 +5,7 @@ import CodeEditorSVG from "../../components/CodeEditor/CodeEditor";
 import AboutMeButton from "../../components/AboutMeButton/AboutMeButton";
 import MyProjectsButton from "../../components/MyProjectsButton/MyProjectsButton";
 import RedHeartIcon from "../../icons/RedHeartIcon";
-import homeStyle from "../styles/home.module.scss";
+import heroStyle from "../styles/hero.module.scss";
 import projectsStyle from '../styles/projects.module.scss'
 import Navbar from "../../layouts/Navbar";
 import ScrollDirection from "../../layouts/ScrollDirection";
@@ -24,31 +24,36 @@ export default function Home() {
       </Head>
       <Navbar>
         <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#e0ffff','#CAE5FF','#a4f4d9']}>
-          <div className={homeStyle.hero}>
-            <CodeEditorSVG
-              id={homeStyle.heroCodeEditor}
-              text='print("Hello World!")'
-              animate={true}
-            />
+          <div className={heroStyle.hero}>
 
-            <div className={homeStyle.heroTextWrapper}>
-              <div className={homeStyle.heroText}>
-                <div className={homeStyle.headerText}>
+            <div className={heroStyle.codeEditor}>
+              <CodeEditorSVG
+                id={heroStyle.heroCodeEditor}
+                text='print("Hello World!")'
+                animate={true}
+              />
+            </div>
+
+            <div className={heroStyle.heroTextWrapper}>
+              <div className={heroStyle.heroText}>
+                <div className={heroStyle.headerText}>
                   <div>Hello World!</div>
                   <div>{"I'm Elbert."}</div>
                 </div>
 
-                <div className={homeStyle.subheaderText}>
+                <div className={heroStyle.subheaderText}>
                   {"I’m a bioinformatics student with a soft spot for frontend development."}
-                  <RedHeartIcon
-                    fontSize='2vw'
-                    display='inline-block'
-                  />
+                  <div className={heroStyle.heartIcon}>
+                    <RedHeartIcon
+                      fontSize='inherit'
+                      display='inline-block'
+                    />
+                  </div>
                 </div>
 
-                <div className={homeStyle.buttonRow}>
-                  <MyProjectsButton id={homeStyle.myProjectsButton} />
-                  <AboutMeButton id={homeStyle.aboutMeButton} />
+                <div className={heroStyle.buttonRow}>
+                  <MyProjectsButton id={heroStyle.myProjectsButton} />
+                  <AboutMeButton id={heroStyle.aboutMeButton} />
                 </div>
               </div>
             </div>
@@ -72,9 +77,9 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className={homeStyle.about}></div>
+          <div className={heroStyle.about}></div>
         </ScrollDirection>
-      </Navbar>
+        </Navbar>
     </>
   );
 }
