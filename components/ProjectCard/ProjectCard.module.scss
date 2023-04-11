@@ -36,7 +36,7 @@ $header-color: #04247C;
    }
 
    .imageWrapper::after {
-      box-shadow: inset 3px 3px 10px 0 #000000;
+      box-shadow: inset 3px 3px 10px 0 rgb(0, 0, 0, 0.5);
       content: '';
       display: block;
       height: 100%;

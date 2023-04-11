@@ -13,6 +13,7 @@ import {
 } from "framer-motion";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import { Landscape } from "@mui/icons-material";
 
 const scrollTicksBoxAnim = {
    initial: {},
@@ -41,7 +42,8 @@ const scrollTicksLabelAnim = {
 };
 
 function ScrollDirection({ children, pageNames, pageColors }) {
-   const [orientation, setOrientation] = useState(null);
+
+   const [orientation, setOrientation] = useState('landscape');
 
    const sidescrollWrapperRef = useRef(null);
 
@@ -64,9 +66,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
    const waitTime = 100;
 
    // FramerMotion hooks
-   const { scrollXProgress, scrollX } = useScroll({
-      container: sidescrollWrapperRef,
-   });
+   const { scrollXProgress } = useScroll();
 
    const [scrollTickRef, animateScrollTickRef] = useAnimate();
    const backgroundColor = useTransform(scrollXProgress, scrollProgressThresholds, pageColors);
@@ -118,20 +118,16 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    // determine whether to use horizontal or vertical layout
    function determineOrientation() {
-      if (
-         window.matchMedia("(max-width: 1350px),(orientation: portrait)")
-            .matches
-      ) {
+      if (window.matchMedia("(max-width: 1025px),(orientation: portrait)").matches) {
          setOrientation("portrait");
       } else {
          setOrientation("landscape");
-         if (sidescrollWrapperRef.current != null) {
-            sidescrollWrapperRef.current.childNodes.forEach((child) => {
-               child.style.width = "90vw";
-               child.style.paddingInline = "5vw";
-            });
+         // if (sidescrollWrapperRef.current != null) {
+         //    sidescrollWrapperRef.current.childNodes.forEach((child) => {
+         //       child.style.width = "90vw";
+         //       child.style.paddingInline = "5vw";
+         //    });
          }
-      }
    }
 
    // draw scroll ticks based on the number of provided and detected pages in the application
@@ -264,7 +260,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       determineOrientation();
       window.addEventListener("resize", determineOrientation);
 
-      if (scrollTickRef.current !== null) {
+      if (orientation === 'landscape') {
          window.addEventListener("mousedown", handleDrag);
          window.addEventListener("mouseup", handleMouseUp);
          window.addEventListener("scroll", handleScrollX);
@@ -285,13 +281,14 @@ function ScrollDirection({ children, pageNames, pageColors }) {
             }
          );
       }
+      
       return () => {
          window.removeEventListener("resize", determineOrientation);
          window.removeEventListener("mousedown", handleDrag);
          window.removeEventListener("mouseup", handleMouseUp);
          window.removeEventListener("scroll", handleScrollX);
       };
-   },);
+   },[orientation]);
 
    return (
       <>
@@ -308,7 +305,8 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                      className={styles.navButtons}
                      whileHover={{ x: "-0.2vw" }}
                      whileTap={{ x: "-0.4vw" }}
-                     onClick={handleScrollPrev}>
+                     onClick={handleScrollPrev}
+                     onTap={handleScrollPrev}>
                      <NavigateBeforeIcon fontSize='inherit' color='inherit' />
                   </motion.div>
                   {drawScrollTicks()}
@@ -316,7 +314,8 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                      className={styles.navButtons}
                      whileHover={{ x: "0.2vw" }}
                      whileTap={{ x: "0.4vw" }}
-                     onClick={handleScrollNext}>
+                     onClick={handleScrollNext}
+                     onTap={handleScrollNext}>
                      <NavigateNextIcon fontSize='inherit' color='inherit' />
                   </motion.div>
                </div>

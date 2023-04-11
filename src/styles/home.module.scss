@@ -11,6 +11,8 @@ $teal: #29a0b1;
   margin-top: 25vh;
   justify-content: center;
   align-items: center;
+  width: 90vw;
+  padding-inline: 5vw;
 
   #heroCodeEditor {
     display: flex;
@@ -46,13 +48,13 @@ $teal: #29a0b1;
         display: flex;
         flex-direction: column;
         font-weight: 500;
-        font-size: clamp(70px,4.5vw,92px);
+        font-size: 78px;
         margin-bottom: 2%;
       }
 
       .subheaderText {
         display: inline-block;
-        font-size: clamp(30px,2vw,40px);
+        font-size: 35px;
       }
 
       .buttonRow {
@@ -79,13 +81,71 @@ $teal: #29a0b1;
   }
 }
 
-@media (max-width: 1500px) {
-  .heroText{
-    justify-content: start !important;
-  }
+.projects {
+  display: flex;
+  height: 100vh;
+  // background-color: #5ecdde;
 }
 
-@media (max-width: 1350px), (orientation: portrait) {
+.about {
+  display: flex;
+  height: 100vh;
+  // background-color: rgb(164, 244, 217);
+}
+
+@media only screen and (max-width: 1250px) {
+
+  .hero {
+    min-height: 0px;
+    min-width: 0px;
+
+    #heroCodeEditor {
+      height: 300px;
+      width: 75vw;
+      min-height: 0px;
+      min-width: 0px
+    }
+
+    .heroTextWrapper {
+      min-height: 0px;
+      min-width: 0px;
+
+      .heroText {
+        width: 80%;
+  
+        .headerText {
+          font-size: 54px;
+        }
+  
+        .subheaderText {
+          font-size: 24px;
+        }
+  
+        .buttonRow {
+          display: flex;
+          flex-direction: row;
+          margin-top: 4%;
+          height: clamp(44px,5vh,50px);
+          gap: 5%;
+          
+          #aboutMeButton {
+            margin-top: 1%;
+            height: 90%;
+          }
+  
+          #myProjectsButton {
+            margin-top: 1%;
+            height: 90%;
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+@media (max-width: 1025px), (orientation: portrait) {
   .hero {
     display: flex;
     flex-direction: column;
@@ -97,9 +157,7 @@ $teal: #29a0b1;
 
     #heroCodeEditor {
       align-self: center;
-      width: 100%;
-      height: 100%;
-      min-height: 350px;
+      height: 400px;
       flex-shrink: 1;
     }
   
@@ -145,14 +203,3 @@ $teal: #29a0b1;
   }
 }
 
-.projects {
-  display: flex;
-  height: 100vh;
-  // background-color: #5ecdde;
-}
-
-.about {
-  display: flex;;
-  height: 100vh;
-  // background-color: rgb(164, 244, 217);
-}

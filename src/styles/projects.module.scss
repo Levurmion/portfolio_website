@@ -7,6 +7,8 @@ $teal: #29a0b1;
 .projects{
    display: flex;
    align-items: center;
+   width: 90vw;
+   padding-inline: 5vw;
 
    .projectCardsWrapper {
       display: flex;

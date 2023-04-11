@@ -58,20 +58,20 @@ function CodeEditorSVG({ id, text, animate }) {
    function uniqueKeyGenerator() {
       let counter = -1;
       function generateKey(keyName) {
-         counter += 1
-         return keyName + String(counter)
+         counter += 1;
+         return keyName + String(counter);
       }
-      return generateKey
+      return generateKey;
    }
 
-   const makeCharKeys = uniqueKeyGenerator()
+   const makeCharKeys = uniqueKeyGenerator();
 
    function setCodeEditorDimensions() {
       const SVGRect = SVGEditor.current.getBoundingClientRect();
       const SVGWidth = SVGRect.width;
       const SVGHeight = SVGRect.height;
 
-      const SVGnavbar = SVGHeight * 0.04;
+      const SVGnavbar = SVGHeight * 0.06;
       const SVGSideMargins = SVGWidth * 0.05;
       const gridFontSize = (SVGWidth / 30) * 1.4;
       setCharFontSize(String(gridFontSize) + "px");
@@ -135,63 +135,21 @@ function CodeEditorSVG({ id, text, animate }) {
             </motion.div>
          </div>
          <svg
-            viewBox='0 0 903 605'
             height='100%'
+            viewBox='0 0 863 565'
+            className={styles.SVGEditor}
             fill='none'
             xmlns='http://www.w3.org/2000/svg'>
-            <g filter='url(#filter0_d_1_5)' ref={SVGEditor}>
-               <rect
-                  x='24'
-                  y='10'
-                  width='863'
-                  height='565'
-                  rx='10'
-                  fill='#737373'
-               />
-               <path
-                  d='M24 20C24 14.4772 28.4772 10 34 10H877C882.523 10 887 14.4772 887 20V48H24V20Z'
-                  fill='#494949'
-               />
-               <circle cx='99' cy='29' r='10' fill='#82FF56' />
-               <circle cx='71' cy='29' r='10' fill='#F2EB4E' />
-               <circle cx='43' cy='29' r='10' fill='#FF5959' />
-            </g>
-            <defs>
-               <filter
-                  id='filter0_d_1_5'
-                  x='0'
-                  y='0'
-                  width='903'
-                  height='605'
-                  filterUnits='userSpaceOnUse'
-                  color-interpolation-filters='sRGB'>
-                  <feFlood flood-opacity='0' result='BackgroundImageFix' />
-                  <feColorMatrix
-                     in='SourceAlpha'
-                     type='matrix'
-                     values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0'
-                     result='hardAlpha'
-                  />
-                  <feOffset dx='-4' dy='9' />
-                  <feGaussianBlur stdDeviation='9' />
-                  <feComposite in2='hardAlpha' operator='out' />
-                  <feColorMatrix
-                     type='matrix'
-                     values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0'
-                  />
-                  <feBlend
-                     mode='normal'
-                     in2='BackgroundImageFix'
-                     result='effect1_dropShadow_1_5'
-                  />
-                  <feBlend
-                     mode='normal'
-                     in='SourceGraphic'
-                     in2='effect1_dropShadow_1_5'
-                     result='shape'
-                  />
-               </filter>
-            </defs>
+            <rect width='863' height='565' rx='10' fill='#737373' ref={SVGEditor}/>
+            <path
+               d='M0 10C0 4.47715 4.47715 0 10 0H853C858.523 0 863 4.47715 863 10V38H0V10Z'
+               fill='#494949'
+            />
+            <circle cx='75' cy='19' r='10' fill='#82FF56' />
+            <circle cx='47' cy='19' r='10' fill='#F2EB4E' />
+            <circle cx='19' cy='19' r='10' fill='#FF5959' />
+            <circle cx='19' cy='19' r='10' fill='#FF5959' />
+            <circle cx='19' cy='19' r='10' fill='#FF5959' />
          </svg>
       </div>
    );

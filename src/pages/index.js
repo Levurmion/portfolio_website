@@ -23,7 +23,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Navbar>
-        <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#DDFFE7','#CAE5FF','#a4f4d9']}>
+        <ScrollDirection pageNames={['home', 'projects', 'about']} pageColors={['#e0ffff','#CAE5FF','#a4f4d9']}>
           <div className={homeStyle.hero}>
             <CodeEditorSVG
               id={homeStyle.heroCodeEditor}
@@ -41,7 +41,7 @@ export default function Home() {
                 <div className={homeStyle.subheaderText}>
                   {"I’m a bioinformatics student with a soft spot for frontend development."}
                   <RedHeartIcon
-                    fontSize='clamp(30px,2vw,40px)'
+                    fontSize='2vw'
                     display='inline-block'
                   />
                 </div>
@@ -63,7 +63,7 @@ export default function Home() {
               <ProjectCard 
                 header='Alphasense'
                 description='Alphasense augments the predictive accuracy of the existing Missense3D portal for Alphafold models. It is a data/pipeline engineering project built in Python implementing nearest-neighbour search algorithms to deal with 3D protein atomic coordinates.'
-                imageSrc={'/images/sample_pic.jpg'}
+                imageSrc={'/images/alphasense.png'}
               />
               <ProjectCard 
                 header='ICAC Scoresheet'
