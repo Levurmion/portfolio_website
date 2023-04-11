@@ -49,7 +49,7 @@ $teal: #29a0b1;
 
 }
 
-@media (max-width: 1025px), (orientation: portrait), ((hover: none) and (pointer: coarse)) {
+@media (max-width: 1025px), (orientation: portrait), (hover: none), (pointer: coarse) {
   .navbar {
     position: relative;
     justify-content: space-around;
