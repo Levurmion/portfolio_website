@@ -4,18 +4,57 @@ $spearmint: #98d7c2;
 $teal-green: #167d7f;
 $teal: #29a0b1;
 
-.projects{
-   display: flex;
-   align-items: center;
-   width: 90vw;
-   padding-inline: 5vw;
-
-   .projectCardsWrapper {
+// mobile phones
+@media (max-width: 420px) {
+   .projects {
       display: flex;
-      width: 100%;
-      height: 50vh;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      gap: 5vw
+      margin-top: 5vh !important;
+      
+      .projectCardsWrapper {
+         display: flex;
+         flex-direction: column;
+         gap: 4vh;
+      }
+   }
+}
+
+
+// iPad and tablets
+@media (max-width: 1024px), (orientation: portrait) {
+   .projects {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10vh;
+      
+      .projectCardsWrapper {
+         display: flex;
+         flex-direction: column;
+         gap: 5vh;
+      }
+   }
+}
+
+
+// small laptops and larger
+@media (min-width: 1025px) {
+   .projects {
+      display: flex;
+      flex-direction: row;
+      width: 90vw;
+      padding-inline: 5vw;
+
+      .projectCardsWrapper {
+         display: flex;
+         flex-direction: row;
+         width: 100%;
+         height: 50vh;
+         margin-top: 25vh;
+         align-items: center;
+         justify-content: center;
+         gap: 4vw
+      }
    }
 }

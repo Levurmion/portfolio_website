@@ -6,6 +6,7 @@ $teal: #29a0b1;
 
 .sidescrollWrapper {
   display: flex;
+  flex-direction: row;
   width: 300vw;
   height: 100vh;
 }
@@ -21,7 +22,7 @@ $teal: #29a0b1;
   align-items: center;
   height: 5vh;
   width: 50vw;
-  top: 87.5vh;
+  top: 90vh;
   left: 25vw;
   gap: 1.5vw;
 
