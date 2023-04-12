@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./ProjectCard.module.scss";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useSpring, useTransform } from "framer-motion";
 
 const cardAnim = {
    default: {
       scale: 1,
       transition: {
          type: "spring",
-         stiffness: 100,
+         stiffness: 50,
          damping: 12,
       },
    },
@@ -17,8 +17,8 @@ const cardAnim = {
       cursor: "pointer",
       transition: {
          type: "spring",
-         stiffness: 200,
-         damping: 18,
+         stiffness: 100,
+         damping: 15,
       },
    },
 };
@@ -26,13 +26,21 @@ const cardAnim = {
 function ProjectCard({ header, description, imageSrc }) {
 
    const cardRef = useRef(null);
+   const cardShadowRef = useRef(null);
 
    const cursorCenterOffsetX = useMotionValue(0);
    const cursorCenterOffsetY = useMotionValue(0);
+   const scale = useMotionValue(1)
    const cursorOffsetXSpring = useSpring(cursorCenterOffsetX, {stiffness: 100, damping: 15})
    const cursorOffsetYSpring = useSpring(cursorCenterOffsetY, {stiffness: 100, damping: 15})
    const x = useTransform(cursorOffsetXSpring, [-0.5, 0.5], [10, -10]);
    const y = useTransform(cursorOffsetYSpring, [-0.5, 0.5], [10, -15]);
+   const opacity = useTransform(scale, [1, 1.1], [0,1])
+
+   useMotionValueEvent(opacity, 'change', latest => {
+      console.log(latest)
+      cardShadowRef.current.style.opacity = latest
+   })
 
    function handleMousemoveOnCard(event) {
       const cardRect = cardRef.current.getBoundingClientRect();
@@ -65,8 +73,9 @@ function ProjectCard({ header, description, imageSrc }) {
          whileTap={{scale: 1.05}}
          onHoverStart={handleHoverStart}
          onHoverEnd={handleHoverEnd}
-         style={{x, y}}
+         style={{x, y, scale}}
          ref={cardRef}>
+         <div className={styles.cardShadow} ref={cardShadowRef}></div>
          <div className={styles.imageWrapper}>
             <Image
                alt='image'

@@ -15,6 +15,17 @@ $teal: #29a0b1;
       display: none !important
    }
 
+   .iconsRow {
+      margin-top: 5vh;
+      margin-bottom: 5vh;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 6vh;
+      gap: 5vw;
+      justify-content: center;
+   }
+
    .heroTextWrapper {
       display: flex;
       flex-direction: row;
@@ -78,7 +89,7 @@ $teal: #29a0b1;
          .headerText {
             font-size: clamp(40px, 9vw, 80px);
             font-weight: 500;
-            color: teal
+            color: $teal-green
          }
 
          .subheaderText {
@@ -102,49 +113,68 @@ $teal: #29a0b1;
 @media (min-width: 1025px) and (pointer: fine) {
    .hero {
       display: flex;
-      flex-direction: row;
-      height: 50vh;
-      margin-top: 25vh;
+      flex-direction: column;
+      height: 100vh;
       width: 90vw;
       padding-inline: 5vw;
       align-items: center;
    }
 
+   .heroFirstLine {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 24vh
+   }
+
+   .iconsRow {
+      margin-top: 8vh;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 6vh;
+      gap: 5vw;
+      justify-content: center;
+   }
+
    .codeEditor {
       display: flex;
       justify-content: center;
-      height: 280px;
+      height: 250px;
    }
 
    .heroTextWrapper {
       display: flex;
       flex-direction: row;
-      padding-inline: 4vw;
+      padding-left: 3vw;
+      max-width: 40vw;
 
       .heroText {
          display: flex;
          flex-direction: column;
 
          .headerText {
-            font-size: 5vw;
+            font-size: 4.5vw;
             font-weight: 500;
-            color: teal
+            color: $teal-green
          }
 
          .subheaderText {
             display: inline-block;
-            font-size: 2.2vw;
+            font-size: 2vw;
 
             .heartIcon {
                display: inline-block;
-               height: 2vw;
+               height: 1.8vw;
             }
          }
       }
 
       .buttonRow {
          display: flex;
-         height: 5vh;
+         height: 4.8vh;
          gap: 2vw;
          margin-top: 4vh;
       }
@@ -154,52 +184,73 @@ $teal: #29a0b1;
 
 // large laptops
 @media (min-width: 1200px) and (pointer: fine) {
+
    .hero {
       display: flex;
-      flex-direction: row;
-      height: 50vh;
-      margin-top: 25vh;
+      flex-direction: column;
+      height: 100vh;
       width: 90vw;
       padding-inline: 5vw;
       align-items: center;
    }
 
+   .heroFirstLine {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: 24vh
+   }
+
+   .iconsRow {
+      margin-top: 8vh;
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      height: 6vh;
+      gap: 5vw;
+      justify-content: center;
+   }
+
    .codeEditor {
       display: flex;
       justify-content: center;
-      height: 25vw;
-      min-width: 40vw;
+      height: 20vw;
+      min-width: 30vw;
    }
 
    .heroTextWrapper {
       display: flex;
       flex-direction: row;
-      padding-inline: 4vw;
+      padding-left: 5vw;
+      max-width: none;
 
       .heroText {
          display: flex;
          flex-direction: column;
+         max-width: 30vw;
 
          .headerText {
-            font-size: 5vw;
+            font-size: 4vw;
             font-weight: 500;
-            color: teal
+            color: $teal-green
          }
 
          .subheaderText {
             display: inline-block;
-            font-size: 2vw;
+            font-size: 1.6vw;
 
             .heartIcon {
                display: inline-block;
-               height: 2vw;
+               height: 1.6vw;
             }
          }
       }
 
       .buttonRow {
          display: flex;
-         height: 3.5vw;
+         height: 2.5vw;
          gap: 2vw;
          margin-top: 2vh;
       }

@@ -1,5 +1,5 @@
 import styles from "./ScrollDirection.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import {
    motion,
    useScroll,
@@ -119,7 +119,6 @@ function ScrollDirection({ children, pageNames, pageColors }) {
    // determine whether to use horizontal or vertical layout
    function determineOrientation() {
       if (window.matchMedia('(max-width: 1024px), (orientation: portrait), (pointer: coarse)').matches){
-         console.log('vertical')
          setOrientation("verticalScroll");
       } else {
          console.log('horizontal')
@@ -328,4 +327,4 @@ function ScrollDirection({ children, pageNames, pageColors }) {
    );
 }
 
-export default ScrollDirection;
+export default memo(ScrollDirection);

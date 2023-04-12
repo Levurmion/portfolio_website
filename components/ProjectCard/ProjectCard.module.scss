@@ -67,7 +67,7 @@ $header-color: #04247C;
 }
 
 // pre-render shadow
-.cardWrapper::after {
+.cardShadow {
 
    --shadow-color: 210deg 40% 56%;
    --shadow-elevation-high:
@@ -80,21 +80,14 @@ $header-color: #04247C;
      -23.2px 27.6px 40.6px -2.1px hsl(var(--shadow-color) / 0.33),
      -34.1px 40.6px 59.6px -2.5px hsl(var(--shadow-color) / 0.33);
 
-   content: '';
    position: absolute;
    border-radius: inherit;
-   opacity: 0 !important;
+   opacity: 0;
    box-shadow: var(--shadow-elevation-high);
    height: 100%;
    width: 100%;
-   opacity: 1;
-   transition: 0.5s;
 }
 
-.cardWrapper:hover::after {
-   opacity: 1 !important;
-   transition: 0.5s;
-}
 
 // mobile phones
 @media (max-width: 420px) {
