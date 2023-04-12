@@ -14,6 +14,7 @@ import {
    useMotionValueEvent,
    useScroll,
    useTransform,
+   useSpring
 } from "framer-motion";
 
 function MobileIconsRow({ children }) {
@@ -21,17 +22,14 @@ function MobileIconsRow({ children }) {
    const [contentOverflow, setContentOverflow] = useState(false);
 
    const { scrollYProgress } = useScroll();
-   const x = useTransform(scrollYProgress, [0, 1], [0, -400]);
+   const x = useSpring(useTransform(scrollYProgress, [0, 1], [0, -400]));
 
    useEffect(() => {
-      if (iconsRowRef.current.scrollWidth > screen.width) {
+      if (iconsRowRef.current.scrollWidth > iconsRowRef.current.offsetWidth) {
          setContentOverflow(true);
       } else {
          setContentOverflow(false);
       }
-      console.log(iconsRowRef.current.scrollWidth);
-      console.log(screen.width);
-      console.log(contentOverflow);
    }, [contentOverflow]);
 
    return !contentOverflow ? (

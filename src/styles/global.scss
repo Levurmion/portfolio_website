@@ -18,3 +18,10 @@ body {
 svg {
   overflow: visible !important;
 }
+
+@media (max-width: 1024px) {
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
