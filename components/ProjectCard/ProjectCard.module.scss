@@ -2,7 +2,7 @@
 $header-color: #04247C;
 
 .cardWrapper {
-   --shadow-color: 210deg 40% 56%;
+   --shadow-color: 180deg 34% 52%;
    --shadow-elevation-medium:
      -0.3px 0.4px 0.6px hsl(var(--shadow-color) / 0.35),
      -1.1px 1.4px 2px -0.8px hsl(var(--shadow-color) / 0.35),
@@ -62,6 +62,7 @@ $header-color: #04247C;
 
       .description {
          font-size: 70%;
+         color: #000000;
       }
     }
 }
@@ -69,7 +70,7 @@ $header-color: #04247C;
 // pre-render shadow
 .cardShadow {
 
-   --shadow-color: 210deg 40% 56%;
+   --shadow-color: 180deg 34% 52%;
    --shadow-elevation-high:
      -0.3px 0.4px 0.6px hsl(var(--shadow-color) / 0.33),
      -2px 2.4px 3.5px -0.4px hsl(var(--shadow-color) / 0.33),

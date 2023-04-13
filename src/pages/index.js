@@ -20,6 +20,7 @@ import HTMLIcon from "../../icons/HTMLIcon";
 import CSSIcon from "../../icons/CSSIcon";
 import FramerMotionIcon from "../../icons/FramerMotionIcon";
 import MobileIconsRow from "../../components/MobileIconsRow/MobileIconsRow";
+import { Reorder } from "framer-motion";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +39,7 @@ export default function Home() {
          <Navbar>
             <ScrollDirection
                pageNames={["home", "projects", "about"]}
-               pageColors={["#c1f7f7", "#CAE5FF", "#a4f4d9"]}>
+               pageColors={["#c1f7f7", "#c1f7f7", "#c1f7f7"]}>
                <div className={heroStyle.hero}>
                   <div className={heroStyle.heroFirstLine}>
                      <div className={heroStyle.codeEditor}>

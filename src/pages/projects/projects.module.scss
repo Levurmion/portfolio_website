@@ -1,0 +1,22 @@
+.projectPage {
+   display: flex; 
+   flex-direction: column;
+   padding-top: 15vh;
+   padding-inline: 5vw;
+   font-family: 'Roboto', sans-serif;
+
+   h1 {
+      font-size: 3.5vw;
+      font-weight: 400;
+   }
+
+   h2 {
+      font-size: 2vw;
+      font-weight: 400;
+   }
+
+   p {
+      font-size: 1vw;
+      font-weight: 300;
+   }
+}

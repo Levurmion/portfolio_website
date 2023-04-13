@@ -251,10 +251,20 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.addEventListener("mousemove", handleMouseMove);
    }
 
+   function clearSession() {
+      sessionStorage.clear()
+   }
+
    useEffect(() => {
       determineOrientation();
 
       if (orientation === 'sideScroll') {
+
+         window.scroll({
+            left: (parseInt(sessionStorage.getItem('leftProjectsPage')) * sideScrollWrapperRef.current.clientWidth /
+            pageNames.length),
+            behavior: 'instant'
+         })
 
          window.addEventListener("mousedown", handleDrag);
          window.addEventListener("mouseup", handleMouseUp);

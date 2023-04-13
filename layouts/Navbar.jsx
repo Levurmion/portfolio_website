@@ -6,7 +6,7 @@ function Navbar({ children }) {
     <>
       <div className={styles.navbar}>
         <div className={styles.linkBox}>
-          <a className={styles.links} href='/'>
+          <a className={styles.links} href='/' onClick={() => {sessionStorage.removeItem('leftProjectsPage')}}>
             Home
           </a>
           <div className={styles.underliner}></div>
