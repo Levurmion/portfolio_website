@@ -20,11 +20,32 @@ import HTMLIcon from "../../icons/HTMLIcon";
 import CSSIcon from "../../icons/CSSIcon";
 import FramerMotionIcon from "../../icons/FramerMotionIcon";
 import MobileIconsRow from "../../components/MobileIconsRow/MobileIconsRow";
-import { Reorder } from "framer-motion";
+import { AnimatePresence, Reorder } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+
+   const [cardClicked, setCardClicked] = useState(false)
+
+   function handleCardClick() {
+      setCardClicked(true)
+   }
+
+   function clearSession () {
+      sessionStorage.clear()
+   }
+
+   useEffect(() => {
+      window.addEventListener("beforeunload", clearSession)
+
+      return () => {
+         window.removeEventListener("beforeunload", clearSession)
+      }
+   })
+
    return (
       <>
          <Head>
@@ -93,21 +114,34 @@ export default function Home() {
                </div>
                <div className={projectsStyle.projects}>
                   <div className={projectsStyle.projectCardsWrapper}>
-                     <ProjectCard
-                        header='COSMOUSE'
-                        description='COSMOUSE is a fullstack project powered by React, Django, and a MySQL database. It is a bioinformatics portal integrating protein-protein interaction networks with embryonic expression data obtained from human and mouse models.'
-                        imageSrc={"/images/cosmouse.png"}
-                     />
-                     <ProjectCard
-                        header='Alphasense'
-                        description='Alphasense augments the predictive accuracy of the existing Missense3D portal for Alphafold models. It is a data/pipeline engineering project built in Python implementing nearest-neighbour search algorithms to deal with 3D protein atomic coordinates.'
-                        imageSrc={"/images/alphasense.png"}
-                     />
-                     <ProjectCard
-                        header='ICAC Scoresheet'
-                        description='Not your typical CRUD app project. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper.'
-                        imageSrc={"/images/sample_pic.jpg"}
-                     />
+                     <AnimatePresence mode='wait'>
+                        {
+                        !cardClicked ?
+                        (
+                        <>
+                        <ProjectCard
+                           header='COSMOUSE'
+                           description='COSMOUSE is a fullstack project powered by React, Django, and a MySQL database. It is a bioinformatics portal integrating protein-protein interaction networks with embryonic expression data obtained from human and mouse models.'
+                           imageSrc={"/images/cosmouse.png"}
+                           notifyClick={handleCardClick}
+                        />
+                        <ProjectCard
+                           header='Alphasense'
+                           description='Alphasense augments the predictive accuracy of the existing Missense3D portal for Alphafold models. It is a data/pipeline engineering project built in Python implementing nearest-neighbour search algorithms to deal with 3D protein atomic coordinates.'
+                           imageSrc={"/images/alphasense.png"}
+                           notifyClick={handleCardClick}
+                        />
+                        <ProjectCard
+                           header='ICAC Scoresheet'
+                           description='Not your typical CRUD app project. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper.'
+                           imageSrc={"/images/sample_pic.jpg"}
+                           notifyClick={handleCardClick}
+                        />
+                        </>
+                        ):(
+                           <div key='dummyDiv'></div>
+                        )}
+                     </AnimatePresence>
                   </div>
                </div>
                <div className={heroStyle.about}></div>

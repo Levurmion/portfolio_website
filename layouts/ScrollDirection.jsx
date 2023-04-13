@@ -1,5 +1,5 @@
 import styles from "./ScrollDirection.module.scss";
-import { useEffect, useRef, useState, memo } from "react";
+import { useLayoutEffect, useRef, useState, memo } from "react";
 import {
    motion,
    useScroll,
@@ -255,8 +255,9 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       sessionStorage.clear()
    }
 
-   useEffect(() => {
+   useLayoutEffect(() => {
       determineOrientation();
+      console.log(orientation)
 
       if (orientation === 'sideScroll') {
 
@@ -310,7 +311,6 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                      className={styles.navButtons}
                      whileHover={{ x: "-0.2vw" }}
                      whileTap={{ x: "-0.4vw" }}
-                     // onClick={handleScrollPrev}
                      onTap={handleScrollPrev}>
                      <NavigateBeforeIcon fontSize='inherit' color='inherit' />
                   </motion.div>
@@ -319,7 +319,6 @@ function ScrollDirection({ children, pageNames, pageColors }) {
                      className={styles.navButtons}
                      whileHover={{ x: "0.2vw" }}
                      whileTap={{ x: "0.4vw" }}
-                     // onClick={handleScrollNext}
                      onTap={handleScrollNext}>
                      <NavigateNextIcon fontSize='inherit' color='inherit' />
                   </motion.div>

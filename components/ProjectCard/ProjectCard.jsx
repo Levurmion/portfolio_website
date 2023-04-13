@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./ProjectCard.module.scss";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import {
    AnimatePresence,
    motion,
@@ -28,13 +29,15 @@ const cardAnim = {
          stiffness: 100,
          damping: 15,
       },
-   }
+   },
 };
 
-function ProjectCard({ header, description, imageSrc }) {
+function ProjectCard({ header, description, imageSrc, notifyClick }) {
    const cardRef = useRef(null);
    const cardShadowRef = useRef(null);
-   let cardClicked = false
+   const [cardClicked, setCardClicked] = useState(false);
+
+   const router = useRouter()
 
    // hover animation setup
    const cursorCenterOffsetX = useMotionValue(0);
@@ -80,45 +83,55 @@ function ProjectCard({ header, description, imageSrc }) {
       cardRef.current.removeEventListener("mousemove", handleMousemoveOnCard);
    }
 
-   function handleClick() {
-      cardClicked = true
+   function handleClick(event) {
+      setCardClicked(true)
+      event.preventDefault()
+      notifyClick()
+      setTimeout(() => {
+         router.push('/projects/any')
+      }, 750)
    }
 
    useEffect(() => {
-      return (() => {
+      return () => {
          if (cardClicked) {
-            sessionStorage.setItem('leftProjectsPage','1')
+            sessionStorage.setItem("leftProjectsPage", "1");
          }
-      })
-   })
+      };
+   });
 
    return (
-      <Link href='/projects/any' style={{textDecoration: 'none', color: 'none'}}>
+      <Link
+         href='/projects/any'
+         onClick={handleClick}
+         key={"projectCard"}
+         style={{ textDecoration: "none", color: "none" }}>
          <motion.div
-               className={styles.cardWrapper}
-               key={"small"}
-               initial={false}
-               animate={cardAnim.default}
-               whileHover={cardAnim.hover}
-               whileTap={{ scale: 1.05 }}
-               onHoverStart={handleHoverStart}
-               onHoverEnd={handleHoverEnd}
-               onTap={handleClick}
-               style={{ x, y, scale }}
-               ref={cardRef}>
-               <div className={styles.cardShadow} ref={cardShadowRef}></div>
-               <div className={styles.imageWrapper}>
-                  <Image
-                     alt='image'
-                     className={styles.image}
-                     fill
-                     src={imageSrc}></Image>
-               </div>
-               <div className={styles.textbox}>
-                  <header className={styles.header}>{header}</header>
-                  <p className={styles.description}>{description}</p>
-               </div>
-            </motion.div>
+            className={styles.cardWrapper}
+            key={"small"}
+            initial={false}
+            animate={cardAnim.default}
+            exit={{ y: 30, opacity: 0 }}
+            whileHover={cardAnim.hover}
+            whileTap={{ scale: 1.05 }}
+            onHoverStart={handleHoverStart}
+            onHoverEnd={handleHoverEnd}
+            onTap={handleClick}
+            style={{ x, y, scale }}
+            ref={cardRef}>
+            <div className={styles.cardShadow} ref={cardShadowRef}></div>
+            <div className={styles.imageWrapper}>
+               <Image
+                  alt='image'
+                  className={styles.image}
+                  fill
+                  src={imageSrc}></Image>
+            </div>
+            <div className={styles.textbox}>
+               <header className={styles.header}>{header}</header>
+               <p className={styles.description}>{description}</p>
+            </div>
+         </motion.div>
       </Link>
    );
 }
