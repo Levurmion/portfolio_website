@@ -4,7 +4,6 @@ import styles from './AboutMeButton.module.scss';
 function AboutMeButton({id}) {
 
   return (
-    <div id={id}>
       <svg
       className={styles.button}
       height='100%'
@@ -33,7 +32,6 @@ function AboutMeButton({id}) {
         />
       </g>
       </svg>
-    </div>
   );
 }
 

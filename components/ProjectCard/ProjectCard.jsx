@@ -38,7 +38,6 @@ function ProjectCard({ header, description, imageSrc }) {
    const opacity = useTransform(scale, [1, 1.1], [0,1])
 
    useMotionValueEvent(opacity, 'change', latest => {
-      console.log(latest)
       cardShadowRef.current.style.opacity = latest
    })
 

@@ -121,7 +121,6 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       if (window.matchMedia('(max-width: 1024px), (orientation: portrait), (pointer: coarse)').matches){
          setOrientation("verticalScroll");
       } else {
-         console.log('horizontal')
          setOrientation("sideScroll");
       }
    }
@@ -254,11 +253,9 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    useEffect(() => {
       determineOrientation();
-      window.addEventListener("resize", determineOrientation);
-      console.log('mounting')
-
 
       if (orientation === 'sideScroll') {
+
          window.addEventListener("mousedown", handleDrag);
          window.addEventListener("mouseup", handleMouseUp);
          window.addEventListener("scroll", handleScrollX);

@@ -1,3 +1,4 @@
+'client side';
 import styles from "./MobileIconsRow.module.scss";
 import HTMLIcon from "../../icons/HTMLIcon";
 import CSSIcon from "../../icons/CSSIcon";
@@ -14,40 +15,41 @@ import {
    useMotionValueEvent,
    useScroll,
    useTransform,
-   useSpring
+   useSpring,
+   useTime,
+   useMotionValue,
 } from "framer-motion";
 
 function MobileIconsRow({ children }) {
-   const iconsRowRef = useRef(null);
-   const [contentOverflow, setContentOverflow] = useState(false);
 
-   const { scrollYProgress } = useScroll();
-   const x = useSpring(useTransform(scrollYProgress, [0, 1], [0, -400]));
+   const iconsRowRef = useRef(null)
+   const [targetX, setTargetX] = useState({})
+   const [mobileMode, setMobileMode] = useState(true)
 
+   // after mounting, check device dimensions
    useEffect(() => {
-      if (iconsRowRef.current.scrollWidth > iconsRowRef.current.offsetWidth) {
-         setContentOverflow(true);
-      } else {
-         setContentOverflow(false);
-      }
-   }, [contentOverflow]);
+      setMobileMode(iconsRowRef.current.getBoundingClientRect().width > screen.width)
+      setTargetX((iconsRowRef.current.getBoundingClientRect().width/2) + (0.025*screen.width))
+   },[mobileMode, targetX])
 
-   return !contentOverflow ? (
+   return !mobileMode ? (
       <div className={styles.iconsRow} ref={iconsRowRef}>
          {children}
       </div>
    ) : (
       <div className={styles.iconsWindow}>
          <motion.div
-            drag='x'
-            dragSnapToOrigin
-            style={{ x }}
+            initial = {{ x: 0 }}
+            animate = {{ x: targetX }}
+            transition={{ ease: 'linear', duration: 10, repeat: Infinity }}
             className={styles.iconsRow}
-            ref={iconsRowRef}>
+            ref={iconsRowRef}
+            >
+            {children}
             {children}
          </motion.div>
       </div>
    );
 }
 
-export default MobileIconsRow;
+export default memo(MobileIconsRow);

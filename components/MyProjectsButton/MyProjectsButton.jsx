@@ -3,7 +3,6 @@ import styles from './MyProjectsButton.module.scss'
 
 function MyProjectsButton({ id }) {
   return (
-    <div id={id}>
       <svg
         className={styles.button}
         height='100%'
@@ -32,7 +31,6 @@ function MyProjectsButton({ id }) {
           />
         </g>
       </svg>
-    </div>
   );
 }
 
