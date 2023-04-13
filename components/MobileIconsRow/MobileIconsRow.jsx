@@ -28,7 +28,7 @@ function MobileIconsRow({ children }) {
 
    // after mounting, check device dimensions
    useEffect(() => {
-      setMobileMode(iconsRowRef.current.getBoundingClientRect().width > screen.width)
+      setMobileMode(iconsRowRef.current.getBoundingClientRect().width > screen.width && window.matchMedia('(orientation: portrait), (max-width: 414px)').matches)
       setTargetX((iconsRowRef.current.getBoundingClientRect().width/2) + (0.025*screen.width))
    },[mobileMode, targetX])
 
