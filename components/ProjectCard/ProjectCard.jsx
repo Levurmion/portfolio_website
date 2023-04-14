@@ -13,8 +13,13 @@ import {
 import Link from "next/link";
 
 const cardAnim = {
+   initial: {
+      scale: 1.1,
+      opacity: 0
+   },
    default: {
       scale: 1,
+      opacity: 1,
       transition: {
          type: "spring",
          stiffness: 50,
@@ -33,11 +38,13 @@ const cardAnim = {
 };
 
 function ProjectCard({ header, description, imageSrc, notifyClick }) {
+
    const cardRef = useRef(null);
    const cardShadowRef = useRef(null);
    const [cardClicked, setCardClicked] = useState(false);
+   const [isMobile, setIsMobile] = useState(null);
 
-   const router = useRouter()
+   const router = useRouter();
 
    // hover animation setup
    const cursorCenterOffsetX = useMotionValue(0);
@@ -84,21 +91,23 @@ function ProjectCard({ header, description, imageSrc, notifyClick }) {
    }
 
    function handleClick(event) {
-      setCardClicked(true)
+      cursorCenterOffsetX.set(0);
+      cursorCenterOffsetY.set(0);
+      cardRef.current.removeEventListener("mousemove", handleMousemoveOnCard)
       event.preventDefault()
+      setCardClicked(true)
       notifyClick()
+      sessionStorage.setItem("leftProjectsPage", "1")
       setTimeout(() => {
          router.push('/projects/any')
-      }, 750)
+      }, isMobile ? 1 : 750)
    }
 
    useEffect(() => {
-      return () => {
-         if (cardClicked) {
-            sessionStorage.setItem("leftProjectsPage", "1");
-         }
-      };
-   });
+
+      setIsMobile(window.matchMedia('(max-width: 1024px)').matches)
+
+   },[isMobile]);
 
    return (
       <Link
@@ -109,13 +118,13 @@ function ProjectCard({ header, description, imageSrc, notifyClick }) {
          <motion.div
             className={styles.cardWrapper}
             key={"small"}
-            initial={false}
+            initial={cardAnim.initial}
             animate={cardAnim.default}
-            exit={{ y: 30, opacity: 0 }}
+            exit={isMobile ? {} : { opacity: 0 }}
             whileHover={cardAnim.hover}
             whileTap={{ scale: 1.05 }}
-            onHoverStart={handleHoverStart}
-            onHoverEnd={handleHoverEnd}
+            onHoverStart={isMobile ? () => {} : () => {handleHoverStart()}}
+            onHoverEnd={isMobile ? () => {} : () => {handleHoverEnd()}}
             onTap={handleClick}
             style={{ x, y, scale }}
             ref={cardRef}>

@@ -1,0 +1,39 @@
+.gallery {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+
+   .selectedPhoto {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+   }
+
+   .photoOptions {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+   }
+
+   .photos {
+      display: flex;
+      height: 100%;
+      width: 25%;
+      justify-content: center;
+      align-items: center;
+   }
+
+   .photoWrapper {
+      display: flex;
+      height: 90%;
+      width: 90%;
+   }
+
+   .selectedPhotoWrapper {
+      display: flex;
+      height: 97.5%;
+      width: 97.5%;
+   }
+}

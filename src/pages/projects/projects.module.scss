@@ -1,22 +1,32 @@
 .projectPage {
    display: flex; 
    flex-direction: column;
-   padding-top: 15vh;
-   padding-inline: 5vw;
+   justify-content: center;
+   height: 100vh;
+   width: 100vw;
    font-family: 'Roboto', sans-serif;
 
-   h1 {
-      font-size: 3.5vw;
-      font-weight: 400;
+   .pageContent {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 70%;
+      height: 70%;
+      padding-inline: 15%;
    }
 
-   h2 {
-      font-size: 2vw;
-      font-weight: 400;
+   .photoGallery {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40%;
+      height: 100%;
    }
 
-   p {
-      font-size: 1vw;
-      font-weight: 300;
+   .description {
+      display: flex;
+      flex-direction: column;
+      width: 60%;
+      height: 100%;
    }
 }
