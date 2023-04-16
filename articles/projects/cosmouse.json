@@ -1,0 +1,24 @@
+{
+   "imageURLs": [
+      "/images/cosmouse.png", 
+      "/images/cosmouse_normal.png", 
+      "/images/cosmouse_expression.png", 
+      "/images/cosmouse_panel.png"
+   ],
+   "header": "COSMOUSE",
+   "subheader": "An integrated database of human protein-protein interaction networks, cancer-associated mutations, and embryonic gene expression data.",
+   "pointers": [
+      "1,787,238 combined human and mouse embryonic expression records",
+      "8,134,081 cancer-associated mutations",
+      "11,938,498 human pairwise protein-protein interactions",
+      "interactive frontend GUI built using React, NivoCharts, and CytoscapeJS",
+      "demo version powered by REST APIs hosted on AWS"
+   ],
+   "techStack": [
+      "Django",
+      "MySQL",
+      "React",
+      "Cytoscape",
+      "NivoCharts"
+   ]
+}

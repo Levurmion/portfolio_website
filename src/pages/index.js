@@ -124,18 +124,21 @@ export default function Home() {
                            description='COSMOUSE is a fullstack project powered by React, Django, and a MySQL database. It is a bioinformatics portal integrating protein-protein interaction networks with embryonic expression data obtained from human and mouse models.'
                            imageSrc={"/images/cosmouse.png"}
                            notifyClick={handleCardClick}
+                           linkURL={'/projects/cosmouse'}
                         />
                         <ProjectCard
                            header='Alphasense'
                            description='Alphasense augments the predictive accuracy of the existing Missense3D portal for Alphafold models. It is a data/pipeline engineering project built in Python implementing nearest-neighbour search algorithms to deal with 3D protein atomic coordinates.'
                            imageSrc={"/images/alphasense.png"}
                            notifyClick={handleCardClick}
+                           linkURL={'/projects/alphasense'}
                         />
                         <ProjectCard
                            header='ICAC Scoresheet'
                            description='Not your typical CRUD app project. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper.'
                            imageSrc={"/images/sample_pic.jpg"}
                            notifyClick={handleCardClick}
+                           linkURL={'projects/icac-scoresheet'}
                         />
                         </>
                         ):(

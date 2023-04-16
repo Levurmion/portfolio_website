@@ -1,0 +1,22 @@
+{
+   "imageURLs": [
+      "/images/sample_pic.jpg", 
+      "/images/cosmouse_normal.png", 
+      "/images/cosmouse_expression.png", 
+      "/images/cosmouse_panel.png"
+   ],
+   "header": "ICAC Scoresheet",
+   "subheader": "Mobile-first fullstack web app to automate score tracking in archery competitions.",
+   "pointers": [
+      "full-feature web app with admin, judges, and archer profiles",
+      "user sign-up, authentication, and authorization",
+      "NextJS-powered frontend and backend infrastructures",
+      "Hosted on AWS",
+      "linked to a bespoke cloud-hosted PostgreSQL schema"
+   ],
+   "techStack": [
+      "Next",
+      "React",
+      "PostgreSQL"
+   ]
+}

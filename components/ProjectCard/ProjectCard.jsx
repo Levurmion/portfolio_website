@@ -37,7 +37,7 @@ const cardAnim = {
    },
 };
 
-function ProjectCard({ header, description, imageSrc, notifyClick }) {
+function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
 
    const cardRef = useRef(null);
    const cardShadowRef = useRef(null);
@@ -99,7 +99,7 @@ function ProjectCard({ header, description, imageSrc, notifyClick }) {
       notifyClick()
       sessionStorage.setItem("leftProjectsPage", "1")
       setTimeout(() => {
-         router.push('/projects/any')
+         router.push(linkURL)
       }, isMobile ? 1 : 750)
    }
 
@@ -111,7 +111,7 @@ function ProjectCard({ header, description, imageSrc, notifyClick }) {
 
    return (
       <Link
-         href='/projects/any'
+         href='/'
          onClick={handleClick}
          key={"projectCard"}
          style={{ textDecoration: "none", color: "none" }}>

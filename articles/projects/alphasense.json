@@ -1,0 +1,23 @@
+{
+   "imageURLs": [
+      "/images/alphasense.png", 
+      "/images/cosmouse_normal.png", 
+      "/images/cosmouse_expression.png", 
+      "/images/cosmouse_panel.png"
+   ],
+   "header": "Alphasense",
+   "subheader": "Missense3D prediction flagging pipeline for Alphafold missense variants.",
+   "pointers": [
+      "production-level Python pipeline for flagging low-confidence Missense3D predictions of Alphafold models",
+      "utilizes k-dtree nearest-neighbour search algorithms to analyze 3D protein structures",
+      "statistically tested on >4M known ClinVar missense genetic variants",
+      ">90GB PostgreSQL database dump available to download"
+   ],
+   "techStack": [
+      "Python",
+      "Pandas",
+      "Numpy",
+      "PostgreSQL",
+      "Django"
+   ]
+}
