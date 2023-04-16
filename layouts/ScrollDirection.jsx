@@ -11,43 +11,19 @@ import {
    useSpring,
    animate,
 } from "framer-motion";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { sideScroll } from "@mui/icons-material";
-
-const scrollTicksBoxAnim = {
-   initial: {},
-   hovered: {},
-};
-
-const scrollTicksLabelAnim = {
-   initial: {
-      y: "2.5vh",
-      opacity: 0,
-      transition: {
-         type: "spring",
-         stiffness: 300,
-         damping: 15,
-      },
-   },
-   hovered: {
-      y: ["2.5vh", "3vh"],
-      opacity: [0, 1],
-      transition: {
-         type: "spring",
-         stiffness: 300,
-         damping: 20,
-      },
-   },
-};
+import ScrollTicks from "../components/ScrollTicks/ScrollTicks";
 
 function ScrollDirection({ children, pageNames, pageColors }) {
 
-   const [orientation, setOrientation] = useState('sideScroll');
+   const [orientation, setOrientation] = useState(null);
+   const [currentPage, setCurrentPage] = useState(0);
 
+   // useRef protects the .current value of the reference variable from resets by stateful re-renders!!!
+   // if eventListenerPageRef was not a useRef object, it will be reset with every React re-render!!!
    const sideScrollWrapperRef = useRef(null);
+   const eventListenerPageRef = useRef(0);
 
-   let currentPage = 0;
    let lastClientX = 0;
 
    const initialPageThreshold = 1 / (pageNames.length + 1);
@@ -67,54 +43,22 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    // FramerMotion hooks
    const { scrollXProgress } = useScroll();
-
-   const [scrollTickRef, animateScrollTickRef] = useAnimate();
    const backgroundColor = useTransform(scrollXProgress, scrollProgressThresholds, pageColors);
 
    // determine page to snap to
    useMotionValueEvent(scrollXProgress, "change", (latest) => {
-      const nextPageThreshold =
-         initialPageThreshold + currentPage * pageThresholdIntervals;
+      const nextPageThreshold = initialPageThreshold + currentPage * pageThresholdIntervals;
       const prevPageThreshold = nextPageThreshold - pageThresholdIntervals;
 
       if (latest >= nextPageThreshold && latest < 1) {
-         currentPage += 1;
-         if (sideScrollWrapperRef.current !== null) {
-            animateScrollTicks(pageNames[currentPage - 1]);
-         }
+         setCurrentPage(currentPage + 1);
+         eventListenerPageRef.current += 1;
       } else if (latest < prevPageThreshold && latest < 1 && currentPage > 0) {
-         currentPage -= 1;
-         if (sideScrollWrapperRef.current !== null) {
-            animateScrollTicks(pageNames[currentPage + 1]);
-         }
-      } else {
+         setCurrentPage(currentPage - 1);
+         eventListenerPageRef.current -= 1;
       }
    });
 
-   function animateScrollTicks(pageToReset) {
-      const thisPage = pageNames[currentPage];
-
-      const thisPageTargetStyle = {
-         borderRadius: "5%",
-         transform: "rotate(135deg) scale(1.5)",
-      };
-
-      const defaultStyle = {
-         borderRadius: "50%",
-         transform: "rotate(0deg) scale(1)",
-      };
-
-      animateScrollTickRef(`#${thisPage} > .tick`, thisPageTargetStyle, {
-         type: "spring",
-         stiffness: 300,
-         damping: 20,
-      });
-      animateScrollTickRef(`#${pageToReset} > .tick`, defaultStyle, {
-         type: "spring",
-         stiffness: 300,
-         damping: 20,
-      });
-   }
 
    // determine whether to use horizontal or vertical layout
    function determineOrientation() {
@@ -123,59 +67,15 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       } else {
          setOrientation("sideScroll");
       }
-   }
-
-   // draw scroll ticks based on the number of provided and detected pages in the application
-   function drawScrollTicks() {
-      const numPages =
-         sideScrollWrapperRef.current !== null
-            ? sideScrollWrapperRef.current.childNodes.length
-            : 0;
-
-      let pageCounter = -1;
-
-      if (pageNames.length != numPages && numPages > 0) {
-         throw new Error(
-            "pageNames array does not have the same number of labels as the number of existing pages."
-         );
-      } else {
-         return pageNames.map((name) => {
-            pageCounter += 1;
-            return (
-               <motion.div
-                  key={name}
-                  className={styles.scrollTicksBox}
-                  initial='initial'
-                  whileHover='hovered'
-                  id={name}
-                  variants={scrollTicksBoxAnim}>
-                  <motion.div
-                     className={styles.scrollTicksLabel}
-                     variants={scrollTicksLabelAnim}>
-                     {/* {name} */}
-                  </motion.div>
-                  <motion.div
-                     className={styles.scrollTicks + " tick"}
-                     onClick={handleSkipToPage}
-                     pagenumber={pageCounter}
-                     animate={{
-                        borderRadius: "50%",
-                        transform: "rotate(0deg) scale(1)",
-                     }}
-                     whileHover={{ cursor: "pointer" }}></motion.div>
-               </motion.div>
-            );
-         });
-      }
-   }
+   } 
 
    // handle moving to the next page when clicking on the '>' button
    function handleScrollNext() {
-      currentPage =
-         currentPage < pageNames.length - 1 ? currentPage + 1 : currentPage;
+      setCurrentPage(currentPage < children.length ? currentPage + 1 : currentPage)
+      eventListenerPageRef.current += eventListenerPageRef.current < children.length ? 1 : 0
       window.scroll({
          left:
-            (currentPage * sideScrollWrapperRef.current.clientWidth) /
+            (eventListenerPageRef.current * sideScrollWrapperRef.current.clientWidth) /
             pageNames.length,
          behavior: "smooth",
       });
@@ -183,27 +83,21 @@ function ScrollDirection({ children, pageNames, pageColors }) {
 
    // handle moving to previous page when clicking on '<' button
    function handleScrollPrev() {
-      currentPage = currentPage > 0 ? currentPage - 1 : currentPage;
+      setCurrentPage(currentPage > 0 ? currentPage - 1 : currentPage)
+      eventListenerPageRef.current -= eventListenerPageRef.current > 0 ? 1 : 0
       window.scroll({
          left:
-            (currentPage * sideScrollWrapperRef.current.clientWidth) /
+            (eventListenerPageRef.current * sideScrollWrapperRef.current.clientWidth) /
             pageNames.length,
          behavior: "smooth",
       });
    }
 
-   // handle skipping to a page when clicking on one of the scroll ticks
-   function handleSkipToPage(event) {
-      currentPage = parseInt(event.target.getAttribute("pagenumber"));
-      console.log(currentPage);
-      snapScrollToPage();
-   }
-
    // function to snap scroll to page
-   function snapScrollToPage() {
+   function snapScrollToPage(pageToSnap) {
       window.scroll({
          left:
-            (currentPage * sideScrollWrapperRef.current.clientWidth) /
+            (pageToSnap * sideScrollWrapperRef.current.clientWidth) /
             pageNames.length,
          behavior: "smooth",
       });
@@ -214,17 +108,20 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.clearTimeout(isScrolling);
 
       isScrolling = setTimeout(() => {
-         snapScrollToPage();
-      }, waitTime + 10);
+         console.log('successful timeout on page: ', eventListenerPageRef.current)
+         snapScrollToPage(eventListenerPageRef.current);
+      }, waitTime + 50);
    }
 
    // handle drag release (mouseup)
    function handleMouseUp(event) {
       window.removeEventListener("mousemove", handleMouseMove);
-      clearInterval(clearIsScrolling);
+      window.clearInterval(clearIsScrolling);
+
+      console.log('mouseup on page: ', eventListenerPageRef.current)
 
       lastClientX = 0;
-      snapScrollToPage();
+      snapScrollToPage(eventListenerPageRef.current);
    }
 
    // handle dragging while mousedown
@@ -232,6 +129,8 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.clearTimeout(isScrolling);
       let { clientX } = event;
       let deltaX = (clientX - lastClientX) * scrollXMultiplier;
+
+      console.log("mouse move on page: ", eventListenerPageRef.current)
 
       if (lastClientX === 0) {
          lastClientX = clientX;
@@ -251,13 +150,8 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.addEventListener("mousemove", handleMouseMove);
    }
 
-   function clearSession() {
-      sessionStorage.clear()
-   }
-
    useLayoutEffect(() => {
       determineOrientation();
-      console.log(orientation)
 
       if (orientation === 'sideScroll') {
 
@@ -272,20 +166,6 @@ function ScrollDirection({ children, pageNames, pageColors }) {
          window.addEventListener("scroll", handleScrollX);
 
          scrollXProgress.set(0)
-
-         const firstTick = pageNames[0];
-         animateScrollTickRef(
-            `#${firstTick} > .tick`,
-            {
-               borderRadius: "5%",
-               transform: "rotate(135deg) scale(1.5)",
-            },
-            {
-               type: "spring",
-               stiffness: 300,
-               damping: 20,
-            }
-         );
       }
       
       return () => {
@@ -296,41 +176,33 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       };
    },[orientation]);
 
-   return (
-      <>
-         {orientation === "sideScroll" ? (
-            <>
+   function renderPage() {
+      if (orientation === null) {
+         return <></>
+      } else if (orientation === 'sideScroll') {
+         return (
+            <>           
                <motion.div
                   style={{ backgroundColor }}
                   className={styles.sidescrollWrapper}
                   ref={sideScrollWrapperRef}>
                   {children}
                </motion.div>
-               <div className={styles.scrollTicksRow} ref={scrollTickRef}>
-                  <motion.div
-                     className={styles.navButtons}
-                     whileHover={{ x: "-0.2vw" }}
-                     whileTap={{ x: "-0.4vw" }}
-                     onTap={handleScrollPrev}>
-                     <NavigateBeforeIcon fontSize='inherit' color='inherit' />
-                  </motion.div>
-                  {drawScrollTicks()}
-                  <motion.div
-                     className={styles.navButtons}
-                     whileHover={{ x: "0.2vw" }}
-                     whileTap={{ x: "0.4vw" }}
-                     onTap={handleScrollNext}>
-                     <NavigateNextIcon fontSize='inherit' color='inherit' />
-                  </motion.div>
+               <div className={styles.scrollTicksRow}>
+                  <ScrollTicks numPages={children.length} currentPage={currentPage} notifyScrollNext={handleScrollNext} notifyScrollPrev={handleScrollPrev}/>
                </div>
             </>
-         ) : (
+         )
+      } else if (orientation === 'verticalScroll') {
+         return (
             <div className='verticalScrollbox' style={{display: 'flex', flexDirection: 'column', width: '90vw', paddingInline: '5vw', alignItems: 'center'}}>
                {children}
             </div>
-         )}
-      </>
-   );
+         )
+      }
+   }
+
+   return renderPage()
 }
 
 export default memo(ScrollDirection);
