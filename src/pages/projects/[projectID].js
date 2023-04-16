@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PhotoFrame from "../../../components/PhotoFrame/PhotoFrame";
 import { motion, AnimatePresence } from "framer-motion";
 import PhotoGallery from "../../../components/PhotoGallery/PhotoGallery";
@@ -31,55 +31,65 @@ const techIcons = {
 };
 
 const galleryAnim = {
-   initial: { x: "-5vw", opacity: 0 },
+   initial: { x: "-2vw", opacity: 0 },
    entry: { x: 0, opacity: 1 },
 };
 
 const descriptionAnim = {
-   initial: { x: "2vw", opacity: 0 },
+   initial: { x: "1vw", opacity: 0 },
    entry: { x: 0, opacity: 1 },
 };
 
 export default function Project({ projectData }) {
    const keyGenerator = uniqueKeyGenerator();
 
+   const [isMobile, setIsMobile] = useState(null);
+
+   useEffect(() => {
+      setIsMobile(window.matchMedia('(max-width: 1024px),(pointer: coarse)').matches)
+   }, [])
+
    return (
       <Navbar>
-         <div className={styles.projectPage}>
-            <div className={styles.pageContent}>
-               <AnimatePresence>
-                  <div className={styles.mobileHeader}>{projectData.header}</div>
-                  <div className={styles.mobileSubheader}>{projectData.subheader}</div>
-                  <motion.div
-                     className={styles.photoGallery}
-                     initial={galleryAnim.initial}
-                     animate={galleryAnim.entry}
-                     transition={{ type: "tween", duration: 0.5 }}>
-                     <PhotoGallery imageURLs={projectData.imageURLs} />
-                  </motion.div>
-                  <motion.div
-                     className={styles.description}
-                     initial={descriptionAnim.initial}
-                     animate={descriptionAnim.entry}
-                     transition={{ type: "tween", duration: 0.5, delay: 0.25 }}>
-                     <div className={styles.header}>{projectData.header}</div>
-                     <div className={styles.subheader}>{projectData.subheader}</div>
-                     <div className={styles.techIcons}>
-                        {projectData.techStack.map((icon) => {
-                           return techIcons[icon];
-                        })}
-                     </div>
-                     <div className={styles.pointers}>
-                        <ul>
-                           {projectData.pointers.map((point) => {
-                              return <li key={keyGenerator("point")}>{point}</li>;
+         {isMobile == null ? (
+            <div className={styles.projectPage}></div>
+         ) : (
+            <div className={styles.projectPage}>
+               <div className={styles.pageContent}>
+                  <AnimatePresence>
+                     <div className={styles.mobileHeader}>{projectData.header}</div>
+                     <div className={styles.mobileSubheader}>{projectData.subheader}</div>
+                     <motion.div
+                        className={styles.photoGallery}
+                        initial={isMobile ? false : galleryAnim.initial}
+                        animate={galleryAnim.entry}
+                        transition={{ type: "tween", duration: 0.5 }}>
+                        <PhotoGallery imageURLs={projectData.imageURLs} />
+                     </motion.div>
+                     <motion.div
+                        className={styles.description}
+                        initial={isMobile ? false : descriptionAnim.initial}
+                        animate={descriptionAnim.entry}
+                        transition={{ type: "tween", duration: 0.5, delay: 0.25 }}>
+                        <div className={styles.header}>{projectData.header}</div>
+                        <div className={styles.subheader}>{projectData.subheader}</div>
+                        <div className={styles.techIcons}>
+                           {projectData.techStack.map((icon) => {
+                              return techIcons[icon];
                            })}
-                        </ul>
-                     </div>
-                  </motion.div>
-               </AnimatePresence>
+                        </div>
+                        <div className={styles.pointers}>
+                           <ul>
+                              {projectData.pointers.map((point) => {
+                                 return <li key={keyGenerator("point")}>{point}</li>;
+                              })}
+                           </ul>
+                        </div>
+                     </motion.div>
+                  </AnimatePresence>
+               </div>
             </div>
-         </div>
+         )}
       </Navbar>
    );
 }

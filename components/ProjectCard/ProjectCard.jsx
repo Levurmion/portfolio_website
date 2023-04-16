@@ -2,19 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./ProjectCard.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import {
-   AnimatePresence,
-   motion,
-   useMotionValue,
-   useMotionValueEvent,
-   useSpring,
-   useTransform,
-} from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useMotionValueEvent, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 
 const cardAnim = {
    initial: {
-      opacity: 0
+      opacity: 0,
    },
    default: {
       scale: 1,
@@ -37,7 +30,6 @@ const cardAnim = {
 };
 
 function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
-
    const cardRef = useRef(null);
    const cardShadowRef = useRef(null);
    const [cardClicked, setCardClicked] = useState(false);
@@ -92,28 +84,27 @@ function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
    function handleClick(event) {
       cursorCenterOffsetX.set(0);
       cursorCenterOffsetY.set(0);
-      cardRef.current.removeEventListener("mousemove", handleMousemoveOnCard)
-      event.preventDefault()
-      setCardClicked(true)
-      notifyClick()
-      sessionStorage.setItem("leftProjectsPage", "1")
-      setTimeout(() => {
-         router.push(linkURL)
-      }, isMobile ? 1 : 750)
+      cardRef.current.removeEventListener("mousemove", handleMousemoveOnCard);
+      event.preventDefault();
+      setCardClicked(true);
+      notifyClick();
+      sessionStorage.setItem("leftProjectsPage", "1");
+
+      if (isMobile) {
+         router.push(linkURL);
+      } else {
+         setTimeout(() => {
+            router.push(linkURL);
+         }, 750);
+      }
    }
 
    useEffect(() => {
-
-      setIsMobile(window.matchMedia('(max-width: 1024px)').matches)
-
-   },[isMobile]);
+      setIsMobile(window.matchMedia("(max-width: 1024px)").matches);
+   }, [isMobile]);
 
    return (
-      <Link
-         href='/'
-         onClick={handleClick}
-         key={"projectCard"}
-         style={{ textDecoration: "none", color: "none" }}>
+      <Link href='/' onClick={handleClick} key={"projectCard"} style={{ textDecoration: "none", color: "none" }}>
          <motion.div
             className={styles.cardWrapper}
             key={"small"}
@@ -122,18 +113,26 @@ function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
             exit={isMobile ? {} : { opacity: 0 }}
             whileHover={cardAnim.hover}
             whileTap={{ scale: 1.05 }}
-            onHoverStart={isMobile ? () => {} : () => {handleHoverStart()}}
-            onHoverEnd={isMobile ? () => {} : () => {handleHoverEnd()}}
+            onHoverStart={
+               isMobile
+                  ? () => {}
+                  : () => {
+                       handleHoverStart();
+                    }
+            }
+            onHoverEnd={
+               isMobile
+                  ? () => {}
+                  : () => {
+                       handleHoverEnd();
+                    }
+            }
             onTap={handleClick}
             style={{ x, y, scale }}
             ref={cardRef}>
             <div className={styles.cardShadow} ref={cardShadowRef}></div>
             <div className={styles.imageWrapper}>
-               <Image
-                  alt='image'
-                  className={styles.image}
-                  fill
-                  src={imageSrc}></Image>
+               <Image alt='image' className={styles.image} fill src={imageSrc}></Image>
             </div>
             <div className={styles.textbox}>
                <header className={styles.header}>{header}</header>
