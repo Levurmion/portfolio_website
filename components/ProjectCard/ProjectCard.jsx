@@ -14,7 +14,6 @@ import Link from "next/link";
 
 const cardAnim = {
    initial: {
-      scale: 1.1,
       opacity: 0
    },
    default: {
