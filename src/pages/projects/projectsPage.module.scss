@@ -130,7 +130,7 @@ $teal: #29a0b1;
          display: flex;
          align-items: center;
          justify-content: center;
-         width: 100%;
+         width: 90%;
          height: 100%;
       }
 
@@ -177,7 +177,7 @@ $teal: #29a0b1;
 }
 
 // portrait iPad/tablets
-@media (max-width: 1024px) {
+@media (415px <= width <= 1024px) {
    .projectPage {
       display: flex; 
       flex-direction: column;
