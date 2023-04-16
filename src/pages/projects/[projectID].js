@@ -15,6 +15,7 @@ import PandasIconColored from "../../../icons/PandasIconColored";
 import Navbar from "../../../layouts/Navbar";
 import styles from "./projectsPage.module.scss";
 import { getAllProjectIds, getProjectData } from "../../../lib/project-utils.mjs";
+import { uniqueKeyGenerator } from "../../../lib/utilities.mjs";
 
 const techIcons = {
    Django: <DjangoIconColored />,
@@ -40,6 +41,9 @@ const descriptionAnim = {
 }
 
 export default function Project({ projectData }) {
+
+   const keyGenerator = uniqueKeyGenerator()
+
    return (
       <Navbar>
          <div className={styles.projectPage}>
@@ -67,7 +71,7 @@ export default function Project({ projectData }) {
                      <div className={styles.pointers}>
                         <ul>
                            {projectData.pointers.map((point) => {
-                              return <li>{point}</li>;
+                              return <li key={keyGenerator('point')}>{point}</li>;
                            })}
                         </ul>
                      </div>
