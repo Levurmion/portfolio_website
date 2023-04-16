@@ -43,8 +43,6 @@ const descriptionAnim = {
 export default function Project({ projectData }) {
    const keyGenerator = uniqueKeyGenerator();
 
-   
-
    return (
       <Navbar>
          <div className={styles.projectPage}>

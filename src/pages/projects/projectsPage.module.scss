@@ -177,7 +177,7 @@ $teal: #29a0b1;
 }
 
 // portrait iPad/tablets
-@media (max-width: 1024px), (pointer: coarse) {
+@media (max-width: 1024px) {
    .projectPage {
       display: flex; 
       flex-direction: column;
