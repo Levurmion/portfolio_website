@@ -13,6 +13,14 @@ $teal: #29a0b1;
    width: 100vw;
    font-family: 'Roboto', sans-serif;
 
+   .mobileHeader {
+      display: none
+   }
+
+   .mobileSubheader {
+      display: none
+   }
+
    .pageContent {
       display: flex;
       flex-direction: row;
@@ -72,6 +80,279 @@ $teal: #29a0b1;
             padding-inline-start: 20px;
             li {
                margin-top: 1.5%;
+            }
+         }
+      }
+   }
+}
+
+// mobile
+@media (max-width: 414px) {
+   .projectPage {
+      display: flex; 
+      flex-direction: column;
+      justify-content: center;
+      width: 90vw;
+      height: auto;
+      padding-inline: 5vw;
+      font-size: 10vw;
+      margin-bottom: 5vh;
+
+      .mobileHeader {
+         display: flex;
+         font-size: 100%;
+         font-weight: 500;
+         width: 97.5%;
+         justify-content: start;
+         color: $teal-green;
+         padding-inline: 1.25%;
+      }
+
+      .mobileSubheader {
+         display: flex;
+         font-size: 45%;
+         width: 97.5%;
+         font-weight: 500;
+         margin-bottom: 2vh;
+         padding-inline: 1.25%;
+      }
+
+      .pageContent {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         width: 100%;
+         height: 100%;
+         padding-inline: 0;
+      }
+
+      .photoGallery {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         width: 100%;
+         height: 100%;
+      }
+
+      .description {
+         display: flex;
+         flex-direction: column;
+         align-items: start;
+         justify-content: start;
+         font-size: inherit;
+         width: 100%;
+         height: 100%;
+         padding-left: 0;
+         margin-top: 2vh;
+
+         .header, .subheader {
+            display: none
+         }
+
+         .techIcons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4vw;
+            width: 100%;
+            height: 6vh;
+         }
+
+         .pointers {
+            display: flex;
+            font-size: 40%;
+            font-weight: 300;
+            height: 100%;
+   
+            ul {
+               padding-inline-start: 20px;
+               li {
+                  margin-top: 1.5%;
+               }
+            }
+         }
+      }
+   }
+}
+
+// portrait iPad/tablets
+@media (max-width: 1024px), (pointer: coarse) {
+   .projectPage {
+      display: flex; 
+      flex-direction: column;
+      justify-content: center;
+      width: 90vw;
+      height: auto;
+      padding-inline: 5vw;
+      font-size: 8vw;
+      margin-bottom: 5vh;
+
+      .mobileHeader {
+         display: flex;
+         font-size: 100%;
+         font-weight: 500;
+         width: 97.5%;
+         justify-content: start;
+         color: $teal-green;
+         padding-inline: 1.25%;
+      }
+
+      .mobileSubheader {
+         display: flex;
+         font-size: 45%;
+         width: 97.5%;
+         font-weight: 500;
+         margin-bottom: 3vh;
+         padding-inline: 1.25%;
+      }
+
+      .pageContent {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         width: 100%;
+         height: 100%;
+         padding-inline: 0;
+      }
+
+      .photoGallery {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         width: 70%;
+         height: 100%;
+      }
+
+      .description {
+         display: flex;
+         flex-direction: column;
+         align-items: start;
+         justify-content: start;
+         font-size: inherit;
+         width: 100%;
+         height: 100%;
+         padding-left: 0;
+         margin-top: 3vh;
+
+         .header, .subheader {
+            display: none
+         }
+
+         .techIcons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5vw;
+            width: 100%;
+            height: 7.5vh;
+         }
+
+         .pointers {
+            display: flex;
+            font-size: 40%;
+            font-weight: 300;
+            height: 100%;
+   
+            ul {
+               padding-inline-start: 40px;
+               li {
+                  margin-top: 1.5%;
+               }
+            }
+         }
+      }
+   }
+}
+
+// landscape iPad/tablets
+@media (pointer: coarse) and (orientation: landscape) {
+   .projectPage {
+      display: flex; 
+      flex-direction: column;
+      justify-content: center;
+      width: 80vw;
+      height: auto;
+      padding-inline: 10vw;
+      font-size: 5.5vw;
+      margin-top: 6vh;
+      margin-bottom: 5vh;
+
+      .mobileHeader {
+         display: flex;
+         font-size: 100%;
+         font-weight: 500;
+         width: 97.5%;
+         justify-content: center;
+         color: $teal-green;
+         padding-inline: 1.25%;
+      }
+
+      .mobileSubheader {
+         display: flex;
+         text-align: center;
+         font-size: 45%;
+         width: 97.5%;
+         font-weight: 500;
+         margin-bottom: 5vh;
+         padding-inline: 1.25%;
+         margin-top: 1vw;
+      }
+
+      .pageContent {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         width: 100%;
+         height: 100%;
+         padding-inline: 0;
+      }
+
+      .photoGallery {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         width: 70%;
+         height: 100%;
+      }
+
+      .description {
+         display: flex;
+         flex-direction: column;
+         align-items: start;
+         justify-content: start;
+         font-size: inherit;
+         width: 100%;
+         height: 100%;
+         padding-left: 0;
+         margin-top: 3vh;
+
+         .header, .subheader {
+            display: none
+         }
+
+         .techIcons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5vw;
+            width: 100%;
+            height: 10vh;
+         }
+
+         .pointers {
+            display: flex;
+            font-size: 50%;
+            font-weight: 300;
+            height: 100%;
+   
+            ul {
+               padding-inline-start: 60px;
+               li {
+                  margin-top: 1.5%;
+               }
             }
          }
       }

@@ -33,22 +33,25 @@ const techIcons = {
 const galleryAnim = {
    initial: { x: "-5vw", opacity: 0 },
    entry: { x: 0, opacity: 1 },
-}
+};
 
 const descriptionAnim = {
    initial: { x: "2vw", opacity: 0 },
-   entry: { x: 0, opacity: 1 }
-}
+   entry: { x: 0, opacity: 1 },
+};
 
 export default function Project({ projectData }) {
+   const keyGenerator = uniqueKeyGenerator();
 
-   const keyGenerator = uniqueKeyGenerator()
+   
 
    return (
       <Navbar>
          <div className={styles.projectPage}>
             <div className={styles.pageContent}>
                <AnimatePresence>
+                  <div className={styles.mobileHeader}>{projectData.header}</div>
+                  <div className={styles.mobileSubheader}>{projectData.subheader}</div>
                   <motion.div
                      className={styles.photoGallery}
                      initial={galleryAnim.initial}
@@ -71,7 +74,7 @@ export default function Project({ projectData }) {
                      <div className={styles.pointers}>
                         <ul>
                            {projectData.pointers.map((point) => {
-                              return <li key={keyGenerator('point')}>{point}</li>;
+                              return <li key={keyGenerator("point")}>{point}</li>;
                            })}
                         </ul>
                      </div>
