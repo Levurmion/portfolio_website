@@ -106,7 +106,7 @@ function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
          <motion.div
             className={styles.cardWrapper}
             key={"small"}
-            initial={cardAnim.initial}
+            initial={isMobile ? false : cardAnim.initial}
             animate={cardAnim.default}
             exit={isMobile ? false : { opacity: 0 }}
             whileHover={cardAnim.hover}
