@@ -32,7 +32,6 @@ const cardAnim = {
 function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
    const cardRef = useRef(null);
    const cardShadowRef = useRef(null);
-   const [cardClicked, setCardClicked] = useState(false);
    const [isMobile, setIsMobile] = useState(null);
 
    const router = useRouter();
@@ -86,7 +85,6 @@ function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
       cursorCenterOffsetY.set(0);
       cardRef.current.removeEventListener("mousemove", handleMousemoveOnCard);
       event.preventDefault();
-      setCardClicked(true);
       notifyClick();
       sessionStorage.setItem("leftProjectsPage", "1");
 
@@ -110,7 +108,7 @@ function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
             key={"small"}
             initial={cardAnim.initial}
             animate={cardAnim.default}
-            exit={isMobile ? {} : { opacity: 0 }}
+            exit={isMobile ? false : { opacity: 0 }}
             whileHover={cardAnim.hover}
             whileTap={{ scale: 1.05 }}
             onHoverStart={
