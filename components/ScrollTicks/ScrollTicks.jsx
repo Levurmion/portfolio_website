@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
-function ScrollTicks({ numPages, currentPage, style, notifyScrollNext, notifyScrollPrev }) {
+function ScrollTicks({ numPages, currentPage, style, notifyScrollNext, notifyScrollPrev, notifySkipToPage }) {
    const ticksRowRef = useRef(null);
 
    const ticksRowStyle = {
@@ -25,9 +25,9 @@ function ScrollTicks({ numPages, currentPage, style, notifyScrollNext, notifyScr
       const pages = [...Array(numPages).keys()];
       return pages.map((page) => {
          if (parseInt(page) === currentPage) {
-            return <ScrollTick key={page} selected={true} />;
+            return <ScrollTick key={page} selected={true} notifyClick={handleSkipToPage} forPage={page}/>;
          } else {
-            return <ScrollTick key={page} selected={false} />;
+            return <ScrollTick key={page} selected={false} notifyClick={handleSkipToPage} forPage={page}/>;
          }
       });
    }
@@ -40,9 +40,9 @@ function ScrollTicks({ numPages, currentPage, style, notifyScrollNext, notifyScr
       notifyScrollPrev()
    }
 
-   useEffect(() => {
-      console.log(ticksRowRef.current.childNodes);
-   }, [currentPage]);
+   function handleSkipToPage(page) {
+      notifySkipToPage(page)
+   }
 
    return (
       <div style={ticksRowStyle} ref={ticksRowRef}>

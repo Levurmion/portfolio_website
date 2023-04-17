@@ -21,7 +21,7 @@ const scrollTickAnim = {
    }
 }
 
-function ScrollTick({ selected, style }) {
+function ScrollTick({ selected, style, notifyClick, forPage }) {
 
    const [isSelected, setIsSelected] = useState(selected)
 
@@ -41,11 +41,12 @@ function ScrollTick({ selected, style }) {
    }, [selected])
 
    return (
-      <motion.div style={scrollTickBoxStyle}>
+      <motion.div style={scrollTickBoxStyle} whileHover={{scale: 1.5, cursor: 'pointer'}} transition={{ type: 'spring', stiffness: 400, damping: 17}}>
          <motion.div 
             initial={false}
             animate={isSelected ? scrollTickAnim.selected : scrollTickAnim.default}
             transition={{type: 'spring', stiffness: 300, damping: 20}}
+            onTap={() => notifyClick(forPage)}
             >
          </motion.div>
       </motion.div>

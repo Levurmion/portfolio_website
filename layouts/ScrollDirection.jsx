@@ -1,21 +1,10 @@
 import styles from "./ScrollDirection.module.scss";
 import { useLayoutEffect, useRef, useState, memo } from "react";
-import {
-   motion,
-   useScroll,
-   useAnimate,
-   useMotionValueEvent,
-   useVelocity,
-   useMotionValue,
-   useTransform,
-   useSpring,
-   animate,
-} from "framer-motion";
+import { motion, useScroll, useAnimate, useMotionValueEvent, useVelocity, useMotionValue, useTransform, useSpring, animate } from "framer-motion";
 import { sideScroll } from "@mui/icons-material";
 import ScrollTicks from "../components/ScrollTicks/ScrollTicks";
 
 function ScrollDirection({ children, pageNames, pageColors }) {
-
    const [orientation, setOrientation] = useState(null);
    const [currentPage, setCurrentPage] = useState(0);
 
@@ -59,36 +48,31 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       }
    });
 
-
    // determine whether to use horizontal or vertical layout
    function determineOrientation() {
-      if (window.matchMedia('(max-width: 1024px), (orientation: portrait), (pointer: coarse)').matches){
+      if (window.matchMedia("(max-width: 1024px), (orientation: portrait), (pointer: coarse)").matches) {
          setOrientation("verticalScroll");
       } else {
          setOrientation("sideScroll");
       }
-   } 
+   }
 
    // handle moving to the next page when clicking on the '>' button
    function handleScrollNext() {
-      setCurrentPage(currentPage < children.length ? currentPage + 1 : currentPage)
-      eventListenerPageRef.current += eventListenerPageRef.current < children.length ? 1 : 0
+      setCurrentPage(currentPage < children.length ? currentPage + 1 : currentPage);
+      eventListenerPageRef.current += eventListenerPageRef.current < children.length ? 1 : 0;
       window.scroll({
-         left:
-            (eventListenerPageRef.current * sideScrollWrapperRef.current.clientWidth) /
-            pageNames.length,
+         left: (eventListenerPageRef.current * sideScrollWrapperRef.current.clientWidth) / pageNames.length,
          behavior: "smooth",
       });
    }
 
    // handle moving to previous page when clicking on '<' button
    function handleScrollPrev() {
-      setCurrentPage(currentPage > 0 ? currentPage - 1 : currentPage)
-      eventListenerPageRef.current -= eventListenerPageRef.current > 0 ? 1 : 0
+      setCurrentPage(currentPage > 0 ? currentPage - 1 : currentPage);
+      eventListenerPageRef.current -= eventListenerPageRef.current > 0 ? 1 : 0;
       window.scroll({
-         left:
-            (eventListenerPageRef.current * sideScrollWrapperRef.current.clientWidth) /
-            pageNames.length,
+         left: (eventListenerPageRef.current * sideScrollWrapperRef.current.clientWidth) / pageNames.length,
          behavior: "smooth",
       });
    }
@@ -96,9 +80,7 @@ function ScrollDirection({ children, pageNames, pageColors }) {
    // function to snap scroll to page
    function snapScrollToPage(pageToSnap) {
       window.scroll({
-         left:
-            (pageToSnap * sideScrollWrapperRef.current.clientWidth) /
-            pageNames.length,
+         left: (pageToSnap * sideScrollWrapperRef.current.clientWidth) / pageNames.length,
          behavior: "smooth",
       });
    }
@@ -108,18 +90,14 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.clearTimeout(isScrolling);
 
       isScrolling = setTimeout(() => {
-         console.log('successful timeout on page: ', eventListenerPageRef.current)
          snapScrollToPage(eventListenerPageRef.current);
       }, waitTime + 50);
    }
 
    // handle drag release (mouseup)
    function handleMouseUp(event) {
-      window.removeEventListener("mousemove", handleMouseMove);
       window.clearInterval(clearIsScrolling);
-
-      console.log('mouseup on page: ', eventListenerPageRef.current)
-
+      window.removeEventListener("mousemove", handleMouseMove);
       lastClientX = 0;
       snapScrollToPage(eventListenerPageRef.current);
    }
@@ -129,8 +107,6 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.clearTimeout(isScrolling);
       let { clientX } = event;
       let deltaX = (clientX - lastClientX) * scrollXMultiplier;
-
-      console.log("mouse move on page: ", eventListenerPageRef.current)
 
       if (lastClientX === 0) {
          lastClientX = clientX;
@@ -150,59 +126,60 @@ function ScrollDirection({ children, pageNames, pageColors }) {
       window.addEventListener("mousemove", handleMouseMove);
    }
 
+   function handleSkipToPage(page) {
+      setCurrentPage(page)
+      eventListenerPageRef.current = page
+      snapScrollToPage(page)
+   }
+
    useLayoutEffect(() => {
       determineOrientation();
 
-      if (orientation === 'sideScroll') {
-
+      if (orientation === "sideScroll") {
          window.scroll({
-            left: (parseInt(sessionStorage.getItem('leftProjectsPage')) * sideScrollWrapperRef.current.clientWidth /
-            pageNames.length),
-            behavior: 'instant'
-         })
+            left: (parseInt(sessionStorage.getItem("leftProjectsPage")) * sideScrollWrapperRef.current.clientWidth) / pageNames.length,
+            behavior: "instant",
+         });
 
          window.addEventListener("mousedown", handleDrag);
          window.addEventListener("mouseup", handleMouseUp);
          window.addEventListener("scroll", handleScrollX);
 
-         scrollXProgress.set(0)
+         scrollXProgress.set(0);
       }
-      
+
       return () => {
          window.removeEventListener("resize", determineOrientation);
          window.removeEventListener("mousedown", handleDrag);
          window.removeEventListener("mouseup", handleMouseUp);
          window.removeEventListener("scroll", handleScrollX);
       };
-   },[orientation]);
+   }, [orientation]);
 
    function renderPage() {
       if (orientation === null) {
-         return <></>
-      } else if (orientation === 'sideScroll') {
+         return <></>;
+      } else if (orientation === "sideScroll") {
          return (
-            <>           
-               <motion.div
-                  style={{ backgroundColor }}
-                  className={styles.sidescrollWrapper}
-                  ref={sideScrollWrapperRef}>
+            <>
+               <motion.div style={{ backgroundColor }} className={styles.sidescrollWrapper} ref={sideScrollWrapperRef}>
                   {children}
                </motion.div>
                <div className={styles.scrollTicksRow}>
-                  <ScrollTicks numPages={children.length} currentPage={currentPage} notifyScrollNext={handleScrollNext} notifyScrollPrev={handleScrollPrev}/>
+                  <ScrollTicks numPages={children.length} currentPage={currentPage} notifyScrollNext={handleScrollNext} notifyScrollPrev={handleScrollPrev} notifySkipToPage={handleSkipToPage}/>
                </div>
             </>
-         )
-      } else if (orientation === 'verticalScroll') {
+         );
+      } else if (orientation === "verticalScroll") {
          return (
-            <div className='verticalScrollbox' style={{display: 'flex', flexDirection: 'column', width: '90vw', paddingInline: '5vw', alignItems: 'center'}}>
+            <div className='verticalScrollbox' style={{ display: "flex", flexDirection: "column", width: "90vw", paddingInline: "5vw", alignItems: "center" }}>
                {children}
             </div>
-         )
+         );
       }
    }
 
-   return renderPage()
+   return renderPage();
 }
 
 export default memo(ScrollDirection);
