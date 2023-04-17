@@ -1,4 +1,3 @@
-"client side";
 import styles from "./MobileIconsRow.module.scss";
 import HTMLIcon from "../../icons/HTMLIcon";
 import CSSIcon from "../../icons/CSSIcon";
@@ -10,52 +9,69 @@ import PythonIcon from "../../icons/PythonIcon";
 import DjangoIcon from "../../icons/DjangoIcon";
 import MySQLIcon from "../../icons/MySQLIcon";
 import { useEffect, useRef, useState, memo } from "react";
-import {
-   motion,
-   useMotionValueEvent,
-   useScroll,
-   useTransform,
-   useSpring,
-   useTime,
-   useMotionValue,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
 function MobileIconsRow({ children }) {
    const iconsRowRef = useRef(null);
-   const [targetX, setTargetX] = useState({});
-   const [mobileMode, setMobileMode] = useState(true);
+   const targetX = useRef(null);
+   const [scrollingRow, setScrollingRow] = useState(null);
 
-   // after mounting, check device dimensions
+   // after mounting, check device dimensions and determine if we should inifite scroll the row
    useEffect(() => {
-      setMobileMode(
-         iconsRowRef.current.getBoundingClientRect().width > screen.width &&
-            window.matchMedia("(orientation: portrait), (max-width: 414px)")
-               .matches
-      );
-      setTargetX(
-         iconsRowRef.current.getBoundingClientRect().width / 2 +
-            0.025 * screen.width
-      );
-   }, [mobileMode, targetX]);
-   
 
-   return !mobileMode ? (
-      <div className={styles.iconsRow} ref={iconsRowRef}>
-         {children}
-      </div>
-   ) : (
-      <div className={styles.iconsWindow}>
-         <motion.div
-            initial={{ x: 0 }}
-            animate={{ x: targetX }}
-            transition={{ ease: "linear", duration: 10, repeat: Infinity }}
-            className={styles.iconsRow}
-            ref={iconsRowRef}>
-            {children}
-            {children}
-         </motion.div>
-      </div>
-   );
+      const numChildren = children.length
+      const viewportHeight = window.innerHeight
+      const viewportWidth = window.innerWidth
+      const mobileAndLaptopRowHeight = 0.06 //vh
+      const landscapeTabletRowHeight = 0.08 //vh
+      const iconsGap = 0.05 //vw
+
+      // landscape tablets
+      if (window.matchMedia('(415px <= width <= 1024px) and (pointer: coarse) and (orientation: landscape)').matches) {
+         const rowHeight = landscapeTabletRowHeight * viewportHeight // equal to the width of each icon
+         const totalGapsWidth = (iconsGap * (numChildren - 1)) * viewportWidth
+         const totalIconsWidth = numChildren * rowHeight
+         const totalRowWidth = totalGapsWidth + totalIconsWidth
+         targetX.current = totalRowWidth + (iconsGap * viewportWidth)
+         setScrollingRow(totalRowWidth > viewportWidth)
+      } else { // everything else (portrait mobile and tablet, laptops)
+         const rowHeight = mobileAndLaptopRowHeight * viewportHeight // equal to the width of each icon
+         const totalGapsWidth = (iconsGap * (numChildren - 1)) * viewportWidth
+         const totalIconsWidth = numChildren * rowHeight
+         const totalRowWidth = totalGapsWidth + totalIconsWidth
+         targetX.current = totalRowWidth + (iconsGap * viewportWidth)
+         setScrollingRow(totalRowWidth > viewportWidth)
+      }
+
+   }, []);
+
+   function renderIconsRow() {
+      if (scrollingRow === null) {
+         return <></>;
+      } else if (scrollingRow === false) {
+         return (
+            <div className={styles.iconsRow} ref={iconsRowRef}>
+               {children}
+            </div>
+         );
+      } else if (scrollingRow === true) {
+         return (
+            <div className={styles.iconsWindow}>
+               <motion.div
+                  initial={{ x: 0 }}
+                  animate={{ x: targetX.current }}
+                  transition={{ ease: "linear", duration: 10, repeat: Infinity }}
+                  className={styles.iconsRow}
+                  ref={iconsRowRef}>
+                  {children}
+                  {children}
+               </motion.div>
+            </div>
+         );
+      }
+   }
+
+   return renderIconsRow()
 }
 
-export default memo(MobileIconsRow);
+export default MobileIconsRow;
