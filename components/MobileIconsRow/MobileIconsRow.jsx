@@ -20,8 +20,8 @@ function MobileIconsRow({ children }) {
    useEffect(() => {
 
       const numChildren = children.length
-      const viewportHeight = window.innerHeight
-      const viewportWidth = window.innerWidth
+      const viewportHeight = screen.height
+      const viewportWidth = screen.width
       const mobileAndLaptopRowHeight = 0.06 //vh
       const landscapeTabletRowHeight = 0.08 //vh
       const iconsGap = 0.05 //vw
@@ -32,14 +32,14 @@ function MobileIconsRow({ children }) {
          const totalGapsWidth = (iconsGap * (numChildren - 1)) * viewportWidth
          const totalIconsWidth = numChildren * rowHeight
          const totalRowWidth = totalGapsWidth + totalIconsWidth
-         targetX.current = totalRowWidth + (iconsGap * viewportWidth)
+         targetX.current = totalRowWidth + 1.25*(iconsGap * viewportWidth)
          setScrollingRow(totalRowWidth > viewportWidth)
       } else { // everything else (portrait mobile and tablet, laptops)
          const rowHeight = mobileAndLaptopRowHeight * viewportHeight // equal to the width of each icon
          const totalGapsWidth = (iconsGap * (numChildren - 1)) * viewportWidth
          const totalIconsWidth = numChildren * rowHeight
          const totalRowWidth = totalGapsWidth + totalIconsWidth
-         targetX.current = totalRowWidth + (iconsGap * viewportWidth)
+         targetX.current = totalRowWidth + 1.25*(iconsGap * viewportWidth)
          setScrollingRow(totalRowWidth > viewportWidth)
       }
 
