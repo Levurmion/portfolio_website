@@ -13,7 +13,7 @@
    }
 }
 
-
+// landscape tablets
 @media (min-width: 415px) and (pointer: coarse) and (orientation: landscape) {
    .iconsRow {
       margin-top: 10vh;
@@ -27,7 +27,7 @@
    }
 }
 
-
+// laptops
 @media (min-width: 1025px) and (pointer: fine) {
    .iconsRow {
       margin-top: 8vh;
