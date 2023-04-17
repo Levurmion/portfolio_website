@@ -16,6 +16,7 @@ import Navbar from "../../../layouts/Navbar";
 import styles from "./projectsPage.module.scss";
 import { getAllProjectIds, getProjectData } from "../../../lib/project-utils.mjs";
 import { uniqueKeyGenerator } from "../../../lib/utilities.mjs";
+import Head from "next/head";
 
 const techIcons = {
    Django: <DjangoIconColored />,
@@ -46,51 +47,56 @@ export default function Project({ projectData }) {
    const [isMobile, setIsMobile] = useState(null);
 
    useEffect(() => {
-      setIsMobile(window.matchMedia('(max-width: 1024px),(pointer: coarse)').matches)
-   }, [])
+      setIsMobile(window.matchMedia("(max-width: 1024px),(pointer: coarse)").matches);
+   }, []);
 
    return (
-      <Navbar>
-         {isMobile == null ? (
-            <div className={styles.projectPage}></div>
-         ) : (
-            <div className={styles.projectPage}>
-               <div className={styles.pageContent}>
-                  <AnimatePresence>
-                     <div className={styles.mobileHeader}>{projectData.header}</div>
-                     <div className={styles.mobileSubheader}>{projectData.subheader}</div>
-                     <motion.div
-                        className={styles.photoGallery}
-                        initial={isMobile ? false : galleryAnim.initial}
-                        animate={galleryAnim.entry}
-                        transition={{ type: "tween", duration: 0.5 }}>
-                        <PhotoGallery imageURLs={projectData.imageURLs} />
-                     </motion.div>
-                     <motion.div
-                        className={styles.description}
-                        initial={isMobile ? false : descriptionAnim.initial}
-                        animate={descriptionAnim.entry}
-                        transition={{ type: "tween", duration: 0.5, delay: 0.25 }}>
-                        <div className={styles.header}>{projectData.header}</div>
-                        <div className={styles.subheader}>{projectData.subheader}</div>
-                        <div className={styles.techIcons}>
-                           {projectData.techStack.map((icon) => {
-                              return techIcons[icon];
-                           })}
-                        </div>
-                        <div className={styles.pointers}>
-                           <ul>
-                              {projectData.pointers.map((point) => {
-                                 return <li key={keyGenerator("point")}>{point}</li>;
+      <>
+         <Head>
+            <title>Elbert - {projectData.header}</title>
+         </Head>
+         <Navbar>
+            {isMobile == null ? (
+               <div className={styles.projectPage}></div>
+            ) : (
+               <div className={styles.projectPage}>
+                  <div className={styles.pageContent}>
+                     <AnimatePresence>
+                        <div className={styles.mobileHeader}>{projectData.header}</div>
+                        <div className={styles.mobileSubheader}>{projectData.subheader}</div>
+                        <motion.div
+                           className={styles.photoGallery}
+                           initial={isMobile ? false : galleryAnim.initial}
+                           animate={galleryAnim.entry}
+                           transition={{ type: "tween", duration: 0.5 }}>
+                           <PhotoGallery imageURLs={projectData.imageURLs} />
+                        </motion.div>
+                        <motion.div
+                           className={styles.description}
+                           initial={isMobile ? false : descriptionAnim.initial}
+                           animate={descriptionAnim.entry}
+                           transition={{ type: "tween", duration: 0.5, delay: 0.25 }}>
+                           <div className={styles.header}>{projectData.header}</div>
+                           <div className={styles.subheader}>{projectData.subheader}</div>
+                           <div className={styles.techIcons}>
+                              {projectData.techStack.map((icon) => {
+                                 return techIcons[icon];
                               })}
-                           </ul>
-                        </div>
-                     </motion.div>
-                  </AnimatePresence>
+                           </div>
+                           <div className={styles.pointers}>
+                              <ul>
+                                 {projectData.pointers.map((point) => {
+                                    return <li key={keyGenerator("point")}>{point}</li>;
+                                 })}
+                              </ul>
+                           </div>
+                        </motion.div>
+                     </AnimatePresence>
+                  </div>
                </div>
-            </div>
-         )}
-      </Navbar>
+            )}
+         </Navbar>
+      </>
    );
 }
 
