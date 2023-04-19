@@ -93,7 +93,7 @@ function ProjectCard({ header, description, imageSrc, notifyClick, linkURL }) {
       } else {
          setTimeout(() => {
             router.push(linkURL);
-         }, 750);
+         }, 500);
       }
    }
 

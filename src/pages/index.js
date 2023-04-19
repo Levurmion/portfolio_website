@@ -7,6 +7,7 @@ import MyProjectsButton from "../../components/MyProjectsButton/MyProjectsButton
 import RedHeartIcon from "../../icons/RedHeartIcon";
 import heroStyle from "../styles/hero.module.scss";
 import projectsStyle from "../styles/projects.module.scss";
+import aboutStyle from '../styles/about.module.scss'
 import Navbar from "../../layouts/Navbar";
 import ScrollDirection from "../../layouts/ScrollDirection";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
@@ -36,6 +37,20 @@ export default function Home() {
 
    function clearSession () {
       sessionStorage.clear()
+   }
+
+   function skipToProjects() {
+      window.scroll({
+         left: window.innerWidth,
+         behavior: 'smooth'
+      })
+   }
+
+   function skipToAbout() {
+      window.scroll({
+         left: window.innerWidth * 2,
+         behavior: 'smooth'
+      })
    }
 
    useEffect(() => {
@@ -93,8 +108,12 @@ export default function Home() {
                            <div className={heroStyle.buttonRow}>
                               <MyProjectsButton
                                  id={heroStyle.myProjectsButton}
+                                 notifyClick={skipToProjects}
                               />
-                              <AboutMeButton id={heroStyle.aboutMeButton} />
+                              <AboutMeButton 
+                                 id={heroStyle.aboutMeButton} 
+                                 notifyClick={skipToAbout}
+                              />
                            </div>
                         </div>
                      </div>
@@ -135,7 +154,7 @@ export default function Home() {
                         />
                         <ProjectCard
                            header='ICAC Scoresheet'
-                           description='Not your typical CRUD app project. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper.'
+                           description='Not your typical CRUD app. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper.'
                            imageSrc={"/images/sample_pic.jpg"}
                            notifyClick={handleCardClick}
                            linkURL={'projects/icac-scoresheet'}
@@ -147,7 +166,11 @@ export default function Home() {
                      </AnimatePresence>
                   </div>
                </div>
-               <div className={heroStyle.about}></div>
+               <div className={aboutStyle.about}>
+                  <div className={aboutStyle.aboutContents}>
+                     About Me
+                  </div>
+               </div>
             </ScrollDirection>
          </Navbar>
       </>

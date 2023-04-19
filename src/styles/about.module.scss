@@ -1,0 +1,39 @@
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$teal-green: #167d7f;
+$teal: #29a0b1;
+
+// mobile phones
+@media (max-width: 420px) {
+
+}
+
+// iPads and tablets
+@media (max-width: 1024px), (orientation: portrait), (pointer: coarse) {
+
+}
+
+// small laptops
+@media (min-width: 1025px) and (pointer: fine) {
+   .about {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+
+      .aboutContents {
+         display: flex;
+         width: 90vw;
+         padding-inline: 5vw;
+         height: 70vh;
+         padding-top: 15vh;
+         padding-bottom: 15vh;
+      }
+   }
+}
+
+
+// large laptops
+@media (min-width: 1200px) and (pointer: fine) {
+
+}
