@@ -1,0 +1,96 @@
+#scrollbarWrapperA:hover, #scrollbarWrapperB:hover {
+  background-color: #d2fff1 !important;
+  transition: 0.2s;
+  z-index: 8;
+}
+
+.barchartA:hover, .barchartB:hover {
+  background-color: #d5faef !important;
+  transition: 0.2s;
+  z-index: 8;
+}
+
+.dropdowns-and-links {
+  display: flex;
+  flex-direction: column;
+}
+.dropdowns-and-links .linksRow {
+  display: flex;
+  height: 50%;
+  padding-top: 0.2vh;
+  padding-bottom: 0.2vh;
+}
+.dropdowns-and-links .linksRow .coexp-uniprot-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+  background-color: rgb(88, 158, 239);
+  margin-right: 0.2vw;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+.dropdowns-and-links .linksRow .coexp-uniprot-link .uniprot-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0.4vw;
+  filter: brightness(0) saturate(100%) invert(1);
+}
+.dropdowns-and-links .linksRow .coexp-uniprot-link:hover {
+  background-color: rgb(54, 143, 211);
+  transition: 0.2s;
+  cursor: pointer;
+}
+.dropdowns-and-links .linksRow .coexp-uniprot-link.disabled {
+  background-color: rgb(153, 186, 211);
+  transition: 0.2s;
+  cursor: default;
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 100%;
+  width: 50%;
+  background-color: rgb(75, 190, 190);
+  margin-left: 0.2vw;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: 0.2s;
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link .expAtlas-logo {
+  display: block;
+  height: 3vh;
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link .expAtlas-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-left: 0.2vw;
+  margin-right: 0.4vw;
+  color: white;
+  font-size: 1.5vh;
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link .expAtlas-title .Expression-text {
+  margin-bottom: -8%;
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link:hover {
+  background-color: rgb(32, 157, 157);
+  transition: 0.2s;
+  cursor: pointer;
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link.disabled {
+  background-color: rgb(116, 183, 183);
+  transition: 0.2s;
+  cursor: default;
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link.disabled .expAtlas-logo {
+  filter: opacity(0.8) saturate(50%) brightness(90%);
+}
+.dropdowns-and-links .linksRow .coexp-expAtlas-link.disabled .expAtlas-title {
+  color: rgb(199, 237, 237);
+}/*# sourceMappingURL=sidePanelCoexpressionPanel.css.map */

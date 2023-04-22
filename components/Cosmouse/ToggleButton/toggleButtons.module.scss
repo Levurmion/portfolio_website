@@ -1,0 +1,58 @@
+$standard-shadow: 2px 4px 3px 1px rgb(79, 163, 166), -0.1px 4px 4px 0.25px rgb(79, 163, 166), 0 -0.5px 2px rgb(79, 163, 166);
+$small-box-shadow: 1px 2px 2px 0.5px rgb(186, 186, 186), -0.25px 2px 2px 0.5px rgb(186, 186, 186);
+$tiny-box-shadow: 0.5px 1px 2px 0.5px rgb(186, 186, 186), -0.125px 1px 2px 0.5px rgb(186, 186, 186);
+$slider-track-color: rgb(116, 241, 199);
+$slider-thumb-color: rgb(0, 155, 142);
+$stage-display-color: rgb(61, 234, 217);
+$stage-background-color: rgb(208, 255, 239);
+$slider-track-color-disabled: rgb(178, 216, 203);
+$slider-thumb-color-disabled: rgb(118, 189, 183);
+$stage-display-color-disabled: rgb(166, 228, 222);
+$stage-background-color-disabled: rgb(184, 233, 216);
+$button-hover-color: rgb(0, 177, 162);
+$button-active-color: rgb(0, 122, 111);
+$popup-background-color: rgb(1, 139, 105);
+$panel-padding: clamp(5px, 5%, 10px);
+$panel-top-margin: clamp(10px, 5%, 15px);
+$rounded-borders: 5px;
+
+
+@mixin button-style ($height, $width) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: $height;
+    width: $width;
+    box-shadow: $tiny-box-shadow;
+    position: relative;
+    border-radius: $rounded-borders;
+    background-color: $slider-thumb-color;
+    color: white;
+    font-size: calc(0.45 * $height);
+}
+
+.toggleButton {
+    @include button-style(80%, 90%);
+    font-size: 1vw;
+    transition: 0.25s;
+    margin-top: 0.2vh;
+    margin-bottom: 0.2vh;
+
+    span {
+        font-size: 100%;
+    }
+}
+
+.toggleButton:hover {
+    box-shadow: $small-box-shadow;
+    background-color: $button-hover-color;
+    transition: 0.25s;
+}
+
+.toggleButton:active {
+    box-shadow: $tiny-box-shadow;
+    background-color: $button-active-color;
+    transition: 0.1s;
+}
+

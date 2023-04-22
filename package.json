@@ -13,17 +13,26 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.11.16",
+    "@nivo/bar": "^0.80.0",
+    "@tippy.js/react": "^3.1.1",
     "child-process": "^1.0.2",
+    "cytoscape": "^3.24.0",
+    "cytoscape-popper": "^2.0.0",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
     "framer-motion": "^10.10.0",
     "fs": "^0.0.1-security",
+    "jquery": "^3.6.4",
     "material": "^0.5.3",
     "next": "13.2.4",
     "path": "^0.12.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-element-to-jsx-string": "^15.0.0",
+    "react-perfect-scrollbar": "^1.5.8",
+    "react-tippy": "^1.4.0",
     "sass": "^1.60.0",
-    "serverless-mysql": "^1.5.5"
+    "serverless-mysql": "^1.5.5",
+    "tippy.js": "^6.3.7"
   }
 }

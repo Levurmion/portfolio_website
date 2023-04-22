@@ -1,0 +1,16 @@
+.recenter-button-label-text {
+  display: block;
+  position: absolute;
+  color: #006157;
+  transform: translateX(3vw);
+  opacity: 0;
+  font-size: 0.9vw;
+  transition: 0.25s;
+}
+
+.recenter-button-label-text.hover {
+  transform: translateX(3.4vw);
+  opacity: 1;
+  transition: 0.25s;
+  z-index: 2;
+}/*# sourceMappingURL=recenterButton.css.map */

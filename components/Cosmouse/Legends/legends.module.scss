@@ -1,0 +1,157 @@
+$central-node-color: #ee5d6c;
+$direct-interactors-color: #8e7fe3;
+$other-interactors-color: #f5c889;
+$label-background-color: rgb(0, 99, 99);
+$label-shadow: 0.5px 0.5px 8px 0.1px rgb(141, 141, 141), 0px 0.5px 8px 0.1px rgb(141, 141, 141);
+$legend-height: 100px;
+$legend-box-radius: 5px;
+$node-diameter: calc($legend-height*0.5);
+$node-margins: calc(($legend-height - $node-diameter)/2);
+$node-bottom-margin: calc($node-margins*1.7);
+$tpm-low-color: rgb(162, 216, 143);
+$tpm-med-color: rgb(82, 186, 104);
+$tpm-high-color: rgb(23, 137, 103);
+$tpm-nornaseq-color: #368de3;
+$tpm-notexp-color: #c2a5a5;
+
+
+.legendsBox {
+  position: relative;
+  background-color: white;
+  border-radius: $legend-box-radius;
+  margin: 6px;
+  height: calc(100% - 12px);
+  width: calc(100% - 12px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.legendsNodeWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  
+  .legendsNode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: translateY(85%);
+    height: 5vh;
+    width: 5vh;
+    border-radius: 2.5vh;
+    z-index: 5;
+    transition: 0.25s;
+  }
+
+  .legendsNode:hover {
+    cursor: pointer;
+    transform: scale(1.05) translateY(80%);
+    transition: 0.25s;
+  }
+
+  .legendsNode:active {
+    cursor: pointer;
+    transform: scale(0.98) translateY(85%);
+    transition: 0.2s;
+  }
+
+  .legendsNode-shadow {
+    display: block;
+    position: relative;
+    transform: translateY(-10%);
+    height: 5vh;
+    width: 5vh;
+    border-radius: 2.5vh;
+    background-color: #b5b5b5;
+    filter: blur(0.1vw);
+    z-index: 4;
+  }
+
+  .legendsNode-text {
+    display: block;
+    position: relative;
+    transform: translateY(-33%);
+    font-size: 0.85vw;
+    white-space: nowrap;
+  }
+}
+
+.legendsNodeWrapper.moreInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  
+  .legendsNode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform: translateY(40%);
+    height: 5vh;
+    width: 5vh;
+    border-radius: 2.5vh;
+    z-index: 5;
+    transition: 0.25s;
+  }
+
+  .legendsNode:hover {
+    cursor: pointer;
+    transform: scale(1.05) translateY(35%);
+    transition: 0.25s;
+  }
+
+  .legendsNode:active {
+    cursor: pointer;
+    transform: scale(0.98) translateY(40%);
+    transition: 0.2s;
+  }
+
+  .legendsNode-shadow {
+    display: block;
+    position: relative;
+    transform: translateY(-55%);
+    height: 5vh;
+    width: 5vh;
+    border-radius: 2.5vh;
+    background-color: #b5b5b5;
+    filter: blur(0.1vw);
+    z-index: 4;
+  }
+
+  .legendsNode-text {
+    display: block;
+    position: relative;
+    transform: translateY(-78%);
+    font-size: 0.85vw;
+    white-space: nowrap;
+  }
+}
+
+.legend-edges {
+  display: flex;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .legend-edges-text {
+    font-size: 1vw;
+    display: block;
+    position: absolute;
+    transform: translate(1.4vw,0.8vw);
+  }
+
+}

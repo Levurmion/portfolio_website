@@ -1,0 +1,76 @@
+$standard-shadow: 2px 4px 3px 1px rgb(79, 163, 166), -0.1px 4px 4px 0.25px rgb(79, 163, 166), 0 -0.5px 2px rgb(79, 163, 166);
+$small-box-shadow: 1px 2px 2px 0.5px rgb(186, 186, 186), -0.25px 2px 2px 0.5px rgb(186, 186, 186);
+$tiny-box-shadow: 0.5px 1px 2px 0.5px rgb(116, 173, 175), -0.125px 1px 2px 0.5px rgb(140, 198, 200);
+$slider-track-color: rgb(116, 241, 199);
+$slider-thumb-color: rgb(0, 155, 142);
+$stage-display-color: rgb(61, 234, 217);
+$stage-background-color: rgb(208, 255, 239);
+$slider-track-color-disabled: rgb(178, 216, 203);
+$slider-thumb-color-disabled: rgb(118, 189, 183);
+$stage-display-color-disabled: rgb(166, 228, 222);
+$stage-background-color-disabled: rgb(184, 233, 216);
+$button-hover-color: rgb(0, 177, 162);
+$button-active-color: rgb(0, 122, 111);
+$popup-background-color: rgb(1, 139, 105);
+$panel-padding: clamp(5px, 5%, 10px);
+$panel-top-margin: clamp(10px, 5%, 15px);
+$rounded-borders: 5px;
+
+@mixin main-panel {
+    background-color: white;
+    box-shadow: $standard-shadow;
+    padding: $panel-padding;
+    margin-top: $panel-top-margin;
+    border-radius: $rounded-borders;
+}
+
+@mixin sub-panel ($height) {
+    width: 100%;
+    background-color: rgb(202, 253, 236);
+    border: rgb(118, 226, 190) 1.5px solid;
+    height: $height;
+    border-radius: $rounded-borders;
+    // box-shadow: $small-box-shadow;
+}
+
+
+
+
+
+.scoresheet {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include sub-panel(calc(100% - 1vh));
+    padding: 0.6vw;
+    padding-top: 0.4vw;
+    padding-bottom: 0.4vw;
+
+    .scoresheetLabel {
+        font-size: 1.1vw;
+    }
+
+    .scoresheetCheckboxes {
+        display: flex;
+        flex-direction: column;
+        margin: clamp(2px, 0.2vh, 10px);
+
+        .checkboxRow {
+            display: flex;
+            align-items: center;
+            font-size: clamp(14px, 0.95vw, 22px);
+    
+            .checkbox {
+                display:block;
+                height: 0.6vw;
+                width: 0.6vw;
+                margin-right: 0.2vw;
+                accent-color: $slider-thumb-color;
+            }
+    
+        }
+    }
+
+    
+}

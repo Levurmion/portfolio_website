@@ -1,0 +1,22 @@
+.dropdown {
+  display: flex;
+  position: relative;
+  padding: 0;
+  grid-area: 3/1/4/9;
+  font-size: 1vw;
+  padding-inline: 6px;
+  border: none;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 100%;
+  background-color: rgb(202, 253, 236);
+  border: rgb(118, 226, 190) 1.5px solid;
+  height: clamp(30px, 70%, 40px);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown:disabled {
+  background-color: rgb(184, 233, 216);
+  cursor: default;
+}/*# sourceMappingURL=dropdown.css.map */

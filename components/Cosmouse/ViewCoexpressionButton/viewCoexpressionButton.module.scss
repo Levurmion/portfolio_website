@@ -1,0 +1,17 @@
+.coexpression-button-label-text {
+  display: block;
+  position: absolute;
+  color: #006157;
+  transform: translateX(5vw);
+  opacity: 0;
+  font-size: 0.9vw;
+  transition: 0.25s;
+  white-space: nowrap;
+}
+
+.coexpression-button-label-text.hover {
+  transform: translateX(5.4vw);
+  opacity: 1;
+  transition: 0.25s;
+  z-index: 8
+}

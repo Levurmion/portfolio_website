@@ -1,0 +1,83 @@
+.slider-wrapper {
+  display: flex;
+  position: relative;
+  padding: 0;
+  grid-area: 4/1/5/9;
+  font-size: 1.2vw;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 100%;
+  background-color: rgb(202, 253, 236);
+  border: rgb(118, 226, 190) 1.5px solid;
+  height: clamp(28px, 2.5vh, 50px);
+  border-radius: 5px;
+}
+.slider-wrapper .slider {
+  -webkit-appearance: none;
+  padding-inline: 15px;
+  cursor: pointer;
+  width: 100%;
+  outline: none;
+  background: transparent;
+}
+.slider-wrapper .slider::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  background: rgb(115, 233, 194);
+  height: 33.3333%;
+  border-radius: 5px;
+}
+.slider-wrapper .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: rgb(0, 155, 142);
+  height: 17.5px;
+  width: 17.5px;
+  border-radius: 8.75px;
+  margin-top: -3.75px;
+}
+.slider-wrapper .slider-display {
+  display: flex;
+  width: clamp(50px, 3.5vw, 100px);
+  height: 100%;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: rgb(0, 155, 142);
+  justify-content: center;
+  align-items: center;
+}
+.slider-wrapper .slider-display span {
+  font-size: 1vw;
+  color: white;
+  text-align: center;
+  width: clamp(50px, 3.5vw, 100px);
+}
+.slider-wrapper .slider:disabled ~ #stage-display {
+  display: flex;
+  width: width;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: rgb(0, 155, 142);
+  justify-content: center;
+  align-items: center;
+}
+.slider-wrapper .slider:disabled ~ #stage-display span {
+  font-size: 1vw;
+  color: white;
+  text-align: center;
+  width: clamp(50px, 3.5vw, 100px);
+}
+
+.slider-wrapper.disabled {
+  background-color: rgb(184, 233, 216);
+  cursor: default;
+}
+.slider-wrapper.disabled .slider::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  background: rgb(178, 216, 203);
+  cursor: default;
+}
+.slider-wrapper.disabled .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: rgb(118, 189, 183);
+  cursor: default;
+}/*# sourceMappingURL=slider.css.map */
