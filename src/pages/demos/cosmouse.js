@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Navbar from "../../../layouts/Navbar";
-import FirstLineContainer from "../../../components/Cosmouse/FirstLineContainer/FirstLineContainer";
 
 function Cosmouse() {
    return ( 
