@@ -23,7 +23,6 @@ import FramerMotionIcon from "../../icons/FramerMotionIcon";
 import MobileIconsRow from "../../components/MobileIconsRow/MobileIconsRow";
 import { AnimatePresence, Reorder } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
