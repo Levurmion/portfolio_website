@@ -18,15 +18,7 @@ function Cosmouse() {
                alignItems: 'center',
                justifyContent: 'center'
             }}>
-               <div style={{
-                  display: 'grid',
-                  height: '100%',
-                  width: '100%',
-                  gridTemplateColumns: 'repeat(7,1fr)',
-                  gridTemplateRows: 'repeat(12, 1fr)'
-               }}>
-                  <FirstLineContainer/>
-               </div>
+
             </div>
          </Navbar>
       </>
