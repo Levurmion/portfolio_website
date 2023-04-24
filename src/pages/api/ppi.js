@@ -221,58 +221,58 @@ export default async function (req, res) {
       }
 
       // collate expression data for each gene through the stages for Nivo Charts
-      let nivoChartsData = {}
+      // let nivoChartsData = {}
 
-      cytoscapeNodes.forEach(cytoscapeNode => {
+      // cytoscapeNodes.forEach(cytoscapeNode => {
 
-         nivoChartsData[cytoscapeNode.data.id] = []
+      //    nivoChartsData[cytoscapeNode.data.id] = []
 
-         if (!cytoscapeNode.data.expression) {
-            nivoChartsData[cytoscapeNode.data.id] = false
-         } 
+      //    if (!cytoscapeNode.data.expression) {
+      //       nivoChartsData[cytoscapeNode.data.id] = false
+      //    } 
          
-         else {
+      //    else {
 
-            for (let stage=26; stage > 0; stage--) {
+      //       for (let stage=26; stage > 0; stage--) {
 
-               const structureWithMaxTPM = cytoscapeNode.data.expression_max_map[stage]
+      //          const structureWithMaxTPM = cytoscapeNode.data.expression_max_map[stage]
 
-               if (structureWithMaxTPM !== undefined) {
+      //          if (structureWithMaxTPM !== undefined) {
 
-                  const maxTPM = cytoscapeNode.data.expression[stage][structureWithMaxTPM]
+      //             const maxTPM = cytoscapeNode.data.expression[stage][structureWithMaxTPM]
 
-                  if (maxTPM >= 100) {
-                     nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: Math.round(maxTPM), medium: null, low: null, expressed: null})
-                  } else if (10 <= maxTPM < 100) {
-                     nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: null, medium: Math.round(maxTPM), low: null, expressed: null})
-                  } else if (0.5 <= maxTPM < 10) {
-                     nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: null, medium: null, low: Math.round(maxTPM), expressed: null})
-                  } else if (maxTPM < 0.5) {
-                     nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: null, medium: null, low: null, expressed: 1})
-                  }
+      //             if (maxTPM >= 100) {
+      //                nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: Math.round(maxTPM), medium: null, low: null, expressed: null})
+      //             } else if (10 <= maxTPM < 100) {
+      //                nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: null, medium: Math.round(maxTPM), low: null, expressed: null})
+      //             } else if (0.5 <= maxTPM < 10) {
+      //                nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: null, medium: null, low: Math.round(maxTPM), expressed: null})
+      //             } else if (maxTPM < 0.5) {
+      //                nivoChartsData[cytoscapeNode.data.id].push({stage: stage, high: null, medium: null, low: null, expressed: 1})
+      //             }
                         
-               }
+      //          }
 
-               else {
-                  nivoChartsData[cytoscapeNode.data.id].push({
-                     stage: stage,
-                     high: null,
-                     medium: null,
-                     low: null,
-                     expressed: null
-                  })
-               }
+      //          else {
+      //             nivoChartsData[cytoscapeNode.data.id].push({
+      //                stage: stage,
+      //                high: null,
+      //                medium: null,
+      //                low: null,
+      //                expressed: null
+      //             })
+      //          }
 
-            }
+      //       }
 
-         }
+      //    }
 
-      })
+      // })
 
       const graph = {nodes: cytoscapeNodes, edges: cytoscapeEdges}
 
-      const geneList = nodeListStringId
+      // const geneList = nodeListStringId
 
-      return res.status(200).json({ graph, structuresInStage, nivoChartsData, geneList });
+      return res.status(200).json({ graph, structuresInStage });
    }
 }

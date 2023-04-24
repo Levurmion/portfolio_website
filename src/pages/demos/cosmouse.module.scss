@@ -1,0 +1,64 @@
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$teal-green: #167d7f;
+$dark-teal-green: #0d6c6d;
+$teal: #29a0b1;
+
+.containerBox {
+   display: flex;
+   height: 65vh;
+   width: 85vw;
+   padding-top: 17.5vh;
+   padding-inline: 7.5vw;
+   align-items: center;
+   justify-content: center
+}
+
+.infoPanel {
+   display: flex;
+   height: 100%;
+   width: 35%;
+   font-size: 3vw;
+   flex-direction: column;
+   justify-content: space-between;
+
+   .geneSelection {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      margin-inline: 5%;
+   }
+
+   .geneInfo {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      margin-inline: 5%;
+
+      span {
+         font-size: 100%;
+         font-weight: 500;
+         color: $dark-teal-green;
+      }
+
+      p {
+         font-size: 40%;
+      }
+   }
+
+   .ajaxControls {
+      width: 90%;
+      margin-inline: 5%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+   }
+}
+
+.demoPanel {
+   display: flex;
+   height: 100%;
+   width: 65%;
+}
