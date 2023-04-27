@@ -1,0 +1,15 @@
+
+
+.optionsPanel {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   // justify-content: space-between;
+   gap: 2%;
+   grid-area: 3/8/9/13;
+   border-radius: 5px;
+   margin-bottom: 0.5vw;
+   margin-right: 0.5vw;
+   background-color: rgb(255,255,255);
+   padding: 0.6vw
+}

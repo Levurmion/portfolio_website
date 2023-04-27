@@ -56,7 +56,7 @@ $teal: #29a0b1;
       }
    }
 
-   .incrementButtons {
+   .adjustButtons {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -75,11 +75,13 @@ $teal: #29a0b1;
       .upArrow:hover {
          background-color: $dark-teal-green;
          border-top-right-radius: 5px;
+         cursor: pointer
       }
 
       .downArrow:hover {
          background-color: $dark-teal-green;
          border-bottom-right-radius: 5px;
+         cursor: pointer;
       }
    }
 
