@@ -1,12 +1,18 @@
 import { useState } from "react";
+import styles from './ToggleButton.module.scss'
 
-function ToggleButton({ defText, altText }) {
+function ToggleButton({ defText, altText, fontSize, notifyToggle}) {
 
-   const [defToggle, setDefToggle] = useState(True)
+   const [toggle, setToggle] = useState(true)
+
+   function handleClick(event) {
+      setToggle(state => !state)
+      notifyToggle()
+   }
 
    return ( 
-      <div className={styles.buttonWrapper}>
-         <span></span>
+      <div onClick={handleClick} className={styles.buttonWrapper} style={{ fontSize }}>
+         <span>{toggle ? defText : altText}</span>
       </div>
    );
 }

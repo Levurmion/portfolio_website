@@ -9,6 +9,13 @@ $teal: #29a0b1;
 html {
   background-color: $page-background;
   font-family: 'Roboto', sans-serif;
+  --shadow-color: 0deg 0% 0%;
+  --shadow-elevation-medium-small:
+  -0.3px 0.3px 0.5px hsl(var(--shadow-color) / 0.23),
+  -0.6px 0.9px 1.2px -0.6px hsl(var(--shadow-color) / 0.23),
+  -1.2px 1.6px 2.3px -1.2px hsl(var(--shadow-color) / 0.23),
+  -2.4px 3.3px 4.6px -1.9px hsl(var(--shadow-color) / 0.23),
+  -4.6px 6.3px 8.8px -2.5px hsl(var(--shadow-color) / 0.23);
 }
 
 body {

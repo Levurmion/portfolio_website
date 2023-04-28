@@ -1,0 +1,35 @@
+
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$light-teal-green: #17a9ab;
+$medium-teal-green: #1a9597;
+$teal-green: #167d7f;
+$dark-teal-green: #0d6c6d;
+$teal: #29a0b1;
+
+.buttonWrapper {
+   display: flex;
+   height: 100%;
+   width: 100%;
+   border-radius: 5px;
+   background-color: $medium-teal-green;
+   transition: 0.2s;
+   align-items: center;
+   justify-content: center;
+   color: #FFFFFF;
+
+   box-shadow: var(--shadow-elevation-medium-small)
+}
+
+.buttonWrapper:hover {
+   background-color: $light-teal-green;
+   transition: 0.2s;
+   cursor: pointer;
+}
+
+.buttonWrapper:active {
+   background-color: $teal-green;
+   transition: 0.1s;
+   cursor: pointer;
+}

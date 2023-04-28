@@ -19,6 +19,7 @@ function Slider({ range, interval, defaultVal, notifyChange, displayText }) {
    const valueBoundaries = useRef([])
    const thumbPosBoundaries = useRef([])
    const thumbNthInterval = useRef(null)
+   const thumbPosIntervalSize = useRef(null)
 
    const [currentValue, setCurrentValue] = useState(defaultVal !== undefined ? defaultVal : range[0])
 
@@ -89,6 +90,45 @@ function Slider({ range, interval, defaultVal, notifyChange, displayText }) {
       return 0;
   }
 
+   function clamp(num, min, max) {
+      return Math.min(Math.max(num, min), max)
+   }
+
+   function handleTrackClick(event) {
+      const { clientX } = event
+      const relativeClientX = clientX - leftLim.current
+
+      // no interval provided
+      if (interval === undefined && clientX >= leftLim.current - thumbWidth.current/2 && clientX <= rightLim.current + thumbWidth.current/2) {
+         thumbLeft.current = clamp(relativeClientX, 0, trackLength.current)
+         const slideProgress = calcSlideProgress()
+         setCurrentValue(calcOutputValue(slideProgress))
+      }
+      // interval provided
+      else if (interval !== undefined) {
+         const lowerInterval = thumbPosBoundaries.current.findIndex(element => {
+            return element <= relativeClientX && (relativeClientX - element) <= thumbPosIntervalSize.current
+         })
+         const higherInterval = thumbPosBoundaries.current.findIndex(element => {
+            return element >= relativeClientX && (element - relativeClientX) <= thumbPosIntervalSize.current
+         })
+         const lowerIntervalDist = relativeClientX - thumbPosBoundaries.current[lowerInterval]
+         const higherIntervalDist = thumbPosBoundaries.current[higherInterval] - relativeClientX
+
+         // Arr.findIndex() returns -1 when element not found (i.e., relativeClientX out of range)
+         if (higherIntervalDist < lowerIntervalDist || lowerInterval === -1) {
+            thumbNthInterval.current = higherInterval
+            thumbLeft.current = thumbPosBoundaries.current[higherInterval]
+            setCurrentValue(valueBoundaries.current[thumbNthInterval.current])
+         } else if (lowerInterval <= higherInterval || higherInterval === -1) {
+            thumbNthInterval.current = lowerInterval
+            thumbLeft.current = thumbPosBoundaries.current[lowerInterval]
+            setCurrentValue(valueBoundaries.current[thumbNthInterval.current])
+         }
+      }
+
+   }
+
    // handle initialization
    useLayoutEffect(() => {
 
@@ -120,6 +160,7 @@ function Slider({ range, interval, defaultVal, notifyChange, displayText }) {
             valueBoundaries.current = valueBoundariesArr
             const numBoundaries = valueBoundariesArr.length - 1
             const boundaryLength = trackLength.current/numBoundaries
+            thumbPosIntervalSize.current = boundaryLength
 
             // set the positions along the track for thumb to snap to
             let snapPositions = [0]
@@ -163,15 +204,19 @@ function Slider({ range, interval, defaultVal, notifyChange, displayText }) {
       }
    }, [])
 
+   useEffect(() => {
+      notifyChange(currentValue)
+   }, [currentValue])
+
    return ( 
       <div className={styles.sliderBox} ref={sliderBoxRef}>
          <div className={styles.sliderBody}>
-            <div className={styles.sliderTrack} ref={trackRef}>
+            <div className={styles.sliderTrack} ref={trackRef} onClick={handleTrackClick}>
                <div className={styles.sliderThumb} style={{left: thumbLeft.current}} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} ref={thumbRef}></div>
             </div>
          </div>
          <div className={styles.valueDisplay} >
-            <span>{displayText + currentValue}</span>
+            <span>{(displayText !== undefined ? displayText : '') + currentValue}</span>
          </div>
       </div>
    );

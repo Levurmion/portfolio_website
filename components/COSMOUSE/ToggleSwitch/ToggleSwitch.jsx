@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import styles from "./ToggleSwitch.module.scss";
 
 // needs a wrapper
-function ToggleSwitch({ label, defaultState, textColor, fontSize }) {
+function ToggleSwitch({ label, defaultState, textColor, fontSize}) {
    const toggleSwitchBodyRef = useRef(null);
    const switchWrapperRef = useRef(null);
    const switchLabelRef = useRef(null);
@@ -31,7 +31,13 @@ function ToggleSwitch({ label, defaultState, textColor, fontSize }) {
          const labelFontSize = switchHeight * 0.65;
 
          switchWrapperRef.current.style.justifyContent = "space-between";
-         switchLabelRef.current.style.fontSize = `${labelFontSize}px`;
+
+         if (fontSize === undefined) {
+            switchLabelRef.current.style.fontSize = `${labelFontSize}px`;
+         } else {
+            switchLabelRef.current.style.fontSize = fontSize;
+         }
+         
       }
    }, []);
 

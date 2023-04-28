@@ -4,6 +4,7 @@ import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import styles from './MainPanel.module.scss'
 import DropdownOptions from '../DropdownOptions/DropdownOptions';
 import Slider from '../Slider/Slider';
+import ToggleButton from '../ToggleButton/ToggleButton';
 
 function MainPanel() {
 
@@ -25,23 +26,49 @@ function MainPanel() {
       alert(option)
    }
 
+   function handleStageSlider(stage) {
+      console.log(stage)
+   }
+
    return ( 
       <div className={styles.mainPanel}>
          <CytoscapePanel />
          <OptionsPanel>
-            <div className={styles.toggleSwitch}>
-               <ToggleSwitch label='SECONDARY INTERACTIONS' textColor='#0d6c6d' defaultState={true}/>
+            <div className={styles.optionsTitle}>
+               <span>GRAPH CONTROLS</span>
             </div>
-            <div className={styles.toggleSwitch}>
-               <ToggleSwitch label='EXPRESSION DATA' textColor='#0d6c6d' defaultState={false}/>
+            <div className={styles.toggleSwitches}>
+               <div className={styles.toggleSwitch}>
+                  <ToggleSwitch label='SECONDARY INTERACTIONS' textColor='#000000' defaultState={true} fontSize='1.2vw'/>
+               </div>
+               <div className={styles.toggleSwitch}>
+                  <ToggleSwitch label='EXPRESSION DATA' textColor='#000000' defaultState={false} fontSize='1.2vw'/>
+               </div>
             </div>
             <div className={styles.expressionDropdown}>
                <div className={styles.label}>SELECT A STAGE & STRUCTURE</div>
                <DropdownOptions options={exampleOptions} fontSize={'1vw'} notifySelect={handleSelectStructure}/>
+               <div className={styles.slider}>
+                  <Slider range={[1,26]} interval={1} displayText={'CS'} notifyChange={handleStageSlider}/>
+               </div>
             </div>
-            <div className={styles.slider}>
-               <Slider range={[1,26]} interval={1} displayText={'CS'}/>
+            <div className={styles.confidenceOptions}>
+               <div className={styles.label}>
+                  SELECT A CONFIDENCE THRESHOLD
+               </div>
+               <div className={styles.buttonsRow}>
+                  <div className={styles.buttonWrapper}>
+                     <ToggleButton defText={'ABOVE'} altText={'BELOW'} fontSize={'1.2vw'} notifyToggle={() => {console.log('clicked!')}}/>
+                  </div>
+                  <div className={styles.buttonWrapper}>
+                     <ToggleButton defText={'ALL NODES'} altText={'DROP NODES'} fontSize={'1.2vw'} notifyToggle={() => {console.log('clicked!')}}/>
+                  </div>
+               </div>
+               <div className={styles.confidenceSlider}>
+                  <Slider range={[0.001,0.999]} notifyChange={handleStageSlider}/>
+               </div>
             </div>
+            
          </OptionsPanel>
       </div>
     );
