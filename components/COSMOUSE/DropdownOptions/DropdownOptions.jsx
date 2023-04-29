@@ -76,7 +76,10 @@ function DropdownOptions({ options, fontSize, notifySelect }) {
    return (
       <div className={styles.dropdownWrapper} style={{ fontSize }} ref={wrapperRef}>
          <div className={styles.dropdownDisplay}>
-            <div className={styles.dropdown} ref={displayRef}>{displayedOption}</div>
+            <div className={styles.dropdown} ref={displayRef}>
+               {displayedOption}
+               <div className={styles.overflowFilter}></div>
+            </div>
             <div className={styles.expandDropdown} onClick={handleExpandDropdown} ref={expandRef}>
                <motion.div className={styles.iconContainer} initial={false} animate={showDropdown ? {transform: 'rotate(180deg)'} : {}} transition={{duration: 0.2}}>
                   <ExpandMoreIcon fontSize='inherit' />

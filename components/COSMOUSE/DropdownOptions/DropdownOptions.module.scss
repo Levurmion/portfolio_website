@@ -39,12 +39,31 @@ $teal: #29a0b1;
          box-shadow: var(--shadow-elevation-medium-large);
 
          display: flex;
+         position: relative;
          width: 80%;
          background-color: $medium-teal-green;
+         white-space: nowrap;
+         overflow: hidden;
          color: #FFFFFF;
          padding: 1.5% 2%;
          font-weight: 400;
          border-radius: 5px;
+
+         .overflowFilter {
+            display: block;
+            position: absolute;
+            height: 100%;
+            width: 20%;
+            top: -2%;
+            left: 80%;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            background: linear-gradient(
+               to right,
+               rgb(26, 149, 151, 0),
+               rgb(26, 149, 151, 1)
+            );
+         }
       }
 
       .expandDropdown {

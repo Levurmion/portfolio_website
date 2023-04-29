@@ -1,9 +1,9 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import styles from "./ToggleSwitch.module.scss";
 
 // needs a wrapper
-function ToggleSwitch({ label, defaultState, textColor, fontSize}) {
+function ToggleSwitch({ label, defaultState, textColor, fontSize, notifyToggle}) {
    const toggleSwitchBodyRef = useRef(null);
    const switchWrapperRef = useRef(null);
    const switchLabelRef = useRef(null);
@@ -12,9 +12,10 @@ function ToggleSwitch({ label, defaultState, textColor, fontSize}) {
    const [active, setActive] = useState(defaultState);
 
    function handleSwitchClick() {
-      setActive(!active);
+      setActive(state => !state);
+      notifyToggle(!active)
    }
-
+   
    useLayoutEffect(() => {
       const switchHeight = toggleSwitchBodyRef.current.getBoundingClientRect().height;
       const thumbHeight = switchThumbRef.current.getBoundingClientRect().height;

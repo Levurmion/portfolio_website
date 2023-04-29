@@ -5,49 +5,80 @@ import styles from './MainPanel.module.scss'
 import DropdownOptions from '../DropdownOptions/DropdownOptions';
 import Slider from '../Slider/Slider';
 import ToggleButton from '../ToggleButton/ToggleButton';
+import { useEffect, useLayoutEffect, useState } from 'react';
 
-function MainPanel() {
+import TuneIcon from '@mui/icons-material/Tune';
 
-   const exampleOptions = [
-      'Max TPM',
-      'embryo',
-      'blastocyst',
-      'this',
-      'that',
-      'whatever',
-      'coding is hard',
-      'what if the name is long',
-      'scroll',
-      'scroll',
-      'scroll'
-   ]
+function MainPanel({ structuresInStage }) {
+
+   const [ structures, setStructures ] = useState(['fetching graph...'])
+
+   // Cytoscape parameters (props)
+   const [ stage, setStage ] = useState(1)
+   const [ selectedStructure, setSelectedStructure ] = useState('Max TPM')
+   const [ secondaryInt, setSecondaryInt ] = useState(true)
+   const [ expressionData, setExpressionData ] = useState(false)
+   const [ confidence, setConfidence ] = useState(0.4)
+   const [ aboveConf, setAboveConf ] = useState(true)
+   const [ dropNodes, setDropNodes ] = useState(false)
 
    function handleSelectStructure(option) {
-      alert(option)
+      setSelectedStructure(option)
    }
 
    function handleStageSlider(stage) {
-      console.log(stage)
+      updateStructuresForStage(stage)
    }
+
+   function updateStructuresForStage(stage) {
+      if (structuresInStage !== false) {
+         const newStructures = structuresInStage[stage]
+         setStage(stage)
+         if (newStructures !== undefined) {
+            const structureStateCopy = [...newStructures]
+            structureStateCopy.unshift('Max TPM')
+            setStructures(structureStateCopy)
+         } else {
+            setStructures(['Max TPM'])
+         }
+      }
+   }
+
+   // when new structures come in response to user request, re-initialize
+   useLayoutEffect(() => {
+      if (!structuresInStage) {
+         setStructures(['fetching graph...'])
+      } else {
+         updateStructuresForStage(stage)
+      }
+   }, [structuresInStage])
+
+   useEffect(() => {
+   }, [secondaryInt])
 
    return ( 
       <div className={styles.mainPanel}>
-         <CytoscapePanel />
+         <CytoscapePanel 
+            secondaryInt={secondaryInt} 
+            confidence={confidence}
+            aboveConf={aboveConf}
+            dropNodes={dropNodes}/>
          <OptionsPanel>
             <div className={styles.optionsTitle}>
+               <TuneIcon fontSize='1.2vw'/>
                <span>GRAPH CONTROLS</span>
             </div>
             <div className={styles.toggleSwitches}>
                <div className={styles.toggleSwitch}>
-                  <ToggleSwitch label='SECONDARY INTERACTIONS' textColor='#000000' defaultState={true} fontSize='1.2vw'/>
+                  <ToggleSwitch label='SECONDARY INTERACTIONS' textColor='#000000' defaultState={true} fontSize='1.2vw' notifyToggle={(state) => {setSecondaryInt(state)}}/>
                </div>
                <div className={styles.toggleSwitch}>
-                  <ToggleSwitch label='EXPRESSION DATA' textColor='#000000' defaultState={false} fontSize='1.2vw'/>
+                  <ToggleSwitch label='EXPRESSION DATA' textColor='#000000' defaultState={false} fontSize='1.2vw' notifyToggle={(state) => {setExpressionData(state)}}/>
                </div>
             </div>
             <div className={styles.expressionDropdown}>
                <div className={styles.label}>SELECT A STAGE & STRUCTURE</div>
-               <DropdownOptions options={exampleOptions} fontSize={'1vw'} notifySelect={handleSelectStructure}/>
+               <DropdownOptions options={structures} fontSize={'1vw'} notifySelect={handleSelectStructure}/>
                <div className={styles.slider}>
                   <Slider range={[1,26]} interval={1} displayText={'CS'} notifyChange={handleStageSlider}/>
                </div>
@@ -58,14 +89,14 @@ function MainPanel() {
                </div>
                <div className={styles.buttonsRow}>
                   <div className={styles.buttonWrapper}>
-                     <ToggleButton defText={'ABOVE'} altText={'BELOW'} fontSize={'1.2vw'} notifyToggle={() => {console.log('clicked!')}}/>
+                     <ToggleButton defText={'ABOVE'} altText={'BELOW'} fontSize={'1.2vw'} notifyToggle={() => {setAboveConf(state => !state)}}/>
                   </div>
                   <div className={styles.buttonWrapper}>
-                     <ToggleButton defText={'ALL NODES'} altText={'DROP NODES'} fontSize={'1.2vw'} notifyToggle={() => {console.log('clicked!')}}/>
+                     <ToggleButton defText={'ALL NODES'} altText={'DROP NODES'} fontSize={'1.2vw'} notifyToggle={() => {setDropNodes(state => !state)}}/>
                   </div>
                </div>
                <div className={styles.confidenceSlider}>
-                  <Slider range={[0.001,0.999]} notifyChange={handleStageSlider}/>
+                  <Slider range={[0.001,0.999]} defaultVal={0.4} notifyChange={(confidence) => {setConfidence(confidence)}}/>
                </div>
             </div>
             

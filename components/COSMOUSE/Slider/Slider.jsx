@@ -58,6 +58,14 @@ function Slider({ range, interval, defaultVal, notifyChange, displayText }) {
             }
 
             setCurrentValue(valueBoundaries.current[thumbNthInterval.current])
+         } else if (clientX < leftLim.current - thumbWidth.current) {
+            thumbNthInterval.current = 0
+            thumbLeft.current = (thumbPosBoundaries.current[thumbNthInterval.current])
+            setCurrentValue(valueBoundaries.current[thumbNthInterval.current])
+         } else if (clientX > rightLim.current + thumbWidth.current) {
+            thumbNthInterval.current = thumbPosBoundaries.current.length - 1
+            thumbLeft.current = (thumbPosBoundaries.current[thumbNthInterval.current])
+            setCurrentValue(valueBoundaries.current[thumbNthInterval.current])
          }
          
       }
@@ -204,6 +212,7 @@ function Slider({ range, interval, defaultVal, notifyChange, displayText }) {
       }
    }, [])
 
+   // if value changes, notify parent
    useEffect(() => {
       notifyChange(currentValue)
    }, [currentValue])

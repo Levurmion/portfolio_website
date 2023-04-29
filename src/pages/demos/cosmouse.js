@@ -16,7 +16,7 @@ function Cosmouse() {
    const geneOptions = useRef(['TP53', 'BRCA1', 'KRAS', 'MDM2', 'TRIM28', 'MYC', 'CTNNB1'].sort())
 
    const [selectedGene, setSelectedGene] = useState(geneOptions.current[0])
-   const [graphData, setGraphData] = useState({graph: null, structuresInStage: null})
+   const [graphData, setGraphData] = useState({graph: null, structuresInStage: false})
 
    async function handleReloadNetwork() {
       const urlParams = {
@@ -26,7 +26,7 @@ function Cosmouse() {
       }
 
       // fallback to loading state
-      setGraphData({graph: null, structuresInStage: null})
+      setGraphData({graph: null, structuresInStage: false})
 
       const urlObject = new URLSearchParams(urlParams)
       const requestUrl = '/api/ppi?' + urlObject.toString()
@@ -101,7 +101,7 @@ function Cosmouse() {
                </div>
                <GraphContext.Provider value={graphData}>
                   <div className={styles.demoPanel}>
-                     <MainPanel />
+                     <MainPanel structuresInStage={graphData.structuresInStage}/>
                   </div>
                </GraphContext.Provider>
             </div>
