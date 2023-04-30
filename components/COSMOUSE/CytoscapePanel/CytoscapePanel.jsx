@@ -3,18 +3,34 @@ import styles from "./CytoscapePanel.module.scss";
 import { useContext, useEffect, useLayoutEffect, useRef } from "react";
 import { GraphContext } from "../../../lib/contexts";
 
-// custom useEffect hooks
-function handleEdges(secondaryInt, confidence, aboveConf, dropNodes) {}
+const nodeColors = {
+   normal: { node2: "#ee5d6c", node3: "#8e7fe3", node4: "#f5c889" },
+   tpm: {
+      node4: "#368de3",
+      node1: "#178967",
+      node2: "#52ba69",
+      node3: "#a2d88f",
+      node5: "#c2a5a5",
+   },
+};
+
+const tpmNodeSizes = {
+   noData: { width: 30, height: 30 },
+   notExp: { width: 30, height: 30 },
+   high: { width: 40, height: 40 },
+   med: { width: 30, height: 30 },
+   low: { width: 20, height: 20 },
+};
 
 function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, dropNodes, selectedStructure, stage }) {
    // subscribe to GraphContext
    const graphData = useContext(GraphContext);
 
-   // cytoscape core object reference
+   // cytoscape core object references
    const cy = useRef(null);
    const queryNodeName = useRef(null);
-   const queryNode = useRef(null)
-   const allNodes = useRef(null)
+   const queryNode = useRef(null);
+   const allNodes = useRef(null);
    const sortedEdges = useRef(null);
    const edgesAbove = useRef(null);
    const edgesBelow = useRef(null);
@@ -24,7 +40,7 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
    const hiddenEdges = useRef(null);
    const shownEdges = useRef(null);
    const directNodes = useRef(null);
-   const otherNodes = useRef(null)
+   const otherNodes = useRef(null);
 
    function loadCytoscape(elements) {
       cy.current = cytoscape({
@@ -75,8 +91,8 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
       });
 
       // save nodes as a ref
-      allNodes.current = cy.current.nodes()
-      queryNode.current = queryGene
+      allNodes.current = cy.current.nodes();
+      queryNode.current = queryGene;
 
       // preliminary styling
       edges.forEach((edge) => {
@@ -145,24 +161,25 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
    }
 
    function groupNodes() {
-      const shownDirectInt = shownEdges.current.intersection(directInt.current)
-      directNodes.current = shownDirectInt.map(edge => {
-         const source = edge.source()
-         const target = edge.target()
-         if (source.data('id') !== queryNodeName.current) {
-            return source
-         } else if (target.data('id') !== queryNodeName.current) {
-            return target
+      const shownDirectInt = shownEdges.current.intersection(directInt.current);
+      directNodes.current = shownDirectInt.map((edge) => {
+         const source = edge.source();
+         const target = edge.target();
+         if (source.data("id") !== queryNodeName.current) {
+            return source;
+         } else if (target.data("id") !== queryNodeName.current) {
+            return target;
          }
-      })
+      });
       // convert array into a cytoscape collection
-      directNodes.current = cy.current.collection(directNodes.current)
+      directNodes.current = cy.current.collection(directNodes.current);
 
-      otherNodes.current = allNodes.current.difference(queryNode.current)
-      otherNodes.current = otherNodes.current.difference(directNodes.current)
+      otherNodes.current = allNodes.current.difference(queryNode.current);
+      otherNodes.current = otherNodes.current.difference(directNodes.current);
    }
 
    function paintNodes() {
+      // normal mode
       if (expressionData === false) {
          allNodes.current.style({
             "background-color": "#f5c889",
@@ -174,6 +191,69 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
          });
          queryNode.current.style({
             "background-color": "#ee5d6c",
+         });
+      } 
+      // expression mode
+      else if (expressionData === true) {
+
+         allNodes.current.forEach((node) => {
+            let expression_data = null;
+            let expression_level = undefined;
+
+            if (node.data("expression") == false) {
+               expression_level = undefined;
+            } else {
+               expression_data = node.data("expression")[stage];
+
+               if (selectedStructure == "Max TPM" && expression_data !== undefined) {
+                  const maxExpressStruct = node.data("expression_max_map")[stage];
+
+                  if (maxExpressStruct != undefined) {
+                     expression_level = expression_data[maxExpressStruct];
+                  } else {
+                     expression_level = undefined;
+                  }
+
+               } else if (expression_data !== undefined) {
+                  expression_level = expression_data[selectedStructure];
+               } else {
+                  expression_level = undefined;
+               }
+            }
+
+            console.log(node.data('id'), expression_level)
+
+            if (100 < expression_level) {
+               node.style({
+                  "background-color": nodeColors.tpm.node1,
+                  width: tpmNodeSizes.high.width,
+                  height: tpmNodeSizes.high.height,
+               });
+            } else if (expression_level > 10) {
+               node.style({
+                  "background-color": nodeColors.tpm.node2,
+                  width: tpmNodeSizes.med.width,
+                  height: tpmNodeSizes.med.height,
+               });
+            } else if (expression_level > 0) {
+               node.style({
+                  "background-color": nodeColors.tpm.node3,
+                  width: tpmNodeSizes.low.width,
+                  height: tpmNodeSizes.low.height,
+               });
+            } else if (expression_level === 0) {
+               node.style({
+                  "background-color": nodeColors.tpm.node4,
+                  width: tpmNodeSizes.noData.width,
+                  height: tpmNodeSizes.noData.height,
+               });
+            } else if (expression_level === undefined) {
+               node.style({
+                  "background-color": nodeColors.tpm.node5,
+                  width: tpmNodeSizes.notExp.width,
+                  height: tpmNodeSizes.notExp.height,
+               });
+            }
          });
       }
    }
@@ -218,25 +298,31 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
       }
 
       if (dropNodes === true) {
-
          const nodesToRestore = shownEdges.current.connectedNodes();
-         nodesToRestore.restore()
+         nodesToRestore.restore();
          shownEdges.current.restore();
 
          hiddenEdges.current.remove();
          const nodesToHide = hiddenEdges.current.connectedNodes().filter((node) => {
             return node.connectedEdges().length === 0;
          });
-         nodesToHide.remove()
+         nodesToHide.remove();
 
-         queryNode.current.restore()
-         
+         queryNode.current.restore();
       } else if (dropNodes === false) {
-         allNodes.current.restore()
+         allNodes.current.restore();
          shownEdges.current.restore();
          hiddenEdges.current.remove();
       }
    }
+
+   // useEffect to handle expression data
+   useEffect(() => {
+      if (allNodes.current !== null) {
+         paintNodes()
+      }
+      
+   }, [expressionData, selectedStructure, stage]);
 
    // useEffect to handle edges
    useEffect(() => {
@@ -246,7 +332,7 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
          groupNodes();
          paintNodes();
       }
-   }, [secondaryInt, confidence, aboveConf, dropNodes]);
+   }, [expressionData, secondaryInt, confidence, aboveConf, dropNodes]);
 
    // useEffect to handle graph reload
    useEffect(() => {

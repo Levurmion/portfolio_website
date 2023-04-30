@@ -34,6 +34,7 @@ function MainPanel({ structuresInStage }) {
       if (structuresInStage !== false) {
          const newStructures = structuresInStage[stage]
          setStage(stage)
+         setSelectedStructure('Max TPM')
          if (newStructures !== undefined) {
             const structureStateCopy = [...newStructures]
             structureStateCopy.unshift('Max TPM')
@@ -53,9 +54,6 @@ function MainPanel({ structuresInStage }) {
       }
    }, [structuresInStage])
 
-   useEffect(() => {
-   }, [secondaryInt])
-
    return ( 
       <div className={styles.mainPanel}>
          <CytoscapePanel 
@@ -63,7 +61,9 @@ function MainPanel({ structuresInStage }) {
             confidence={confidence}
             aboveConf={aboveConf}
             dropNodes={dropNodes}
-            expressionData={expressionData}/>
+            expressionData={expressionData}
+            stage={stage}
+            selectedStructure={selectedStructure}/>
          <OptionsPanel>
             <div className={styles.optionsTitle}>
                <TuneIcon fontSize='1.2vw'/>
