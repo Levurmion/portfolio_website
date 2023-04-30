@@ -62,7 +62,8 @@ function MainPanel({ structuresInStage }) {
             secondaryInt={secondaryInt} 
             confidence={confidence}
             aboveConf={aboveConf}
-            dropNodes={dropNodes}/>
+            dropNodes={dropNodes}
+            expressionData={expressionData}/>
          <OptionsPanel>
             <div className={styles.optionsTitle}>
                <TuneIcon fontSize='1.2vw'/>

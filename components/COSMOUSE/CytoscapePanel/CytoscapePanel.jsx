@@ -23,6 +23,8 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
    const secInt = useRef(null);
    const hiddenEdges = useRef(null);
    const shownEdges = useRef(null);
+   const directNodes = useRef(null);
+   const otherNodes = useRef(null)
 
    function loadCytoscape(elements) {
       cy.current = cytoscape({
@@ -142,6 +144,40 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
       secInt.current = cy.current.edges().difference(directInt.current);
    }
 
+   function groupNodes() {
+      const shownDirectInt = shownEdges.current.intersection(directInt.current)
+      directNodes.current = shownDirectInt.map(edge => {
+         const source = edge.source()
+         const target = edge.target()
+         if (source.data('id') !== queryNodeName.current) {
+            return source
+         } else if (target.data('id') !== queryNodeName.current) {
+            return target
+         }
+      })
+      // convert array into a cytoscape collection
+      directNodes.current = cy.current.collection(directNodes.current)
+
+      otherNodes.current = allNodes.current.difference(queryNode.current)
+      otherNodes.current = otherNodes.current.difference(directNodes.current)
+   }
+
+   function paintNodes() {
+      if (expressionData === false) {
+         allNodes.current.style({
+            "background-color": "#f5c889",
+            width: 30,
+            height: 30,
+         });
+         directNodes.current.style({
+            "background-color": "#8e7fe3",
+         });
+         queryNode.current.style({
+            "background-color": "#ee5d6c",
+         });
+      }
+   }
+
    function binarySearch(sortedArr, value, sliceIdx = [0, sortedEdges.current.length]) {
       if (sliceIdx[1] - sliceIdx[0] <= 1) {
          if (sortedArr[sliceIdx[0]].data("weight") > value) {
@@ -207,9 +243,12 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
       if (sortedEdges.current !== null) {
          filterEdges();
          renderEdges();
+         groupNodes();
+         paintNodes();
       }
    }, [secondaryInt, confidence, aboveConf, dropNodes]);
 
+   // useEffect to handle graph reload
    useEffect(() => {
       queryNodeName.current = graphData.queryNode;
       if (graphData.graph !== null) {
@@ -221,6 +260,8 @@ function CytoscapePanel({ secondaryInt, expressionData, confidence, aboveConf, d
       if (sortedEdges.current !== null) {
          filterEdges();
          renderEdges();
+         groupNodes();
+         paintNodes();
       }
    }, [graphData]);
 
