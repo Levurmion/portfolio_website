@@ -5,6 +5,7 @@ import styles from './MainPanel.module.scss'
 import DropdownOptions from '../DropdownOptions/DropdownOptions';
 import Slider from '../Slider/Slider';
 import ToggleButton from '../ToggleButton/ToggleButton';
+import LegendsPanel from '../LegendsPanel/LegendsPanel';
 import { useEffect, useLayoutEffect, useState } from 'react';
 
 import TuneIcon from '@mui/icons-material/Tune';
@@ -100,8 +101,8 @@ function MainPanel({ structuresInStage }) {
                   <Slider range={[0.001,0.999]} defaultVal={0.4} notifyChange={(confidence) => {setConfidence(confidence)}}/>
                </div>
             </div>
-            
          </OptionsPanel>
+         <LegendsPanel mode={expressionData ? 'expression' : 'normal'}/>
       </div>
     );
 }

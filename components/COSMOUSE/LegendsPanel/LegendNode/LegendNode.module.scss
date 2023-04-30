@@ -1,0 +1,28 @@
+.legendNodeWrapper {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   height: 100%;
+   width: 10%;
+   gap: 10%;
+
+   .legendNode {
+      display: block;
+      height: 60%;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      box-shadow: var(--shadow-elevation-medium-small);
+   }
+
+   .legendLabel {
+      display: flex;
+      flex-direction: row;
+      height: 20%;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+   }
+
+}
