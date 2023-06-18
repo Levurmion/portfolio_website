@@ -200,7 +200,7 @@ export default function Home() {
                               <ExperienceCard skillsIcon={<AnalyticsIcon fontSize="inherit" color="inherit"/>} header="Big Data Analytics" description="I am experienced with managing and analyzing large volumes of data using Python and SQL databases. I am also proficient in data presentation using Javascript and Python data plotting libraries." imgSrc={'/images/big_data_analytics.png'}/>
                            </div>
                            <div className={aboutStyle.experience3}>
-                              <ExperienceCard skillsIcon={<StorageIcon fontSize="inherit" color="inherit" />} header="Data Pipeline Engineering" description="My constant work with big data demands fast, modular, and scalable analysis pipelines. I am well-versed in designing and building multiprocessing workflows within Linux HPC environments." imgSrc={"/images/data_pipeline_engineering.png"}/>
+                              <ExperienceCard skillsIcon={<StorageIcon fontSize="inherit" color="inherit" />} header="Data Engineering" description="My constant work with big data demands fast, modular, and scalable analysis pipelines. I am well-versed in designing and building multiprocessing workflows within Linux HPC environments." imgSrc={"/images/data_pipeline_engineering.png"}/>
                            </div>
                         </div>
                      </div>
