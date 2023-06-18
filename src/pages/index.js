@@ -178,7 +178,7 @@ export default function Home() {
                               <Image src='/images/profile_pic.jpg' fill/>
                            </div>
                            <h1>
-                              <span className={aboutStyle.spanA}>Hi, I'm</span> 
+                              <span className={aboutStyle.spanA}>{"Hi, I'm"}</span> 
                               <span className={aboutStyle.spanB}>Elbert.</span>
                               <span className={aboutStyle.emojis}>&#127470;&#127465;  &#127993;  &#127947;  &#129360;  &#128300;</span>
                            </h1>
