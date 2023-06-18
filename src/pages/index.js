@@ -85,7 +85,7 @@ export default function Home() {
                      <div className={heroStyle.codeEditor}>
                         <CodeEditorSVG
                            id={heroStyle.heroCodeEditor}
-                           text='print("Hello World!")'
+                           text='console.log("Hello World!")'
                            animate={true}
                         />
                      </div>
@@ -194,7 +194,7 @@ export default function Home() {
                         <div className={aboutStyle.myExperienceHeader}>My Experience</div>
                         <div className={aboutStyle.experiences}>
                            <div className={aboutStyle.experience1}>
-                              <ExperienceCard skillsIcon={<CodeIcon fontSize="inherit" color="inherit"/>} header="Web Development" description="I have worked with Python and Javascript-based fullstack web frameworks (Django and NextJS). My primary expertise is in building performant server-rendered component-based frontend user interfaces." imgSrc={'/images/web_design.png'}/>
+                              <ExperienceCard skillsIcon={<CodeIcon fontSize="inherit" color="inherit"/>} header="Web Development" description="I have worked with Python and Javascript-based fullstack web frameworks (Django and NextJS). My primary expertise is in building performant server-rendered component-based frontend user interfaces." imgSrc={'/images/ui_design_ideas.png'}/>
                            </div>
                            <div className={aboutStyle.experience2}>
                               <ExperienceCard skillsIcon={<AnalyticsIcon fontSize="inherit" color="inherit"/>} header="Big Data Analytics" description="I am experienced with managing and analyzing large volumes of data using Python and SQL databases. I am also proficient in data presentation using Javascript and Python data plotting libraries." imgSrc={'/images/big_data_analytics.png'}/>
