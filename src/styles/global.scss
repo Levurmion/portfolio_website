@@ -1,21 +1,27 @@
-$mint: #ddffe7;
-$page-background: #c1f7f7;
-$spearmint: #98d7c2;
-$teal-green: #167d7f;
-$teal: #29a0b1;
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$light-teal-green: #17a9ab;
+$medium-teal-green: #1a9597;
+$teal-green: #167d7f;
+$dark-teal-green: #0d6c6d;
+$teal: #29a0b1;
+
 html {
+
+
   background-color: $page-background;
   font-family: 'Roboto', sans-serif;
   --shadow-color: 0deg 0% 0%;
   --shadow-elevation-medium-small:
-  -0.3px 0.3px 0.5px hsl(var(--shadow-color) / 0.23),
-  -0.6px 0.9px 1.2px -0.6px hsl(var(--shadow-color) / 0.23),
-  -1.2px 1.6px 2.3px -1.2px hsl(var(--shadow-color) / 0.23),
-  -2.4px 3.3px 4.6px -1.9px hsl(var(--shadow-color) / 0.23),
-  -4.6px 6.3px 8.8px -2.5px hsl(var(--shadow-color) / 0.23);
+    -0.3px 0.3px 0.5px hsl(var(--shadow-color) / 0.23),
+    -0.6px 0.9px 1.2px -0.6px hsl(var(--shadow-color) / 0.23),
+    -1.2px 1.6px 2.3px -1.2px hsl(var(--shadow-color) / 0.23),
+    -2.4px 3.3px 4.6px -1.9px hsl(var(--shadow-color) / 0.23),
+    -4.6px 6.3px 8.8px -2.5px hsl(var(--shadow-color) / 0.23);
 }
 
 body {
@@ -27,7 +33,9 @@ svg {
 }
 
 @media (max-width: 1024px) {
-  html, body {
+
+  html,
+  body {
     max-width: 100%;
     overflow-x: hidden;
   }
@@ -55,7 +63,7 @@ svg {
   background-color: rgb(3, 165, 143);
   display: block;
   font-family: "Anek Latin", "sans-serif";
-  font-size: clamp(14px,1vw,20px);
+  font-size: clamp(14px, 1vw, 20px);
   opacity: 1;
   color: white;
   padding: 0.2rem;

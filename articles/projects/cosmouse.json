@@ -8,11 +8,12 @@
    "header": "COSMOUSE",
    "subheader": "An integrated database of human protein-protein interaction networks, cancer-associated mutations, and embryonic gene expression data.",
    "pointers": [
+      "Access the demo from within the Imperial College Network (via VPN or on-site wifi)",
       "1,787,238 combined human and mouse embryonic expression records",
       "8,134,081 cancer-associated mutations",
       "11,938,498 human pairwise protein-protein interactions",
-      "interactive frontend GUI built using React, NivoCharts, and CytoscapeJS",
-      "demo version powered by REST APIs hosted on AWS"
+      "Interactive frontend GUI built using React, NivoCharts, and CytoscapeJS",
+      "Components were bespokely made (no cookie-cutter component libraries used)"
    ],
    "techStack": [
       "Django",
@@ -20,5 +21,6 @@
       "React",
       "Cytoscape",
       "NivoCharts"
-   ]
+   ],
+   "demo": "http://msc.bc.ic.ac.uk:20238/home/intro/"
 }

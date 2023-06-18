@@ -48,15 +48,30 @@ $teal: #29a0b1;
       font-size: 4vw;
       padding-left: 3vw;
 
+      .demoLink {
+         display: flex;
+         align-items: center;
+         font-size: 30%;
+         text-decoration: none;
+         margin-top: 3%;
+         transition: 0.2s;
+      }
+
+      .demoLink:hover {
+         color: $teal-green;
+         transition: 0.2s;
+      }
+
       .header {
          display: flex;
          font-size: 100%;
          font-weight: 400;
          color: $teal-green;
+         align-items: center;
       }
 
       .subheader {
-         display: flex;
+         display: inline;
          font-size: 35%;
          font-weight: 500;
       }

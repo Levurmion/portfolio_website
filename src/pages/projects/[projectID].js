@@ -12,11 +12,14 @@ import NumpyIconColored from "../../../icons/NumpyIconColored";
 import NextIconColored from "../../../icons/NextIconColored";
 import PostgreSQLColored from "../../../icons/PostgreSQLIconColored";
 import PandasIconColored from "../../../icons/PandasIconColored";
+import FirebaseIconColored from "../../../icons/FirebaseIconColored";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import Navbar from "../../../layouts/Navbar";
 import styles from "./projectsPage.module.scss";
 import { getAllProjectIds, getProjectData } from "../../../lib/project-utils.mjs";
 import { uniqueKeyGenerator } from "../../../lib/utilities.mjs";
 import Head from "next/head";
+import Link from "next/link";
 
 const techIcons = {
    Django: <DjangoIconColored />,
@@ -29,6 +32,7 @@ const techIcons = {
    Numpy: <NumpyIconColored />,
    Next: <NextIconColored />,
    PostgreSQL: <PostgreSQLColored />,
+   Firebase: <FirebaseIconColored />
 };
 
 const galleryAnim = {
@@ -78,6 +82,10 @@ export default function Project({ projectData }) {
                            transition={{ type: "tween", duration: 0.5, delay: 0.25 }}>
                            <div className={styles.header}>{projectData.header}</div>
                            <div className={styles.subheader}>{projectData.subheader}</div>
+                           {projectData.demo !== undefined && isMobile === false ?
+                           <Link className={styles.demoLink} href={projectData.demo}>
+                              {projectData.linkText === undefined ? 'try the demo' : projectData.linkText} <ArrowRightAltIcon fontSize='inherit' />
+                           </Link> : null}
                            <div className={styles.techIcons}>
                               {projectData.techStack.map((icon) => {
                                  return techIcons[icon];

@@ -1,11 +1,11 @@
 .frame {
-   --shadow-color: 180deg 35% 50%;
+   --shadow-color: 0deg 0% 0%;
    --shadow-elevation-medium:
-      -0.4px 0.6px 0.9px hsl(var(--shadow-color) / 0.26),
-      -1.2px 1.7px 2.5px -0.5px hsl(var(--shadow-color) / 0.28),
-      -2.3px 3.3px 4.8px -1px hsl(var(--shadow-color) / 0.31),
-      -4.4px 6.3px 9.2px -1.5px hsl(var(--shadow-color) / 0.33),
-      -8.3px 11.9px 17.4px -2px hsl(var(--shadow-color) / 0.36);
+   -0.5px 0.6px 0.9px hsl(var(--shadow-color) / 0.09),
+   -1.2px 1.7px 2.3px -0.6px hsl(var(--shadow-color) / 0.09),
+   -2.4px 3.3px 4.6px -1.2px hsl(var(--shadow-color) / 0.09),
+   -4.8px 6.7px 9.3px -1.9px hsl(var(--shadow-color) / 0.09),
+   -9.3px 12.9px 17.9px -2.5px hsl(var(--shadow-color) / 0.09);
 
    display: block;
    position: relative;
@@ -21,13 +21,13 @@
 }
 
 .dumbFrame {
-   --shadow-color: 180deg 35% 50%;
+   --shadow-color: 0deg 0% 0%;
    --shadow-elevation-medium:
-      -0.4px 0.6px 0.9px hsl(var(--shadow-color) / 0.26),
-      -1.2px 1.7px 2.5px -0.5px hsl(var(--shadow-color) / 0.28),
-      -2.3px 3.3px 4.8px -1px hsl(var(--shadow-color) / 0.31),
-      -4.4px 6.3px 9.2px -1.5px hsl(var(--shadow-color) / 0.33),
-      -8.3px 11.9px 17.4px -2px hsl(var(--shadow-color) / 0.36);
+   -0.5px 0.6px 0.9px hsl(var(--shadow-color) / 0.09),
+   -1.2px 1.7px 2.3px -0.6px hsl(var(--shadow-color) / 0.09),
+   -2.4px 3.3px 4.6px -1.2px hsl(var(--shadow-color) / 0.09),
+   -4.8px 6.7px 9.3px -1.9px hsl(var(--shadow-color) / 0.09),
+   -9.3px 12.9px 17.9px -2.5px hsl(var(--shadow-color) / 0.09);
 
    display: block;
    position: relative;

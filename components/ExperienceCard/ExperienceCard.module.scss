@@ -1,0 +1,73 @@
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$light-spearmint: #eefffa;
+$teal-green: #167d7f;
+$teal: #29a0b1;
+
+.experienceCard {
+   --shadow-color: 180deg 34% 52%;
+   --shadow-elevation-medium:
+     -0.3px 0.4px 0.6px hsl(var(--shadow-color) / 0.35),
+     -1.1px 1.4px 2px -0.8px hsl(var(--shadow-color) / 0.35),
+     -2.8px 3.4px 5px -1.7px hsl(var(--shadow-color) / 0.35),
+     -6.9px 8.2px 12.1px -2.5px hsl(var(--shadow-color) / 0.35);
+
+   display: flex;
+   height: 100%;
+   width: 100%;
+   background-color: #FFFFFF;
+   border-radius: 6px;
+   box-shadow: var(--shadow-elevation-medium);
+   flex-direction: column;
+   overflow: hidden;
+
+   .headerPic {
+      width: 100%;
+      aspect-ratio: 4/3;
+   }
+
+   .description {
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      width: 90%;
+      flex-grow: 1;
+      background-color: $light-spearmint;
+      padding: 5%;
+      font-size: 1.6vw;
+
+      .descriptionHeader {
+         display: flex;
+         position: inherit;
+         width: 100%;
+         margin-top: 15%;
+         font-size: 100%;
+         font-weight: 500;
+         justify-content: flex-start;
+      }
+
+      .descriptionText {
+         display: flex;
+         position: inherit;
+         width: 100%;
+         font-size: 60%;
+         margin-top: 5%;
+      }
+   }
+
+   .skillsIcon {
+      background-color: $teal;
+      height: 20%;
+      aspect-ratio: 1/1;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 5%;
+      top: -10%;
+      border-radius: 1000px;
+      font-size: 2vw;
+      color: #FFFFFF;
+   }
+}

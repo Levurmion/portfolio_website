@@ -1,22 +1,21 @@
 {
    "imageURLs": [
-      "/images/sample_pic.jpg", 
-      "/images/cosmouse_normal.png", 
-      "/images/cosmouse_expression.png", 
-      "/images/cosmouse_panel.png"
+      "/images/ICAC_scoresheet.png",
+      "/images/archery_target.png", 
+      "/images/olympic_archer.png", 
+      "/images/scoring_target.png"
    ],
    "header": "ICAC Scoresheet",
-   "subheader": "Mobile-first fullstack web app to automate score tracking in archery competitions.",
+   "subheader": "Mobile-first fullstack web app to automate score tracking in archery competitions (in-progress).",
    "pointers": [
-      "full-feature web app with admin, judges, and archer profiles",
-      "user sign-up, authentication, and authorization",
+      "Full-feature web app with admin, judges, and archer profiles",
+      "User sign-up, authentication, and authorization",
       "NextJS-powered frontend and backend infrastructures",
-      "Hosted on AWS",
-      "linked to a bespoke cloud-hosted PostgreSQL schema"
+      "Powered by a Firebase NoSQL database"
    ],
    "techStack": [
       "Next",
       "React",
-      "PostgreSQL"
+      "Firebase"
    ]
 }

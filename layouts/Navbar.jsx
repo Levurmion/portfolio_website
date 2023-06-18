@@ -12,7 +12,7 @@ function Navbar({ children }) {
           <div className={styles.underliner}></div>
         </div>
         <div className={styles.linkBox}>
-          <Link className={styles.links} href='/'>
+          <Link className={styles.links} target='_blank' href='https://github.com/Levurmion'>
             Github
           </Link>
           <div className={styles.underliner}></div>
@@ -23,12 +23,12 @@ function Navbar({ children }) {
           </Link>
           <div className={styles.underliner}></div>
         </div>
-        <div className={styles.linkBox}>
+        {/* <div className={styles.linkBox}>
           <Link className={styles.links} href='/'>
             Contact
           </Link>
           <div className={styles.underliner}></div>
-        </div>
+        </div> */}
       </div>
       {children}
     </>

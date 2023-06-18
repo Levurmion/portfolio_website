@@ -3,6 +3,36 @@ import { useLayoutEffect, useRef, useState, memo } from "react";
 import { motion, useScroll, useAnimate, useMotionValueEvent, useVelocity, useMotionValue, useTransform, useSpring, animate } from "framer-motion";
 import { sideScroll } from "@mui/icons-material";
 import ScrollTicks from "../components/ScrollTicks/ScrollTicks";
+import PanToolIcon from '@mui/icons-material/PanTool';
+
+let dragPromptBoxAnim = {
+   hover: {},
+   unhover: {}
+}
+
+let dragPromptIconAnim = {
+   hover: {
+      transform: ['rotate(0deg) translateX(0vw)', 'rotate(3deg) translateX(0.8vw)', 'rotate(-3deg) translateX(-0.2vw)', 'rotate(0deg) translateX(0vw)'],
+   },
+   unhover: {
+      transform: 'rotate(0deg)'
+   }
+}
+
+let dragPromptTextAnim = {
+   hover: {
+      x: -5,
+      opacity: 1
+   },
+   unhover: {
+      x: [0,10,20],
+      opacity: [1,0,0],
+      transition: {
+         type: 'tween',
+         duration: 0.4
+      }
+   }
+}
 
 function ScrollDirection({ children, pageNames, pageColors }) {
    const [orientation, setOrientation] = useState(null);
@@ -164,6 +194,12 @@ function ScrollDirection({ children, pageNames, pageColors }) {
             <>
                <motion.div style={{ backgroundColor }} className={styles.sidescrollWrapper} ref={sideScrollWrapperRef}>
                   {children}
+               </motion.div>
+               <motion.div className={styles.dragPromptBox} initial={false} animate="unhover" whileHover="hover" exit={false} variants={dragPromptBoxAnim}>
+                  <motion.span className={styles.dragPromptText} variants={dragPromptTextAnim}>drag to navigate!</motion.span>
+                  <motion.div className={styles.dragPromptIcon} variants={dragPromptIconAnim}>
+                     <PanToolIcon fontSize="inherit" color='inherit'/>
+                  </motion.div>
                </motion.div>
                <div className={styles.scrollTicksRow}>
                   <ScrollTicks numPages={children.length} currentPage={currentPage} notifyScrollNext={handleScrollNext} notifyScrollPrev={handleScrollPrev} notifySkipToPage={handleSkipToPage}/>

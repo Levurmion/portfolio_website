@@ -1,18 +1,21 @@
 $mint: #ddffe7;
 $page-background: #E6FDF6;
 $spearmint: #98d7c2;
+$light-teal-green: #17a9ab;
+$medium-teal-green: #1a9597;
 $teal-green: #167d7f;
+$dark-teal-green: #0d6c6d;
 $teal: #29a0b1;
+$header-green: #075354;
+
 
 // mobile phones
-@media (max-width: 420px) {
-
-}
+@media (max-width: 420px) {}
 
 // iPads and tablets
-@media (max-width: 1024px), (orientation: portrait), (pointer: coarse) {
-
-}
+@media (max-width: 1024px),
+(orientation: portrait),
+(pointer: coarse) {}
 
 // small laptops
 @media (min-width: 1025px) and (pointer: fine) {
@@ -23,11 +26,121 @@ $teal: #29a0b1;
 
       .aboutContents {
          display: flex;
-         width: 90vw;
-         padding-inline: 5vw;
+         width: 80vw;
+         padding-inline: 10vw;
          height: 70vh;
          padding-top: 15vh;
          padding-bottom: 15vh;
+
+         .leftCol {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            height: 100%;
+            width: 40%;
+
+            .profilePicRow {
+               display: flex;
+               flex-direction: row;
+               width: 100%;
+               align-items: center;
+
+               .profilePic {
+                  display: block;
+                  position: relative;
+                  width: 60%;
+                  border-radius: 100vw;
+                  overflow: hidden;
+                  aspect-ratio: 1/1;
+               }
+
+               h1 {
+                  display: flex;
+                  flex-direction: column;
+                  margin-left: 5%;
+                  font-size: 5.2vw;
+                  margin-block: 0px;
+                  color: $header-green;
+
+                  .spanA {
+                     font-size: 60%;
+                     font-weight: 600;
+                  }
+
+                  .spanB {
+                     margin-top: -2.5%;
+                     font-weight: 600;
+                     font-size: 100%;
+                  }
+
+                  .emojis {
+                     margin-top: 5%;
+                     font-size: 45%;
+                  }
+               }
+            }
+
+            .briefIntro {
+               display: flex;
+               flex-direction: column;
+               width: 100%;
+               font-size: 1.5vw;
+
+               h1 {
+                  color: $dark-teal-green;
+                  margin-block: 0px;
+                  font-weight: 500;
+               }
+
+               p {
+                  margin-block: 0px;
+                  margin-top: 2.5%;
+                  font-size: 80%;
+               }
+            }
+         }
+
+         .rightCol {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 5%;
+            height: 100%;
+            width: 55%;
+            gap: 4%;
+
+            @mixin experienceCard() {
+               display: flex;
+               width: 32%;
+               height: 100%;
+            }
+
+            .myExperienceHeader {
+               color: $dark-teal-green;
+               font-weight: 500;
+               font-size: 2.5vw;
+            }
+
+            .experiences {
+               display: flex;
+               position:relative;
+               justify-content: space-between;
+               width: 100%;
+               height: 75%;
+
+               .experience1 {
+                  @include experienceCard()
+               }
+
+               .experience2 {
+                  @include experienceCard()
+               }
+
+               .experience3 {
+                  @include experienceCard()
+               }
+            }
+         }
       }
    }
 }
@@ -35,5 +148,7 @@ $teal: #29a0b1;
 
 // large laptops
 @media (min-width: 1200px) and (pointer: fine) {
+
+
 
 }

@@ -21,6 +21,10 @@ import HTMLIcon from "../../icons/HTMLIcon";
 import CSSIcon from "../../icons/CSSIcon";
 import FramerMotionIcon from "../../icons/FramerMotionIcon";
 import MobileIconsRow from "../../components/MobileIconsRow/MobileIconsRow";
+import ExperienceCard from "../../components/ExperienceCard/ExperienceCard";
+import StorageIcon from '@mui/icons-material/Storage';
+import CodeIcon from '@mui/icons-material/Code';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
 import { AnimatePresence, Reorder } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -68,6 +72,7 @@ export default function Home() {
             <meta
                name='viewport'
                content='width=device-width, initial-scale=1'
+               charset="UTF-8"
             />
             <link rel='icon' href='/favicon.ico' />
          </Head>
@@ -84,7 +89,7 @@ export default function Home() {
                            animate={true}
                         />
                      </div>
-
+                     
                      <div className={heroStyle.heroTextWrapper}>
                         <div className={heroStyle.heroText}>
                            <div className={heroStyle.headerText}>
@@ -146,15 +151,15 @@ export default function Home() {
                         />
                         <ProjectCard
                            header='Alphasense'
-                           description='Alphasense augments the predictive accuracy of the existing Missense3D portal for Alphafold models. It is a data/pipeline engineering project built in Python implementing nearest-neighbour search algorithms to deal with 3D protein atomic coordinates.'
+                           description='Alphasense augments missense variant effect prediction of the Missense3D software suite by selectively evaluating Alphafold model confidence metrics - implementing nearest-neighbour search algorithms to accelerate the analysis of protein structures.'
                            imageSrc={"/images/alphasense.png"}
                            notifyClick={handleCardClick}
                            linkURL={'/projects/alphasense'}
                         />
                         <ProjectCard
                            header='ICAC Scoresheet'
-                           description='Not your typical CRUD app. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper.'
-                           imageSrc={"/images/sample_pic.jpg"}
+                           description='Not your typical CRUD app. ICAC Scoresheet was built to solve a very tedious issue in archery competitions - keeping track of scores! It is a mobile-first web app with archer, judges, and admin accounts to get things off pen and paper. (in-progress)'
+                           imageSrc={"/images/ICAC_scoresheet.png"}
                            notifyClick={handleCardClick}
                            linkURL={'projects/icac-scoresheet'}
                         />
@@ -167,7 +172,38 @@ export default function Home() {
                </div>
                <div className={aboutStyle.about}>
                   <div className={aboutStyle.aboutContents}>
-                     About Me
+                     <div className={aboutStyle.leftCol}>
+                        <div className={aboutStyle.profilePicRow}>
+                           <div className={aboutStyle.profilePic}>
+                              <Image src='/images/profile_pic.jpg' fill/>
+                           </div>
+                           <h1>
+                              <span className={aboutStyle.spanA}>Hi, I'm</span> 
+                              <span className={aboutStyle.spanB}>Elbert.</span>
+                              <span className={aboutStyle.emojis}>&#127470;&#127465;  &#127993;  &#127947;  &#129360;  &#128300;</span>
+                           </h1>
+                        </div>
+                        <div className={aboutStyle.briefIntro}>
+                           <h1>A little about me...</h1>
+                           <p>
+                              Having spent the past 4 years of my undergrad in the wet lab, I had a craving for exploring the applications of computational methods in biological research - leading to my current enrollment in the Bioinformatics and Theoretical Systems Biology MSc at Imperial College London. I am currently looking for career opportunities in computational genomics and web development.
+                           </p>
+                        </div>
+                     </div>
+                     <div className={aboutStyle.rightCol}>
+                        <div className={aboutStyle.myExperienceHeader}>My Experience</div>
+                        <div className={aboutStyle.experiences}>
+                           <div className={aboutStyle.experience1}>
+                              <ExperienceCard skillsIcon={<CodeIcon fontSize="inherit" color="inherit"/>} header="Web Development" description="I have worked with Python and Javascript-based fullstack web frameworks (Django and NextJS). My primary expertise is in building performant server-rendered component-based frontend user interfaces." imgSrc={'/images/web_design.png'}/>
+                           </div>
+                           <div className={aboutStyle.experience2}>
+                              <ExperienceCard skillsIcon={<AnalyticsIcon fontSize="inherit" color="inherit"/>} header="Big Data Analytics" description="I am experienced with managing and analyzing large volumes of data using Python and SQL databases. I am also proficient in data presentation using Javascript and Python data plotting libraries." imgSrc={'/images/big_data_analytics.png'}/>
+                           </div>
+                           <div className={aboutStyle.experience3}>
+                              <ExperienceCard skillsIcon={<StorageIcon fontSize="inherit" color="inherit" />} header="Data Pipeline Engineering" description="My constant work with big data demands fast, modular, and scalable analysis pipelines. I am well-versed in designing and building multiprocessing workflows within Linux HPC environments." imgSrc={"/images/data_pipeline_engineering.png"}/>
+                           </div>
+                        </div>
+                     </div>
                   </div>
                </div>
             </ScrollDirection>

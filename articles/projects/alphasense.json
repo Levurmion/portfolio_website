@@ -1,23 +1,25 @@
 {
    "imageURLs": [
       "/images/alphasense.png", 
-      "/images/cosmouse_normal.png", 
-      "/images/cosmouse_expression.png", 
-      "/images/cosmouse_panel.png"
+      "/images/alphasense_intro.png", 
+      "/images/alphasense_plddt.png", 
+      "/images/alphasense_pae.png"
    ],
    "header": "Alphasense",
-   "subheader": "Missense3D prediction flagging pipeline for Alphafold missense variants.",
+   "subheader": "Alphafold analysis pipeline to determine model confidence for missense variant effect prediction.",
    "pointers": [
-      "production-level Python pipeline for flagging low-confidence Missense3D predictions of Alphafold models",
-      "utilizes k-dtree nearest-neighbour search algorithms to analyze 3D protein structures",
-      "statistically tested on >4M known ClinVar missense genetic variants",
-      ">90GB PostgreSQL database dump available to download"
+      "MSc research project to determine sufficiently confident thresholds of Alphafold prediction metrics for model analysis with Missense3D",
+      "Analysis based on 120,000 annotated missense variants mined from 39M known naturally-occurring genetic variations",
+      "Object-oriented Python software suite",
+      "Utilizes kd-tree nearest-neighbour search algorithms to analyze 3D protein structures in logarithmic time",
+      "Generated confident missense variant effect predictions for >5M known missense variants using Alphafold models",
+      "Pending integration into the Missense3D web portal"
    ],
    "techStack": [
       "Python",
       "Pandas",
-      "Numpy",
-      "PostgreSQL",
-      "Django"
-   ]
+      "Numpy"
+   ],
+   "linkText": "check out the github repo",
+   "demo": "https://github.com/Levurmion/AlphafoldModel"
 }

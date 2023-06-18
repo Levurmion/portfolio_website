@@ -1,3 +1,12 @@
+$mint: #ddffe7;
+$page-background: #E6FDF6;
+$spearmint: #98d7c2;
+$light-teal-green: #17a9ab;
+$medium-teal-green: #1a9597;
+$teal-green: #167d7f;
+$dark-teal-green: #0d6c6d;
+$teal: #29a0b1;
+
 .legendNodeWrapper {
    display: flex;
    flex-direction: column;
@@ -9,7 +18,7 @@
 
    .legendNode {
       display: block;
-      height: 60%;
+      height: 55%;
       aspect-ratio: 1/1;
       border-radius: 50%;
       box-shadow: var(--shadow-elevation-medium-small);
@@ -18,6 +27,7 @@
    .legendLabel {
       display: flex;
       flex-direction: row;
+      color: $dark-teal-green;
       height: 20%;
       width: 100%;
       align-items: center;
